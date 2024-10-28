@@ -13,11 +13,11 @@ public class Tripulante implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Tripulante;
-    @OneToMany
+    @OneToMany(mappedBy = "vueloTripulante")
     public Vuelo tripulanteVuelo;
-    @OneToMany
+    @OneToMany(mappedBy = "cargoTripulante")
     public Cargo tripulanteCargo;
-    @OneToMany
+    @OneToMany(mappedBy = "personaTripulante")
     public Persona tripulantePersona; 
 
     public Long getID_Tripulante() {

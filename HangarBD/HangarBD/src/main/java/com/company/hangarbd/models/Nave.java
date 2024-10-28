@@ -7,21 +7,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity (name = "Nave")
-public class Nave implements Serializable{
+@Entity(name = "Nave")
+public class Nave implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID_Nave; 
+    private Long ID_Nave;
     private float nav_peso;
     private String nav_estado;
     private String nav_descripcion;
     private int nav_capacidad;
     @ManyToOne
-    public Empresa naveEmpresa; 
+    public Empresa naveEmpresa;
     @ManyToOne
     public Hangar naveHangar;
-    @ManyToOne 
-    public Modelo naveModelo; 
+    @ManyToOne
+    public Modelo naveModelo;
 
     public Long getID_Nave() {
         return ID_Nave;
@@ -62,6 +63,5 @@ public class Nave implements Serializable{
     public void setNav_capacidad(int nav_capacidad) {
         this.nav_capacidad = nav_capacidad;
     }
-    
-    
+
 }
