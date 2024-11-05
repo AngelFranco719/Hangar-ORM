@@ -23,7 +23,10 @@ public class Modelo implements Serializable {
     @JoinColumn(name = "nav_mod")
     public Set<Nave> mod_nav;
 
-    public Modelo() {
+    public Modelo(String mod_nombre, String mod_fabricante, String mod_anio) {
+        this.mod_nombre = mod_nombre;
+        this.mod_fabricante = mod_fabricante;
+        this.mod_anio = mod_anio;
     }
 
     public Set<Nave> getModeloNave() {

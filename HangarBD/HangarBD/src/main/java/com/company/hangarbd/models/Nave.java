@@ -1,6 +1,7 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,25 +35,25 @@ public class Nave implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ser_nav")
-    public Servicio nav_ser;
+    public Set<Servicio> nav_ser;
 
     @ManyToOne
     @JoinColumn(name = "vue_nav")
-    public Vuelo nav_vue;
+    public Set<Vuelo> nav_vue;
 
-    public Servicio getNav_ser() {
+    public Set<Servicio> getNav_ser() {
         return nav_ser;
     }
 
-    public void setNav_ser(Servicio nav_ser) {
+    public void setNav_ser(Set<Servicio> nav_ser) {
         this.nav_ser = nav_ser;
     }
 
-    public Vuelo getNav_vue() {
+    public Set<Vuelo> getNav_vue() {
         return nav_vue;
     }
 
-    public void setNav_vue(Vuelo nav_vue) {
+    public void setNav_vue(Set<Vuelo> nav_vue) {
         this.nav_vue = nav_vue;
     }
 

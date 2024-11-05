@@ -14,6 +14,7 @@ public class Hangar implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ID_Hangar; 
     private int han_Capacidad;
     private String han_Nombre;
     private String han_Ubicacion;
@@ -27,6 +28,14 @@ public class Hangar implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tal_han")
     public Set<Taller> han_tal;
+
+    public Long getID_Hangar() {
+        return ID_Hangar;
+    }
+
+    public void setID_Hangar(Long ID_Hangar) {
+        this.ID_Hangar = ID_Hangar;
+    }
 
     public Set<Nave> getHan_nav() {
         return han_nav;

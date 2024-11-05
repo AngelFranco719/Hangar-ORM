@@ -22,6 +22,13 @@ public class Empresa implements Serializable {
     @JoinColumn(name = "nav_emp")
     public Set<Nave> emp_nav;
 
+    public Empresa(String emp_nombre, String emp_ubicacion) {
+        this.emp_nombre = emp_nombre;
+        this.emp_ubicacion = emp_ubicacion;
+    }
+
+    
+    
     public Set<Nave> getEmp_nav() {
         return emp_nav;
     }
