@@ -1,4 +1,3 @@
-
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
@@ -7,23 +6,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "Vuelo")
-public class Vuelo implements Serializable{
+public class Vuelo implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id_Vuelo;
     private String vue_Origen;
     private String vue_Destino;
-    private Date vue_Fecha_Inicio;
-    private Date vue_Fecha_Fin;
+    private Date vue_fechaInicio;
+    private Date vue_fechaFin;
     private float vue_Distancia;
     private float vue_Duracion;
     private float vuel_AltitudPromedio;
     private int vue_Pasajeros;
-     @ManyToOne
-    public Nave vueNave;
+    
+    @ManyToOne
+    @JoinColumn(name = "nav_vue")
+    public Nave vue_nav;
+
+    public Nave getVue_nave() {
+        return vue_nav;
+    }
+
+    public void setVue_nave(Nave vue_nave) {
+        this.vue_nav = vue_nave;
+    }
 
     public Long getId_Vuelo() {
         return Id_Vuelo;
@@ -49,20 +60,20 @@ public class Vuelo implements Serializable{
         this.vue_Destino = vue_Destino;
     }
 
-    public Date getVue_Fecha_Inicio() {
-        return vue_Fecha_Inicio;
+    public Date getVue_fechaInicio() {
+        return vue_fechaInicio;
     }
 
-    public void setVue_Fecha_Inicio(Date vue_Fecha_Inicio) {
-        this.vue_Fecha_Inicio = vue_Fecha_Inicio;
+    public void setVue_fechaInicio(Date vue_fechaInicio) {
+        this.vue_fechaInicio = vue_fechaInicio;
     }
 
-    public Date getVue_Fecha_Fin() {
-        return vue_Fecha_Fin;
+    public Date getVue_fechaFin() {
+        return vue_fechaFin;
     }
 
-    public void setVue_Fecha_Fin(Date vue_Fecha_Fin) {
-        this.vue_Fecha_Fin = vue_Fecha_Fin;
+    public void setVue_fechaFin(Date vue_fechaFin) {
+        this.vue_fechaFin = vue_fechaFin;
     }
 
     public float getVue_Distancia() {
@@ -97,6 +108,4 @@ public class Vuelo implements Serializable{
         this.vue_Pasajeros = vue_Pasajeros;
     }
 
-  
 }
-

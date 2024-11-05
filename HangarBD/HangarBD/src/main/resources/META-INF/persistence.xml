@@ -2,6 +2,17 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
+    <class>com.company.hangarbd.models.Cargo</class>
+    <class>com.company.hangarbd.models.Empresa</class>
+    <class>com.company.hangarbd.models.Hangar</class>
+    <class>com.company.hangarbd.models.Modelo</class>
+    <class>com.company.hangarbd.models.Nave</class>
+    <class>com.company.hangarbd.models.Persona</class>
+    <class>com.company.hangarbd.models.Servicio</class>
+    <class>com.company.hangarbd.models.Taller</class>
+    <class>com.company.hangarbd.models.Tripulante</class>
+    <class>com.company.hangarbd.models.Vuelo</class>
+    
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
