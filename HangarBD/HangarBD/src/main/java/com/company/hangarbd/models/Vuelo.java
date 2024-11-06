@@ -16,6 +16,9 @@ import javax.persistence.TemporalType;
 @Entity(name = "Vuelo")
 public class Vuelo implements Serializable {
 
+    public Vuelo(Long Id_Vuelo1, String vue_Origen1, String vue_Destino1, Date vue_fechaInicio1, Date vue_fechaFin1, float vue_Distancia1, float vue_Duracion1, float vuel_AltitudPromedio1, int vue_Pasajeros1, Nave vue_nav1, Object par10, Object par11) {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id_Vuelo;
@@ -37,6 +40,17 @@ public class Vuelo implements Serializable {
     @OneToMany
     @JoinColumn(name = "tri_vue")
     private Set<Tripulante> vue_tri;
+
+    public Vuelo (String vue_Origen, String vue_Destino, Date vue_fechaInicio, Date vue_fechaFin, float vue_Distancia, float vue_Duracion, float vuel_AltitudPromedio, int vue_Pasajeros, Nave vue_nav) {
+        this.vue_Origen = vue_Origen;
+        this.vue_Destino = vue_Destino; 
+        this.vue_fechaInicio = vue_fechaInicio;
+        this.vue_fechaFin=vue_fechaFin;
+        this.vue_Distancia=vue_Distancia;
+        this.vue_Duracion=vue_Duracion;
+        this.vuel_AltitudPromedio=vuel_AltitudPromedio;
+        this.vue_Pasajeros=vue_Pasajeros;
+    }
 
     public Nave getVue_nav() {
         return vue_nav;
