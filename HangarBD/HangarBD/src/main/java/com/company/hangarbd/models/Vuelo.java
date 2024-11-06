@@ -29,11 +29,11 @@ public class Vuelo implements Serializable {
     private float vue_Duracion;
     private float vuel_AltitudPromedio;
     private int vue_Pasajeros;
-    
+
     @ManyToOne
     @JoinColumn(name = "nav_vue")
     public Nave vue_nav;
-    
+
     @OneToMany
     @JoinColumn(name = "tri_vue")
     private Set<Tripulante> vue_tri;
@@ -53,7 +53,7 @@ public class Vuelo implements Serializable {
     public void setVue_tri(Set<Tripulante> vue_tri) {
         this.vue_tri = vue_tri;
     }
-    
+
     public Nave getVue_nave() {
         return vue_nav;
     }

@@ -30,8 +30,7 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(Long ID_Persona, String per_nombre, String per_fabricante, String per_anio) {
-        this.ID_Persona = ID_Persona;
+    public Persona(String per_nombre, String per_fabricante, String per_anio) {
         this.per_nombre = per_nombre;
         this.per_fabricante = per_fabricante;
         this.per_anio = per_anio;

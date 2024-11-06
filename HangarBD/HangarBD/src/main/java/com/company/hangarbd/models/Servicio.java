@@ -29,8 +29,7 @@ public class Servicio implements Serializable {
     public Servicio() {
     }
 
-    public Servicio(int ID_servicio, String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
-        this.ID_servicio = ID_servicio;
+    public Servicio(String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
         this.ser_Diagnostico = ser_Diagnostico;
         this.ser_Acciones = ser_Acciones;
         this.Responsable = Responsable;

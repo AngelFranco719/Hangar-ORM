@@ -24,6 +24,12 @@ public class Piloto implements Serializable {
     @JoinColumn(name = " mod_pil")
     public Modelo pil_mod;
 
+    public Piloto(int pil_horasVuelo, Persona pil_per, Modelo pil_mod) {
+        this.pil_horasVuelo = pil_horasVuelo;
+        this.pil_per = pil_per;
+        this.pil_mod = pil_mod;
+    }
+
     public Long getID_Piloto() {
         return ID_Piloto;
     }

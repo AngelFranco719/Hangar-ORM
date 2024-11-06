@@ -26,9 +26,9 @@ public class Taller implements Serializable {
     public Taller() {
     }
 
-    public Taller(int ID_taller, String tal_Descripcion) {
-        this.ID_taller = ID_taller;
+    public Taller(String tal_Descripcion, Hangar tall_han) {
         this.tal_Descripcion = tal_Descripcion;
+        this.tall_han=tall_han; 
     }
 
     public int getID_taller() {

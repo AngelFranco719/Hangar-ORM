@@ -27,6 +27,12 @@ public class Tripulante implements Serializable {
     @JoinColumn(name = "per_tri")
     public Persona tri_per;
 
+    public Tripulante(Vuelo tri_vue, Cargo tri_car, Persona tri_per) {
+        this.tri_vue = tri_vue;
+        this.tri_car = tri_car;
+        this.tri_per = tri_per;
+    }
+
     public Long getID_Tripulante() {
         return ID_Tripulante;
     }
