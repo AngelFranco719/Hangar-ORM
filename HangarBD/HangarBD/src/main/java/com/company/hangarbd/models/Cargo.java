@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name = "Cargo")
@@ -16,22 +15,24 @@ public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Cargo;
+
     public enum cargos {
         PILOTO, COPILOTO, INGENIERO, AUXILIAR
     };
     private cargos car_nombre;
     private String car_descripcion;
 
+    @OneToMany
+    @JoinColumn(name = "tri_car")
+    private Set<Tripulante> car_tri;
+    
+    public Cargo() {
+    }
+
     public Cargo(cargos car_nombre, String car_descripcion) {
         this.car_nombre = car_nombre;
         this.car_descripcion = car_descripcion;
     }
-    
-    
-
-    @OneToMany
-    @JoinColumn(name = "tri_car")
-    private Set<Tripulante> car_tri;
 
     public Set<Tripulante> getCar_tri() {
         return car_tri;

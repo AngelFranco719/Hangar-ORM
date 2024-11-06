@@ -22,10 +22,13 @@ public class Modelo implements Serializable {
     @OneToMany
     @JoinColumn(name = "nav_mod")
     public Set<Nave> mod_nav;
-    
+
     @OneToMany
     @JoinColumn(name = "pil_mod")
     public Set<Piloto> mod_pil;
+
+    public Modelo() {
+    }
 
     public Modelo(String mod_nombre, String mod_fabricante, String mod_anio) {
         this.mod_nombre = mod_nombre;

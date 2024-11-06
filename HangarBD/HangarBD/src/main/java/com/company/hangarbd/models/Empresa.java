@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name = "empresa")
@@ -18,7 +17,7 @@ public class Empresa implements Serializable {
     private Long ID_Empresa;
     private String emp_nombre;
     private String emp_ubicacion;
-    
+
     @OneToMany
     @JoinColumn(name = "nav_emp")
     public Set<Nave> emp_nav;
@@ -28,23 +27,15 @@ public class Empresa implements Serializable {
         this.emp_ubicacion = emp_ubicacion;
     }
 
-    
-    
+    public Empresa() {
+    }
+
     public Set<Nave> getEmp_nav() {
         return emp_nav;
     }
 
     public void setEmp_nav(Set<Nave> emp_nav) {
         this.emp_nav = emp_nav;
-    }
-
-    public Empresa(Long ID_Empresa, String emp_nombre, String emp_ubicacion) {
-        this.ID_Empresa = ID_Empresa;
-        this.emp_nombre = emp_nombre;
-        this.emp_ubicacion = emp_ubicacion;
-    }
-
-    public Empresa() {
     }
 
     public Long getID_Empresa() {

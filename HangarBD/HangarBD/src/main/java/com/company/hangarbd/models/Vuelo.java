@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "Vuelo")
 public class Vuelo implements Serializable {
@@ -19,7 +21,9 @@ public class Vuelo implements Serializable {
     private Long Id_Vuelo;
     private String vue_Origen;
     private String vue_Destino;
+    @Temporal(value = TemporalType.DATE)
     private Date vue_fechaInicio;
+    @Temporal(value = TemporalType.DATE)
     private Date vue_fechaFin;
     private float vue_Distancia;
     private float vue_Duracion;
@@ -33,6 +37,22 @@ public class Vuelo implements Serializable {
     @OneToMany
     @JoinColumn(name = "tri_vue")
     private Set<Tripulante> vue_tri;
+
+    public Nave getVue_nav() {
+        return vue_nav;
+    }
+
+    public void setVue_nav(Nave vue_nav) {
+        this.vue_nav = vue_nav;
+    }
+
+    public Set<Tripulante> getVue_tri() {
+        return vue_tri;
+    }
+
+    public void setVue_tri(Set<Tripulante> vue_tri) {
+        this.vue_tri = vue_tri;
+    }
     
     public Nave getVue_nave() {
         return vue_nav;

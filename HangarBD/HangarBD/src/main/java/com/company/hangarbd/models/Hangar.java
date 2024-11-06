@@ -7,30 +7,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity(name = "Hangar")
 public class Hangar implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID_Hangar; 
+    private Long ID_Hangar;
     private int han_Capacidad;
     private String han_Nombre;
     private String han_Ubicacion;
     private String han_Descripcion;
     private String han_Codigo;
-    
-    @OneToMany
+
+    @OneToOne
     @JoinColumn(name = "nav_han")
     public Set<Nave> han_nav;
-    
+
     @OneToMany
     @JoinColumn(name = "tall_han")
-    public Set<Taller> han_tal;
-    
+    public Taller han_tal;
 
+    public Hangar(int han_Capacidad, String han_Nombre, String han_Ubicacion, String han_Descripcion, String han_Codigo) {
+        this.han_Capacidad = han_Capacidad;
+        this.han_Nombre = han_Nombre;
+        this.han_Ubicacion = han_Ubicacion;
+        this.han_Descripcion = han_Descripcion;
+        this.han_Codigo = han_Codigo;
+    }
 
     public Long getID_Hangar() {
         return ID_Hangar;
@@ -48,11 +54,11 @@ public class Hangar implements Serializable {
         this.han_nav = han_nav;
     }
 
-    public Set<Taller> getHan_tal() {
+    public Taller getHan_tal() {
         return han_tal;
     }
 
-    public void setHan_tal(Set<Taller> han_tal) {
+    public void setHan_tal(Taller han_tal) {
         this.han_tal = han_tal;
     }
 

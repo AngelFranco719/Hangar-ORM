@@ -1,4 +1,3 @@
-
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
@@ -8,25 +7,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-@Entity (name = "tripulante")
-public class Tripulante implements Serializable{
+@Entity(name = "tripulante")
+public class Tripulante implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Tripulante;
-    
+
     @ManyToOne
     @JoinColumn(name = "vue_tri")
     public Vuelo tri_vue;
-    
+
     @ManyToOne
     @JoinColumn(name = "car_tri")
     public Cargo tri_car;
-    
+
     @ManyToOne
     @JoinColumn(name = "per_tri")
-    public Persona tri_per; 
+    public Persona tri_per;
 
     public Long getID_Tripulante() {
         return ID_Tripulante;
@@ -60,7 +59,4 @@ public class Tripulante implements Serializable{
         this.tri_per = tri_Per;
     }
 
-    
-    
-    
 }

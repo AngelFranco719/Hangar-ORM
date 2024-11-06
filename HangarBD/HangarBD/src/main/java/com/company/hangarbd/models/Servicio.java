@@ -1,4 +1,3 @@
-
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
@@ -10,18 +9,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.*;
 
 @Entity
-public class Servicio implements Serializable{
+public class Servicio implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_servicio;
     private String ser_Diagnostico;
     private String ser_Acciones;
     private String Responsable;
-    
+
     @ManyToOne
     @JoinColumn(name = "tall_ser")
     private Taller ser_tall;
-    
+
     @ManyToOne
     @JoinColumn(name = "nav_ser")
     private Nave ser_nav;

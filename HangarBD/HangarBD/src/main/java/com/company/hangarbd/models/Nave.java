@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -34,13 +33,26 @@ public class Nave implements Serializable {
     @JoinColumn(name = "mod_nav")
     public Modelo nav_mod;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "ser_nav")
     public Set<Servicio> nav_ser;
 
     @OneToMany
     @JoinColumn(name = "vue_nav")
     public Set<Vuelo> nav_vue;
+
+    public Nave() {
+    }
+
+    public Nave(float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
+        this.nav_peso = nav_peso;
+        this.nav_estado = nav_estado;
+        this.nav_descripcion = nav_descripcion;
+        this.nav_capacidad = nav_capacidad;
+        this.nav_emp = nav_emp;
+        this.nav_han = nav_han;
+        this.nav_mod = nav_mod;
+    }
 
     public Set<Servicio> getNav_ser() {
         return nav_ser;
