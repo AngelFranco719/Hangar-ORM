@@ -2,12 +2,14 @@ package com.company.hangarbd.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Vuelo")
 public class Vuelo implements Serializable {
@@ -27,7 +29,11 @@ public class Vuelo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "nav_vue")
     public Nave vue_nav;
-
+    
+    @OneToMany
+    @JoinColumn(name = "tri_vue")
+    private Set<Tripulante> vue_tri;
+    
     public Nave getVue_nave() {
         return vue_nav;
     }

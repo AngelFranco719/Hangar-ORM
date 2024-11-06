@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Hangar")
 public class Hangar implements Serializable {
@@ -21,13 +22,15 @@ public class Hangar implements Serializable {
     private String han_Descripcion;
     private String han_Codigo;
     
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "nav_han")
     public Set<Nave> han_nav;
     
-    @ManyToOne
-    @JoinColumn(name = "tal_han")
+    @OneToMany
+    @JoinColumn(name = "tall_han")
     public Set<Taller> han_tal;
+    
+
 
     public Long getID_Hangar() {
         return ID_Hangar;

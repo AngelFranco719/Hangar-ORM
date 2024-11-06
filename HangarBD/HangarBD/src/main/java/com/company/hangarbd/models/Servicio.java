@@ -19,11 +19,11 @@ public class Servicio implements Serializable{
     private String Responsable;
     
     @ManyToOne
-    @JoinColumn(name = "tall_ser", nullable = false)
+    @JoinColumn(name = "tall_ser")
     private Taller ser_tall;
     
     @ManyToOne
-    @JoinColumn(name = "nav_ser", nullable = false)
+    @JoinColumn(name = "nav_ser")
     private Nave ser_nav;
 
     public Servicio() {

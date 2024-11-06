@@ -4,6 +4,7 @@ package com.company.hangarbd.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,12 +18,12 @@ public class Taller implements Serializable{
     private String tal_Descripcion;
     
     @OneToMany
-        @JoinColumn (name = "ser_tall", nullable = false)
-        private List<Servicio> tall_ser=new ArrayList<Servicio>();
+        @JoinColumn (name = "ser_tall")
+        public Set<Servicio> tall_ser;
     
     @OneToMany
-        @JoinColumn (name = "han_tall", nullable = false)
-        private List<Hangar> tall_han=new ArrayList<Hangar>();
+        @JoinColumn (name = "han_tall")
+        public Hangar tall_han;
 
     public Taller() {
     }

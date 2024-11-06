@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity (name = "tripulante")
@@ -15,15 +16,15 @@ public class Tripulante implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Tripulante;
     
-    @OneToMany(mappedBy = "vueloTripulante")
+    @ManyToOne
     @JoinColumn(name = "vue_tri")
     public Vuelo tri_vue;
     
-    @OneToMany(mappedBy = "cargoTripulante")
+    @ManyToOne
     @JoinColumn(name = "car_tri")
     public Cargo tri_car;
     
-    @OneToMany(mappedBy = "personaTripulante")
+    @ManyToOne
     @JoinColumn(name = "per_tri")
     public Persona tri_per; 
 

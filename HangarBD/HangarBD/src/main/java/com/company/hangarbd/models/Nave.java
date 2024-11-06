@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Nave")
 public class Nave implements Serializable {
@@ -37,7 +38,7 @@ public class Nave implements Serializable {
     @JoinColumn(name = "ser_nav")
     public Set<Servicio> nav_ser;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "vue_nav")
     public Set<Vuelo> nav_vue;
 

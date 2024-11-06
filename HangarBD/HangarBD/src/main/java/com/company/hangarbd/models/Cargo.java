@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Cargo")
 public class Cargo implements Serializable {
@@ -28,7 +29,7 @@ public class Cargo implements Serializable {
     
     
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "tri_car")
     private Set<Tripulante> car_tri;
 

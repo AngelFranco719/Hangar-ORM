@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "persona")
 public class Persona implements Serializable {
@@ -19,9 +20,14 @@ public class Persona implements Serializable {
     private String per_fabricante;
     private String per_anio;
     
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "tri_per")
     public Set<Tripulante> per_tri;
+    
+    @OneToMany
+    @JoinColumn(name = "pil_per")
+    public Set<Piloto> per_pil;
+    
 
     public Persona() {
     }
