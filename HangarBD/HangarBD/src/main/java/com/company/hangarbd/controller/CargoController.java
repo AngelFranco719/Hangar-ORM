@@ -7,7 +7,11 @@ import javax.persistence.Persistence;
 
 public class CargoController extends Controller<Cargo> {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    private EntityManagerFactory emf; 
+    
+    public CargoController(EntityManagerFactory emf){
+        this.emf=emf; 
+    }
 
     public void createCargo(cargos car_nombre, String car_descripcion) {
         Cargo newCargo = new Cargo(car_nombre, car_descripcion);

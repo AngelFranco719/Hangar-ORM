@@ -1,6 +1,7 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ public class Tripulante implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_Tripulante")
     private Long ID_Tripulante;
 
     @ManyToOne
@@ -20,12 +22,15 @@ public class Tripulante implements Serializable {
     public Vuelo tri_vue;
 
     @ManyToOne
-    @JoinColumn(name = "car_tri")
+    @JoinColumn(name = "tri_car")
     public Cargo tri_car;
 
     @ManyToOne
     @JoinColumn(name = "per_tri")
     public Persona tri_per;
+
+    public Tripulante() {
+    }
 
     public Tripulante(Vuelo tri_vue, Cargo tri_car, Persona tri_per) {
         this.tri_vue = tri_vue;

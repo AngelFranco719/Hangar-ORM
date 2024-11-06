@@ -16,11 +16,11 @@ public class Hangar implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Hangar;
-    private int han_Capacidad;
-    private String han_Nombre;
-    private String han_Ubicacion;
-    private String han_Descripcion;
-    private String han_Codigo;
+    private int han_capacidad;
+    private String han_nombre;
+    private String han_ubicacion;
+    private String han_descripcion;
+    private String han_codigo;
 
     @OneToOne
     @JoinColumn(name = "nav_han")
@@ -30,12 +30,12 @@ public class Hangar implements Serializable {
     @JoinColumn(name = "tall_han")
     public Taller han_tal;
 
-    public Hangar(int han_Capacidad, String han_Nombre, String han_Ubicacion, String han_Descripcion, String han_Codigo) {
-        this.han_Capacidad = han_Capacidad;
-        this.han_Nombre = han_Nombre;
-        this.han_Ubicacion = han_Ubicacion;
-        this.han_Descripcion = han_Descripcion;
-        this.han_Codigo = han_Codigo;
+    public Hangar(int han_capacidad, String han_nombre, String han_ubicacion, String han_descripcion, String han_codigo) {
+        this.han_capacidad = han_capacidad;
+        this.han_nombre = han_nombre;
+        this.han_ubicacion = han_ubicacion;
+        this.han_descripcion = han_descripcion;
+        this.han_codigo = han_codigo;
     }
 
     public Long getID_Hangar() {
@@ -62,44 +62,44 @@ public class Hangar implements Serializable {
         this.han_tal = han_tal;
     }
 
-    public int getHan_Capacidad() {
-        return han_Capacidad;
+    public int getHan_capacidad() {
+        return han_capacidad;
     }
 
-    public void setHan_Capacidad(int han_Capacidad) {
-        this.han_Capacidad = han_Capacidad;
+    public void setHan_capacidad(int han_capacidad) {
+        this.han_capacidad = han_capacidad;
     }
 
-    public String getHan_Nombre() {
-        return han_Nombre;
+    public String getHan_nombre() {
+        return han_nombre;
     }
 
-    public void setHan_Nombre(String han_Nombre) {
-        this.han_Nombre = han_Nombre;
+    public void setHan_nombre(String han_nombre) {
+        this.han_nombre = han_nombre;
     }
 
-    public String getHan_Ubicacion() {
-        return han_Ubicacion;
+    public String getHan_ubicacion() {
+        return han_ubicacion;
     }
 
-    public void setHan_Ubicacion(String han_Ubicacion) {
-        this.han_Ubicacion = han_Ubicacion;
+    public void setHan_ubicacion(String han_ubicacion) {
+        this.han_ubicacion = han_ubicacion;
     }
 
-    public String getHan_Descripcion() {
-        return han_Descripcion;
+    public String getHan_descripcion() {
+        return han_descripcion;
     }
 
-    public void setHan_Descripcion(String han_Descripcion) {
-        this.han_Descripcion = han_Descripcion;
+    public void setHan_descripcion(String han_descripcion) {
+        this.han_descripcion = han_descripcion;
     }
 
-    public String getHan_Codigo() {
-        return han_Codigo;
+    public String getHan_codigo() {
+        return han_codigo;
     }
 
-    public void setHan_Codigo(String han_Codigo) {
-        this.han_Codigo = han_Codigo;
+    public void setHan_codigo(String han_codigo) {
+        this.han_codigo = han_codigo;
     }
 
 }

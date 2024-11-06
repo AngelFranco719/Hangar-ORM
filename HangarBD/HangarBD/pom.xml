@@ -1,44 +1,131 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany</groupId>
+
     <artifactId>HangarBD</artifactId>
+    <groupId>com.mycompany</groupId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+
+    <properties>
+        <dn.javax.persistence.version>2.2.3</dn.javax.persistence.version>
+        <dn.core.version>6.0.9</dn.core.version>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:datanucleus/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:git@github.com:datanucleus/${project.artifactId}.git</developerConnection>
+        <url>https://github.com/datanucleus/${project.artifactId}</url>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>datanucleus-repo</id>
+            <url>https://repo.datanucleus.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+    
     <dependencies>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version> <!-- O la versión que necesites -->
+        </dependency>
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-core</artifactId>
-            <version>6.0.7</version>
+            <version>6.0.9</version> <!-- Asegúrate de que ambas tengan la misma versión -->
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-api-jpa</artifactId>
-            <version>6.0.7</version>
+            <version>6.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId> 
+            <artifactId>javax.transaction-api</artifactId> 
+            <version>1.3</version>
+            <optional>true</optional>
+        </dependency>
+        
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-rdbms</artifactId>
-            <version>6.0.7</version>
+            <version>6.0.1</version> <!-- Sincroniza todas las versiones de DataNucleus -->
         </dependency>
+        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
+            <version>8.0.28</version> <!-- Usa la versión más reciente si es necesario -->
         </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version>
-        </dependency>
+        
+   
+
+        
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
-        <exec.mainClass>com.mycompany.hangarbd.HangarBD</exec.mainClass>
-        
-        
-    </properties>
-    
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>13</source> <!-- O la versión de Java que estás utilizando -->
+                    <target>13</target>
+                    <compilerArgument>-proc:none</compilerArgument>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>4.2.1</version>
+                <configuration>
+                    <instructions>
+                        <Automatic-Module-Name>org.datanucleus.api.jpa</Automatic-Module-Name>
+                        <Bundle-Vendor>DataNucleus</Bundle-Vendor>
+                        <Bundle-SymbolicName>org.datanucleus.api.jpa;singleton:=true</Bundle-SymbolicName>
+                        <Import-Package>
+                            org.datanucleus*;version="${dn.core.version}",
+                            *;resolution:=optional
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-exec-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.mycompany.hangarbd.HangarBD</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.datanucleus</groupId>
+                <artifactId>datanucleus-maven-plugin</artifactId>
+                <version>4.0.0-release</version>
+                <configuration>
+                    <api>JPA</api>
+                    <persistenceUnitName>hangar</persistenceUnitName>
+                    <log4jConfiguration>${basedir}/log4j.properties</log4jConfiguration>
+                    <verbose>true</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 </project>

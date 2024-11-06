@@ -3,6 +3,7 @@ package com.company.hangarbd.controller;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 public abstract class Controller<T> {
 
@@ -48,10 +49,12 @@ public abstract class Controller<T> {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            T selectedElement = em.find(type, ID); 
-            if(selectedElement != null) em.remove(selectedElement);
+            T selectedElement = em.find(type, ID);
+            if (selectedElement != null) {
+                em.remove(selectedElement);
+            }
             tx.commit();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

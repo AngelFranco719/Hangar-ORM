@@ -16,8 +16,8 @@ public class Persona implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Persona;
     private String per_nombre;
-    private String per_fabricante;
-    private String per_anio;
+    private String per_licencia;
+    private int per_horasVuelo;
 
     @OneToMany
     @JoinColumn(name = "tri_per")
@@ -30,10 +30,10 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(String per_nombre, String per_fabricante, String per_anio) {
+    public Persona(String per_nombre, String per_licencia, int per_horasVuelo) {
         this.per_nombre = per_nombre;
-        this.per_fabricante = per_fabricante;
-        this.per_anio = per_anio;
+        this.per_licencia = per_licencia;
+        this.per_horasVuelo = per_horasVuelo;
     }
 
     public Long getID_Modelo() {
@@ -52,20 +52,44 @@ public class Persona implements Serializable {
         this.per_nombre = per_nombre;
     }
 
-    public String getPer_fabricante() {
-        return per_fabricante;
+    public Long getID_Persona() {
+        return ID_Persona;
     }
 
-    public void setPer_fabricante(String per_fabricante) {
-        this.per_fabricante = per_fabricante;
+    public void setID_Persona(Long ID_Persona) {
+        this.ID_Persona = ID_Persona;
     }
 
-    public String getPer_anio() {
-        return per_anio;
+    public String getPer_licencia() {
+        return per_licencia;
     }
 
-    public void setMod_anio(String per_anio) {
-        this.per_anio = per_anio;
+    public void setPer_licencia(String per_licencia) {
+        this.per_licencia = per_licencia;
+    }
+
+    public int getPer_horasVuelo() {
+        return per_horasVuelo;
+    }
+
+    public void setPer_horasVuelo(int per_horasVuelo) {
+        this.per_horasVuelo = per_horasVuelo;
+    }
+
+    public Set<Tripulante> getPer_tri() {
+        return per_tri;
+    }
+
+    public void setPer_tri(Set<Tripulante> per_tri) {
+        this.per_tri = per_tri;
+    }
+
+    public Set<Piloto> getPer_pil() {
+        return per_pil;
+    }
+
+    public void setPer_pil(Set<Piloto> per_pil) {
+        this.per_pil = per_pil;
     }
 
 }
