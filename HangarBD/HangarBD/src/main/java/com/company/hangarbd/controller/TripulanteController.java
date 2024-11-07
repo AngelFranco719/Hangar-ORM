@@ -5,11 +5,14 @@ import com.company.hangarbd.models.Persona;
 import com.company.hangarbd.models.Tripulante;
 import com.company.hangarbd.models.Vuelo;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class TripulanteController extends Controller<Tripulante> {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    final private EntityManagerFactory emf;
+
+    public TripulanteController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public void createTripulante(Vuelo tri_vue, Cargo tri_car, Persona tri_per) {
         Tripulante newTripulante = new Tripulante(tri_vue, tri_car, tri_per);

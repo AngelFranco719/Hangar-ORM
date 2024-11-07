@@ -2,11 +2,14 @@ package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Persona;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class PersonaController extends Controller<Persona> {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    private EntityManagerFactory emf;
+
+    public PersonaController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public void createPersona(String per_nombre, String per_licencia, int per_horasVuelo) {
         Persona newPersona = new Persona(per_nombre, per_licencia, per_horasVuelo);

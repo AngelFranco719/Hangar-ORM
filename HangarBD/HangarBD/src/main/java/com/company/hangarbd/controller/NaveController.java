@@ -9,7 +9,11 @@ import javax.persistence.Persistence;
 
 public class NaveController extends Controller<Nave> {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    private EntityManagerFactory emf;
+
+    public NaveController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public void createNave(float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
         Nave newNave = new Nave(nav_peso, nav_estado, nav_descripcion, nav_capacidad, nav_emp, nav_han, nav_mod);
@@ -24,8 +28,8 @@ public class NaveController extends Controller<Nave> {
         Nave updatedNave = new Nave(nav_peso, nav_estado, nav_descripcion, nav_capacidad, nav_emp, nav_han, nav_mod);
         this.updateElement(updatedNave, emf);
     }
-    
-    public void deleteNaveByID(Long ID){
+
+    public void deleteNaveByID(Long ID) {
         this.deleteElementByID(ID, emf, Nave.class);
     }
 

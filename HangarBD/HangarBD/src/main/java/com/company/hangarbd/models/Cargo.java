@@ -25,7 +25,7 @@ public class Cargo implements Serializable {
     @OneToMany
     @JoinColumn(name = "tri_car")
     private Set<Tripulante> car_tri;
-    
+
     public Cargo() {
     }
 
@@ -64,6 +64,11 @@ public class Cargo implements Serializable {
 
     public void setCar_descripcion(String car_descripcion) {
         this.car_descripcion = car_descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo{" + "ID_Cargo=" + ID_Cargo + ", car_nombre=" + car_nombre + ", car_descripcion=" + car_descripcion + '}';
     }
 
 }

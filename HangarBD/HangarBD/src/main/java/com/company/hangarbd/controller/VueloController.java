@@ -8,7 +8,11 @@ import javax.persistence.Persistence;
 
 public class VueloController extends Controller<Vuelo> {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    private final EntityManagerFactory emf;
+
+    public VueloController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public void createVuelo(String vue_Origen, String vue_Destino, Date vue_fechaInicio, Date vue_fechaFin, float vue_Distancia, float vue_Duracion, float vuel_AltitudPromedio, int vue_Pasajeros, Nave vue_nav) {
         Vuelo newVuelo = new Vuelo(vue_Origen, vue_Destino, vue_fechaInicio, vue_fechaFin, vue_Distancia, vue_Duracion, vuel_AltitudPromedio, vue_Pasajeros, vue_nav);

@@ -1,14 +1,15 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Empresa;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
 public class EmpresaController extends Controller<Empresa> {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    EntityManagerFactory emf;
+
+    public EmpresaController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public void createEmpresa(String emp_nombre, String emp_ubicacion) {
         Empresa newEmpresa = new Empresa(emp_nombre, emp_ubicacion);
@@ -26,7 +27,7 @@ public class EmpresaController extends Controller<Empresa> {
     }
 
     public void deleteEmpresaByID(Long ID) {
-       this.deleteElementByID(ID, emf, Empresa.class);
+        this.deleteElementByID(ID, emf, Empresa.class);
     }
 
 }

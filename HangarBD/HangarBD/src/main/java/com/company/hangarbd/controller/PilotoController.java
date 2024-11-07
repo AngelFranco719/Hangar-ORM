@@ -8,7 +8,11 @@ import javax.persistence.Persistence;
 
 public class PilotoController extends Controller<Piloto> {
 
-    final private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    private EntityManagerFactory emf;
+
+    public PilotoController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public void createPiloto(int pil_horasVuelo, Persona pil_per, Modelo pil_mod) {
         Piloto newPiloto = new Piloto(pil_horasVuelo, pil_per, pil_mod);

@@ -1,5 +1,8 @@
 package com.mycompany.hangarbd;
 
+import com.company.hangarbd.controller.CargoController;
+import com.company.hangarbd.controller.EmpresaController;
+import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.models.Empresa;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,14 +19,18 @@ public class HangarBD {
         try {
             emf = Persistence.createEntityManagerFactory("hangar"); // Verifica que el nombre coincide
             em = emf.createEntityManager();
-            Query q = em.createQuery("SELECT p FROM empresa p");
-            List<Empresa> resultados = q.getResultList(); 
+            Query query=em.createQuery("SELECT p FROM empresa p");
+            List <Empresa> resultados =query.getResultList(); 
+            
             System.out.println("Conexión establecida exitosamente.");
-            System.out.println(resultados.get(0).toString());
-            EntityTransaction xt = em.getTransaction();
-            xt.begin();
-
-            xt.commit();
+            
+            ///cargoController.createCargo(Cargo.cargos.INGENIERO, "Ingeniero de Vuelo");
+            
+            System.out.println(resultados.toString());
+            
+            
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

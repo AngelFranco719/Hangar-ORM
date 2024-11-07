@@ -64,6 +64,6 @@ public class Empresa implements Serializable {
 
     @Override
     public String toString() {
-        return "Empresa{" + "ID_Empresa=" + ID_Empresa + ", emp_nombre=" + emp_nombre + ", emp_ubicacion=" + emp_ubicacion + ", emp_nav=" + emp_nav + '}';
+        return "Empresa{" + "ID_Empresa=" + ID_Empresa + ", emp_nombre=" + emp_nombre + ", emp_ubicacion=" + emp_ubicacion + '}';
     }
 }

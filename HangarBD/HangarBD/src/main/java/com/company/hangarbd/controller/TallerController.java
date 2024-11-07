@@ -3,11 +3,14 @@ package com.company.hangarbd.controller;
 import com.company.hangarbd.models.Hangar;
 import com.company.hangarbd.models.Taller;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class TallerController extends Controller<Taller> {
 
-    final private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU");
+    final private EntityManagerFactory emf;
+
+    public TallerController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     public void createTaller(String tal_Descripcion, Hangar tall_han) {
         Taller newTaller = new Taller(tal_Descripcion, tall_han);
