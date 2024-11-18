@@ -1,29 +1,80 @@
-
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "Vuelo")
-public class Vuelo implements Serializable{
+public class Vuelo implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id_Vuelo;
     private String vue_Origen;
     private String vue_Destino;
-    private Date vue_Fecha_Inicio;
-    private Date vue_Fecha_Fin;
+    @Temporal(value = TemporalType.DATE)
+    private Date vue_fechaInicio;
+    @Temporal(value = TemporalType.DATE)
+    private Date vue_fechaFin;
     private float vue_Distancia;
     private float vue_Duracion;
     private float vuel_AltitudPromedio;
     private int vue_Pasajeros;
-     @ManyToOne
-    public Nave vueNave;
+
+    @ManyToOne
+    @JoinColumn(name = "nav_vue")
+    public Nave vue_nav;
+
+    @OneToMany
+    @JoinColumn(name = "tri_vue")
+    private Set<Tripulante> vue_tri;
+
+    public Vuelo(String vue_Origen, String vue_Destino, Date vue_fechaInicio, Date vue_fechaFin, float vue_Distancia, float vue_Duracion, float vuel_AltitudPromedio, int vue_Pasajeros, Nave vue_nav) {
+        this.vue_Origen = vue_Origen;
+        this.vue_Destino = vue_Destino;
+        this.vue_fechaInicio = vue_fechaInicio;
+        this.vue_fechaFin = vue_fechaFin;
+        this.vue_Distancia = vue_Distancia;
+        this.vue_Duracion = vue_Duracion;
+        this.vuel_AltitudPromedio = vuel_AltitudPromedio;
+        this.vue_Pasajeros = vue_Pasajeros;
+        this.vue_nav = vue_nav;
+    }
+    
+    
+
+    public Nave getVue_nav() {
+        return vue_nav;
+    }
+
+    public void setVue_nav(Nave vue_nav) {
+        this.vue_nav = vue_nav;
+    }
+
+    public Set<Tripulante> getVue_tri() {
+        return vue_tri;
+    }
+
+    public void setVue_tri(Set<Tripulante> vue_tri) {
+        this.vue_tri = vue_tri;
+    }
+
+    public Nave getVue_nave() {
+        return vue_nav;
+    }
+
+    public void setVue_nave(Nave vue_nave) {
+        this.vue_nav = vue_nave;
+    }
 
     public Long getId_Vuelo() {
         return Id_Vuelo;
@@ -49,20 +100,20 @@ public class Vuelo implements Serializable{
         this.vue_Destino = vue_Destino;
     }
 
-    public Date getVue_Fecha_Inicio() {
-        return vue_Fecha_Inicio;
+    public Date getVue_fechaInicio() {
+        return vue_fechaInicio;
     }
 
-    public void setVue_Fecha_Inicio(Date vue_Fecha_Inicio) {
-        this.vue_Fecha_Inicio = vue_Fecha_Inicio;
+    public void setVue_fechaInicio(Date vue_fechaInicio) {
+        this.vue_fechaInicio = vue_fechaInicio;
     }
 
-    public Date getVue_Fecha_Fin() {
-        return vue_Fecha_Fin;
+    public Date getVue_fechaFin() {
+        return vue_fechaFin;
     }
 
-    public void setVue_Fecha_Fin(Date vue_Fecha_Fin) {
-        this.vue_Fecha_Fin = vue_Fecha_Fin;
+    public void setVue_fechaFin(Date vue_fechaFin) {
+        this.vue_fechaFin = vue_fechaFin;
     }
 
     public float getVue_Distancia() {
@@ -97,6 +148,4 @@ public class Vuelo implements Serializable{
         this.vue_Pasajeros = vue_Pasajeros;
     }
 
-  
 }
-

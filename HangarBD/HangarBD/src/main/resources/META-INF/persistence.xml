@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-  <persistence-unit name="com.mycompany_HangarBD_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="crxzsql"/>
-      <property name="datanucleus.ConnectionURL" value="appengine"/>
-      <property name="datanucleus.transaction.nontx.read" value="true"/>
-      <property name="datanucleus.transaction.nontx.write" value="true"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
-    </properties>
-  </persistence-unit>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
+    
+    <persistence-unit name="hangar">
+        <class>com.company.hangarbd.models.Cargo</class>
+        <class>com.company.hangarbd.models.Empresa</class>
+        <class>com.company.hangarbd.models.Hangar</class>
+        <class>com.company.hangarbd.models.Modelo</class>
+        <class>com.company.hangarbd.models.Nave</class>
+        <class>com.company.hangarbd.models.Persona</class>
+        <class>com.company.hangarbd.models.Piloto</class>
+        <class>com.company.hangarbd.models.Servicio</class>
+        <class>com.company.hangarbd.models.Taller</class>
+        <class>com.company.hangarbd.models.Tripulante</class>
+        <class>com.company.hangarbd.models.Vuelo</class>
+        
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3307/hangar"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+        </properties>
+
+        
+    </persistence-unit>
 </persistence>
+

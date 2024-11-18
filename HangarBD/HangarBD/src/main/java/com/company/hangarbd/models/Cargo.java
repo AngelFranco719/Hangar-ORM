@@ -1,10 +1,13 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Cargo")
 public class Cargo implements Serializable {
@@ -18,6 +21,26 @@ public class Cargo implements Serializable {
     };
     private cargos car_nombre;
     private String car_descripcion;
+
+    @OneToMany
+    @JoinColumn(name = "tri_car")
+    private Set<Tripulante> car_tri;
+
+    public Cargo() {
+    }
+
+    public Cargo(cargos car_nombre, String car_descripcion) {
+        this.car_nombre = car_nombre;
+        this.car_descripcion = car_descripcion;
+    }
+
+    public Set<Tripulante> getCar_tri() {
+        return car_tri;
+    }
+
+    public void setCar_tri(Set<Tripulante> car_tri) {
+        this.car_tri = car_tri;
+    }
 
     public Long getID_Cargo() {
         return ID_Cargo;
@@ -41,6 +64,11 @@ public class Cargo implements Serializable {
 
     public void setCar_descripcion(String car_descripcion) {
         this.car_descripcion = car_descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo{" + "ID_Cargo=" + ID_Cargo + ", car_nombre=" + car_nombre + ", car_descripcion=" + car_descripcion + '}';
     }
 
 }

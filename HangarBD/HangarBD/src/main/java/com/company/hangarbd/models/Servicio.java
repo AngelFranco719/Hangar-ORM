@@ -1,5 +1,4 @@
-
-package com.mycompany.hangarbd.com.company.hangarbd.models;
+package com.company.hangarbd.models;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -10,27 +9,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.*;
 
 @Entity
-public class Servicio implements Serializable{
+public class Servicio implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_servicio;
     private String ser_Diagnostico;
     private String ser_Acciones;
     private String Responsable;
-    
+
     @ManyToOne
-    @JoinColumn(name = "tall_ser", nullable = false)
+    @JoinColumn(name = "tall_ser")
     private Taller ser_tall;
-    
+
     @ManyToOne
-    @JoinColumn(name = "nav_ser", nullable = false)
+    @JoinColumn(name = "nav_ser")
     private Nave ser_nav;
 
     public Servicio() {
     }
 
-    public Servicio(int ID_servicio, String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
-        this.ID_servicio = ID_servicio;
+    public Servicio(String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
         this.ser_Diagnostico = ser_Diagnostico;
         this.ser_Acciones = ser_Acciones;
         this.Responsable = Responsable;
