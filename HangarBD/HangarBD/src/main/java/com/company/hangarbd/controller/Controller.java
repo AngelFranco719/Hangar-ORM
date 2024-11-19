@@ -14,7 +14,7 @@ public abstract class Controller<T> {
             tx.begin();
             em.persist(element);
             tx.commit();
-            JOptionPane.showMessageDialog(null,"Se ha subido a la Base de Datos", "Operación Exitosa",0);
+            JOptionPane.showMessageDialog(null,"Se ha subido a la Base de Datos", "Operación Exitosa",JOptionPane.OK_OPTION);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

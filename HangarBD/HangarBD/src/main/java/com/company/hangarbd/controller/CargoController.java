@@ -7,10 +7,10 @@ import javax.persistence.Persistence;
 
 public class CargoController extends Controller<Cargo> {
 
-    private EntityManagerFactory emf; 
-    
-    public CargoController(EntityManagerFactory emf){
-        this.emf=emf; 
+    private EntityManagerFactory emf;
+
+    public CargoController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
 
     public void createCargo(cargos car_nombre, String car_descripcion) {
@@ -29,6 +29,10 @@ public class CargoController extends Controller<Cargo> {
 
     public void deleteCargoByID(Long ID) {
         this.deleteElementByID(ID, emf, Cargo.class);
+    }
+
+    public Long getLastID_Cargo() {
+        return (this.getLastID(emf, "Cargo"));
     }
 
 }
