@@ -3,7 +3,7 @@ package com.company.hangarbd.controller;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 public abstract class Controller<T> {
 
@@ -14,6 +14,7 @@ public abstract class Controller<T> {
             tx.begin();
             em.persist(element);
             tx.commit();
+            JOptionPane.showMessageDialog(null,"Se ha subido a la Base de Datos", "Operación Exitosa",0);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -60,6 +61,21 @@ public abstract class Controller<T> {
         } finally {
             em.close();
         }
+    }
+
+    protected Long getLastID(EntityManagerFactory emf, String Entity) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            System.out.println("SELECT MAX(e.ID_" + Entity + ") FROM " + Entity + " e");
+            Long lastID = em.createQuery("SELECT MAX(e.ID_" + Entity + ") FROM " + Entity + " e", Long.class).getSingleResult();
+            return lastID;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return 0l; 
     }
 
 }

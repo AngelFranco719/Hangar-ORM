@@ -2,6 +2,7 @@ package com.company.hangarbd.models;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Hangar implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_Hangar")
     private Long ID_Hangar;
     private int han_capacidad;
     private String han_nombre;
@@ -22,13 +24,15 @@ public class Hangar implements Serializable {
     private String han_descripcion;
     private String han_codigo;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "nav_han")
     public Set<Nave> han_nav;
 
-    @OneToMany
-    @JoinColumn(name = "tall_han")
+    @OneToOne(mappedBy = "tall_han")
     public Taller han_tal;
+
+    public Hangar() {
+    }
 
     public Hangar(int han_capacidad, String han_nombre, String han_ubicacion, String han_descripcion, String han_codigo) {
         this.han_capacidad = han_capacidad;

@@ -28,5 +28,9 @@ public class HangarController extends Controller<Hangar> {
     public void deleteHangarByID(Long ID) {
         this.deleteElementByID(ID, emf, Hangar.class);
     }
+    
+    public Long getLastID_Hangar(){
+        return this.getLastID(emf,"Hangar");
+    }
 
 }

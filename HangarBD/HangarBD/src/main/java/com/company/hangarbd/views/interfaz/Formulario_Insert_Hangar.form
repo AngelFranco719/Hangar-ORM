@@ -132,6 +132,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="Id_Hangar">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Id_HangarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -185,6 +191,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Enviar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_EnviarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Button_Cancelar">
       <Properties>

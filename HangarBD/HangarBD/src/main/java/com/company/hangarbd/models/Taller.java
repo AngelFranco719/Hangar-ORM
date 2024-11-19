@@ -13,7 +13,7 @@ public class Taller implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_taller;
-    private String tal_Descripcion;
+    private String tall_Descripcion;
 
     @OneToMany
     @JoinColumn(name = "ser_tall")
@@ -27,7 +27,7 @@ public class Taller implements Serializable {
     }
 
     public Taller(String tal_Descripcion, Hangar tall_han) {
-        this.tal_Descripcion = tal_Descripcion;
+        this.tall_Descripcion = tal_Descripcion;
         this.tall_han=tall_han; 
     }
 
@@ -40,11 +40,11 @@ public class Taller implements Serializable {
     }
 
     public String getTal_Descripcion() {
-        return tal_Descripcion;
+        return tall_Descripcion;
     }
 
     public void setTal_Descripcion(String tal_Descripcion) {
-        this.tal_Descripcion = tal_Descripcion;
+        this.tall_Descripcion = tal_Descripcion;
     }
 
 }
