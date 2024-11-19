@@ -1,6 +1,7 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Hangar;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
 public class HangarController extends Controller<Hangar> {
@@ -20,6 +21,10 @@ public class HangarController extends Controller<Hangar> {
         return this.getElementByID(ID, emf, Hangar.class);
     }
 
+    public <T> List<T> getColumnsFromHangar(String Column) {
+        return this.getAllByColumn(Column, emf, "Hangar");
+    }
+
     public void updateHangar(int han_Capacidad, String han_Nombre, String han_Ubicacion, String han_Descripcion, String han_Codigo) {
         Hangar updatedHangar = new Hangar(han_Capacidad, han_Nombre, han_Ubicacion, han_Descripcion, han_Codigo);
         this.updateElement(updatedHangar, emf);
@@ -28,9 +33,13 @@ public class HangarController extends Controller<Hangar> {
     public void deleteHangarByID(Long ID) {
         this.deleteElementByID(ID, emf, Hangar.class);
     }
-    
-    public Long getLastID_Hangar(){
-        return this.getLastID(emf,"Hangar");
+
+    public Long getLastID_Hangar() {
+        return this.getLastID(emf, "Hangar");
+    }
+
+    public <T> Long getIdByColumn(String Column, T Value) {
+        return this.getIdByColumnValue(emf, Column, Value, "Hangar");
     }
 
 }

@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity(name = "Nave")
+@Entity
 public class Nave implements Serializable {
 
     @Id
@@ -22,23 +22,23 @@ public class Nave implements Serializable {
     private int nav_capacidad;
 
     @ManyToOne
-    @JoinColumn(name = "emp_nav")
+    @JoinColumn(name = "nav_emp")
     public Empresa nav_emp;
 
     @ManyToOne
-    @JoinColumn(name = "han_nav")
+    @JoinColumn(name = "nav_han")
     public Hangar nav_han;
 
     @ManyToOne
-    @JoinColumn(name = "mod_nav")
+    @JoinColumn(name = "nav_mod")
     public Modelo nav_mod;
 
     @OneToMany
-    @JoinColumn(name = "ser_nav")
+    @JoinColumn(name = "nav_ser")
     public Set<Servicio> nav_ser;
 
     @OneToMany
-    @JoinColumn(name = "vue_nav")
+    @JoinColumn(name = "nav_vue")
     public Set<Vuelo> nav_vue;
 
     public Nave() {

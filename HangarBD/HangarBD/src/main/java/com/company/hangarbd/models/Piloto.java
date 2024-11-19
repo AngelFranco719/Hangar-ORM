@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Piloto")
 public class Piloto implements Serializable {
@@ -16,12 +16,12 @@ public class Piloto implements Serializable {
     private Long ID_Piloto;
     private int pil_horasVuelo;
 
-    @ManyToOne
-    @JoinColumn(name = "per_pil")
+    @OneToMany
+    @JoinColumn(name = "pil_per")
     public Persona pil_per;
 
-    @ManyToOne
-    @JoinColumn(name = " mod_pil")
+    @OneToMany
+    @JoinColumn(name = "pil_mod")
     public Modelo pil_mod;
 
     public Piloto() {

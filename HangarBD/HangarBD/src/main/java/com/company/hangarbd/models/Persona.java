@@ -7,9 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity(name = "persona")
+@Entity
 public class Persona implements Serializable {
 
     @Id
@@ -23,8 +24,7 @@ public class Persona implements Serializable {
     @JoinColumn(name = "tri_per")
     public Set<Tripulante> per_tri;
 
-    @OneToMany
-    @JoinColumn(name = "pil_per")
+    @OneToMany(mappedBy = "pil_per")
     public Set<Piloto> per_pil;
 
     public Persona() {

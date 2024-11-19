@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity(name = "Hangar")
 public class Hangar implements Serializable {
@@ -24,12 +23,8 @@ public class Hangar implements Serializable {
     private String han_descripcion;
     private String han_codigo;
 
-    @OneToMany
-    @JoinColumn(name = "nav_han")
+    @OneToMany(mappedBy = "nav_han")
     public Set<Nave> han_nav;
-
-    @OneToOne(mappedBy = "tall_han")
-    public Taller han_tal;
 
     public Hangar() {
     }
@@ -56,14 +51,6 @@ public class Hangar implements Serializable {
 
     public void setHan_nav(Set<Nave> han_nav) {
         this.han_nav = han_nav;
-    }
-
-    public Taller getHan_tal() {
-        return han_tal;
-    }
-
-    public void setHan_tal(Taller han_tal) {
-        this.han_tal = han_tal;
     }
 
     public int getHan_capacidad() {

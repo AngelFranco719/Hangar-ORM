@@ -1,6 +1,7 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Modelo;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -28,6 +29,18 @@ public class ModeloController extends Controller<Modelo> {
 
     public void deleteModeloByID(Long ID) {
         this.deleteElementByID(ID, emf, Modelo.class);
+    }
+
+    public Long getLastID_Modelo() {
+        return this.getLastID(emf, "Modelo");
+    }
+
+    public <T> List<T> getColumnsFromModelo(String Column) {
+        return this.getAllByColumn(Column, emf, "Modelo");
+    }
+
+    public <T> Long getIdByColumn(String Column, T Value) {
+        return this.getIdByColumnValue(emf, Column, Value, "Modelo");
     }
 
 }

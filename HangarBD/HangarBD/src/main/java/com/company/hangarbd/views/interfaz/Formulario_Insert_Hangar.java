@@ -2,7 +2,6 @@ package com.company.hangarbd.views.interfaz;
 
 import com.company.hangarbd.controller.HangarController;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Hangar;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 

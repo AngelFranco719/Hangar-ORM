@@ -7,12 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.*;
 
-@Entity(name = "Taller")
+@Entity
 public class Taller implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_taller;
+    private Long ID_Taller;
     private String tall_Descripcion;
 
     @OneToMany
@@ -20,7 +20,7 @@ public class Taller implements Serializable {
     public Set<Servicio> tall_ser;
 
     @OneToOne
-    @JoinColumn(name = "han_tall")
+    @JoinColumn(name = "tall_han")
     public Hangar tall_han;
 
     public Taller() {
@@ -28,15 +28,15 @@ public class Taller implements Serializable {
 
     public Taller(String tal_Descripcion, Hangar tall_han) {
         this.tall_Descripcion = tal_Descripcion;
-        this.tall_han=tall_han; 
+        this.tall_han = tall_han;
     }
 
-    public int getID_taller() {
-        return ID_taller;
+    public Long getID_taller() {
+        return ID_Taller;
     }
 
-    public void setID_taller(int ID_taller) {
-        this.ID_taller = ID_taller;
+    public void setID_taller(Long ID_taller) {
+        this.ID_Taller = ID_taller;
     }
 
     public String getTal_Descripcion() {

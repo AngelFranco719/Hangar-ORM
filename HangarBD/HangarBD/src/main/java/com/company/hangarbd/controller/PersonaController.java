@@ -1,6 +1,7 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Persona;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
 public class PersonaController extends Controller<Persona> {
@@ -16,6 +17,10 @@ public class PersonaController extends Controller<Persona> {
         this.createElement(newPersona, emf);
     }
 
+    public <T> List<T> getColumnsFromPersona(String Column) {
+        return this.getAllByColumn(Column, emf, "Persona");
+    }
+
     public Persona getPersonaByID(Long ID) {
         return this.getElementByID(ID, emf, Persona.class);
     }
@@ -27,6 +32,14 @@ public class PersonaController extends Controller<Persona> {
 
     public void deletePersonaByID(Long ID) {
         this.deleteElementByID(ID, emf, Persona.class);
+    }
+
+    public Long getLastID_Persona() {
+        return this.getLastID(emf, "Persona");
+    }
+
+    public <T> Long getIdByColumn(String Column, T Value) {
+        return this.getIdByColumnValue(emf, Column, Value, "Persona");
     }
 
 }

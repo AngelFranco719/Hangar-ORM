@@ -2,14 +2,14 @@ package com.company.hangarbd.models;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-@Entity(name = "modelo")
+@Entity
 public class Modelo implements Serializable {
 
     @Id
@@ -17,14 +17,13 @@ public class Modelo implements Serializable {
     private Long ID_Modelo;
     private String mod_nombre;
     private String mod_fabricante;
-    private String mod_anio;
+    @Column(name = "mod_año")
+    private String mod_año;
 
-    @OneToMany
-    @JoinColumn(name = "nav_mod")
+    @OneToMany(mappedBy = "nav_mod")
     public Set<Nave> mod_nav;
 
-    @OneToMany
-    @JoinColumn(name = "pil_mod")
+    @OneToMany(mappedBy = "pil_mod")
     public Set<Piloto> mod_pil;
 
     public Modelo() {
@@ -33,7 +32,7 @@ public class Modelo implements Serializable {
     public Modelo(String mod_nombre, String mod_fabricante, String mod_anio) {
         this.mod_nombre = mod_nombre;
         this.mod_fabricante = mod_fabricante;
-        this.mod_anio = mod_anio;
+        this.mod_año = mod_anio;
     }
 
     public Set<Nave> getModeloNave() {
@@ -48,7 +47,7 @@ public class Modelo implements Serializable {
         this.ID_Modelo = ID_Modelo;
         this.mod_nombre = mod_nombre;
         this.mod_fabricante = mod_fabricante;
-        this.mod_anio = mod_anio;
+        this.mod_año = mod_anio;
     }
 
     public Long getID_Modelo() {
@@ -76,11 +75,11 @@ public class Modelo implements Serializable {
     }
 
     public String getMod_anio() {
-        return mod_anio;
+        return mod_año;
     }
 
     public void setMod_anio(String mod_anio) {
-        this.mod_anio = mod_anio;
+        this.mod_año = mod_anio;
     }
 
 }
