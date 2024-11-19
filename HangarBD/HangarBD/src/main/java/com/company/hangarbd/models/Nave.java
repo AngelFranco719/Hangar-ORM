@@ -16,6 +16,7 @@ public class Nave implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Nave;
+    private String nav_codigo;
     private float nav_peso;
     private String nav_estado;
     private String nav_descripcion;
@@ -33,8 +34,7 @@ public class Nave implements Serializable {
     @JoinColumn(name = "nav_mod")
     public Modelo nav_mod;
 
-    @OneToMany
-    @JoinColumn(name = "nav_ser")
+    @OneToMany(mappedBy = "ser_nav")
     public Set<Servicio> nav_ser;
 
     @OneToMany
@@ -44,7 +44,8 @@ public class Nave implements Serializable {
     public Nave() {
     }
 
-    public Nave(float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
+    public Nave(String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
+        this.nav_codigo = nav_codigo;
         this.nav_peso = nav_peso;
         this.nav_estado = nav_estado;
         this.nav_descripcion = nav_descripcion;
@@ -52,6 +53,14 @@ public class Nave implements Serializable {
         this.nav_emp = nav_emp;
         this.nav_han = nav_han;
         this.nav_mod = nav_mod;
+    }
+
+    public String getNav_codigo() {
+        return nav_codigo;
+    }
+
+    public void setNav_codigo(String nav_codigo) {
+        this.nav_codigo = nav_codigo;
     }
 
     public Set<Servicio> getNav_ser() {

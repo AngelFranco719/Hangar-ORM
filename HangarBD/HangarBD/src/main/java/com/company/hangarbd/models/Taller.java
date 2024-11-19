@@ -13,10 +13,10 @@ public class Taller implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Taller;
-    private String tall_Descripcion;
+    private String tall_nombre;
+    private String tall_descripcion;
 
-    @OneToMany
-    @JoinColumn(name = "ser_tall")
+    @OneToMany(mappedBy = "ser_tall")
     public Set<Servicio> tall_ser;
 
     @OneToOne
@@ -26,25 +26,50 @@ public class Taller implements Serializable {
     public Taller() {
     }
 
-    public Taller(String tal_Descripcion, Hangar tall_han) {
-        this.tall_Descripcion = tal_Descripcion;
+    public Taller(String tall_nombre, String tal_Descripcion, Hangar tall_han) {
+        this.tall_nombre = tall_nombre;
+        this.tall_descripcion = tal_Descripcion;
         this.tall_han = tall_han;
     }
 
-    public Long getID_taller() {
+    public Long getID_Taller() {
         return ID_Taller;
     }
 
-    public void setID_taller(Long ID_taller) {
-        this.ID_Taller = ID_taller;
+    public void setID_Taller(Long ID_Taller) {
+        this.ID_Taller = ID_Taller;
     }
 
-    public String getTal_Descripcion() {
-        return tall_Descripcion;
+    public String getTall_nombre() {
+        return tall_nombre;
     }
 
-    public void setTal_Descripcion(String tal_Descripcion) {
-        this.tall_Descripcion = tal_Descripcion;
+    public void setTall_nombre(String tall_nombre) {
+        this.tall_nombre = tall_nombre;
+    }
+
+    public String getTall_descripcion() {
+        return tall_descripcion;
+    }
+
+    public void setTall_descripcion(String tall_descripcion) {
+        this.tall_descripcion = tall_descripcion;
+    }
+
+    public Set<Servicio> getTall_ser() {
+        return tall_ser;
+    }
+
+    public void setTall_ser(Set<Servicio> tall_ser) {
+        this.tall_ser = tall_ser;
+    }
+
+    public Hangar getTall_han() {
+        return tall_han;
+    }
+
+    public void setTall_han(Hangar tall_han) {
+        this.tall_han = tall_han;
     }
 
 }

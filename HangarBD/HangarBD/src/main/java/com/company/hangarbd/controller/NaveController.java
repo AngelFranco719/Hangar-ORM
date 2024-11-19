@@ -4,6 +4,7 @@ import com.company.hangarbd.models.Empresa;
 import com.company.hangarbd.models.Hangar;
 import com.company.hangarbd.models.Modelo;
 import com.company.hangarbd.models.Nave;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
 public class NaveController extends Controller<Nave> {
@@ -20,11 +21,11 @@ public class NaveController extends Controller<Nave> {
         hangarController = new HangarController(emf);
     }
 
-    public void createNave(float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Long nav_emp, Long nav_han, Long nav_mod) {
+    public void createNave(String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Long nav_emp, Long nav_han, Long nav_mod) {
         Empresa empresa = empresaController.getEmpresaByID(nav_emp);
         Modelo modelo = modeloController.getModeloByID(nav_mod);
         Hangar hangar = hangarController.getHangarByID(nav_han);
-        Nave newNave = new Nave(nav_peso, nav_estado, nav_descripcion, nav_capacidad, empresa, hangar, modelo);
+        Nave newNave = new Nave(nav_codigo, nav_peso, nav_estado, nav_descripcion, nav_capacidad, empresa, hangar, modelo);
         this.createElement(newNave, emf);
     }
 
@@ -32,8 +33,12 @@ public class NaveController extends Controller<Nave> {
         return this.getElementByID(ID, emf, Nave.class);
     }
 
-    public void updateNave(float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
-        Nave updatedNave = new Nave(nav_peso, nav_estado, nav_descripcion, nav_capacidad, nav_emp, nav_han, nav_mod);
+    public <T> List<T> getColumnsFromNave(String Column) {
+        return this.getAllByColumn(Column, emf, "Nave");
+    }
+
+    public void updateNave(String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
+        Nave updatedNave = new Nave(nav_codigo, nav_peso, nav_estado, nav_descripcion, nav_capacidad, nav_emp, nav_han, nav_mod);
         this.updateElement(updatedNave, emf);
     }
 
@@ -43,6 +48,10 @@ public class NaveController extends Controller<Nave> {
 
     public Long getLastID_Nave() {
         return this.getLastID(emf, "Nave");
+    }
+
+    public <T> Long getIdByColumn(String Column, T Value) {
+        return this.getIdByColumnValue(emf, Column, Value, "Nave");
     }
 
 }

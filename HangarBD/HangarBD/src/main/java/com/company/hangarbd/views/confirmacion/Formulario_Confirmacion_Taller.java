@@ -8,14 +8,16 @@ import javax.persistence.Persistence;
 public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
 
     Long ID;
+    String Nombre;
     String Descripcion;
     String Hangar;
     TallerController tallerController;
     HangarController hangarController;
 
-    public Formulario_Confirmacion_Taller(Long ID, String Descripcion, String Hangar) {
+    public Formulario_Confirmacion_Taller(Long ID, String Nombre, String Descripcion, String Hangar) {
         initComponents();
         this.ID = ID;
+        this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.Hangar = Hangar;
         this.initializeForm();
@@ -26,7 +28,6 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
         this.tall_descripcion.setText(this.Descripcion);
         this.tall_hangar.setText(Hangar);
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,6 +42,8 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
         id_taller = new javax.swing.JLabel();
         tall_descripcion = new javax.swing.JLabel();
         tall_hangar = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tall_nombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +71,10 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
 
         tall_hangar.setText("jLabel5");
 
+        jLabel5.setText("Nombre:");
+
+        tall_nombre.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,18 +82,22 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(id_taller, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tall_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tall_hangar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(Button_Enviar)
                         .addGap(53, 53, 53)
-                        .addComponent(Button_Cancelar)))
+                        .addComponent(Button_Cancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tall_nombre)
+                            .addComponent(tall_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tall_hangar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(id_taller, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -96,9 +107,7 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(6, 6, 6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap(147, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -106,13 +115,19 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(id_taller)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tall_nombre))
                 .addGap(18, 18, 18)
-                .addComponent(tall_descripcion)
-                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tall_descripcion))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(tall_hangar))
-                .addGap(58, 58, 58)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Enviar)
                     .addComponent(Button_Cancelar))
@@ -123,9 +138,7 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGap(18, 18, 18)
                     .addComponent(jLabel2)
-                    .addGap(18, 18, 18)
-                    .addComponent(jLabel3)
-                    .addContainerGap(188, Short.MAX_VALUE)))
+                    .addContainerGap(222, Short.MAX_VALUE)))
         );
 
         pack();
@@ -136,11 +149,11 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
         try {
             emf = Persistence.createEntityManagerFactory("hangar");
             tallerController = new TallerController(emf);
-            hangarController = new HangarController(emf); 
-            
+            hangarController = new HangarController(emf);
+
             Long ID_Hangar = hangarController.getIdByColumn("han_nombre", Hangar);
 
-            tallerController.createTaller(Descripcion,ID_Hangar);
+            tallerController.createTaller(Nombre, Descripcion, ID_Hangar);
 
         } catch (Exception e) {
         }
@@ -189,7 +202,9 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel tall_descripcion;
     private javax.swing.JLabel tall_hangar;
+    private javax.swing.JLabel tall_nombre;
     // End of variables declaration//GEN-END:variables
 }

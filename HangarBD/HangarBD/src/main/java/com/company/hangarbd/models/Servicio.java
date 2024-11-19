@@ -13,17 +13,17 @@ public class Servicio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_servicio;
+    private Long ID_Servicio;
     private String ser_Diagnostico;
     private String ser_Acciones;
-    private String Responsable;
+    private String ser_responsable;
 
     @ManyToOne
-    @JoinColumn(name = "tall_ser")
+    @JoinColumn(name = "ser_tall")
     private Taller ser_tall;
 
     @ManyToOne
-    @JoinColumn(name = "nav_ser")
+    @JoinColumn(name = "ser_nav")
     private Nave ser_nav;
 
     public Servicio() {
@@ -32,17 +32,17 @@ public class Servicio implements Serializable {
     public Servicio(String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
         this.ser_Diagnostico = ser_Diagnostico;
         this.ser_Acciones = ser_Acciones;
-        this.Responsable = Responsable;
+        this.ser_responsable = Responsable;
         this.ser_tall = ser_tall;
         this.ser_nav = ser_nav;
     }
 
-    public int getID_servicio() {
-        return ID_servicio;
+    public Long getID_servicio() {
+        return ID_Servicio;
     }
 
-    public void setID_servicio(int ID_servicio) {
-        this.ID_servicio = ID_servicio;
+    public void setID_servicio(Long ID_servicio) {
+        this.ID_Servicio = ID_servicio;
     }
 
     public String getSer_Diagnostico() {
@@ -62,11 +62,11 @@ public class Servicio implements Serializable {
     }
 
     public String getResponsable() {
-        return Responsable;
+        return ser_responsable;
     }
 
     public void setResponsable(String Responsable) {
-        this.Responsable = Responsable;
+        this.ser_responsable = Responsable;
     }
 
     public Taller getSer_tall() {
