@@ -72,4 +72,9 @@ public class Taller implements Serializable {
         this.tall_han = tall_han;
     }
 
+    @Override
+    public String toString() {
+        return this.getTall_nombre();
+    }
+
 }

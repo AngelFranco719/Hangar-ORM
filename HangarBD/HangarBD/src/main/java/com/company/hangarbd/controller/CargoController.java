@@ -2,8 +2,8 @@ package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.models.Cargo.cargos;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class CargoController extends Controller<Cargo> {
 
@@ -20,6 +20,12 @@ public class CargoController extends Controller<Cargo> {
 
     public Cargo getCargoByID(Long ID) {
         return this.getElementByID(ID, emf, Cargo.class);
+    }
+
+    public List<List<String>> getAllFromHangar() {
+        List<Cargo> Cargos = this.getAllFrom("Cargo", emf);
+        List<List<String>> cargoToString = this.mapEntitiesToString(Cargos, 3);
+        return cargoToString;
     }
 
     public void updateCargo(cargos car_nombre, String car_descripcion) {

@@ -1,8 +1,11 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,8 +20,8 @@ public class Empresa implements Serializable {
     private String emp_nombre;
     private String emp_ubicacion;
 
-    @OneToMany(mappedBy = "nav_emp")
-    public Set<Nave> emp_nav;
+    @OneToMany(mappedBy = "nav_emp", fetch = FetchType.EAGER)
+    public Set<Nave> emp_nav = new HashSet<>();
 
     public Empresa(String emp_nombre, String emp_ubicacion) {
         this.emp_nombre = emp_nombre;

@@ -43,6 +43,7 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
             emf = Persistence.createEntityManagerFactory("hangar");
             vueloController = new VueloController(emf);
             List<String> vuelos = vueloController.getColumnsFromVuelo("vue_codigo");
+            
 
         } catch (Exception e) {
         }

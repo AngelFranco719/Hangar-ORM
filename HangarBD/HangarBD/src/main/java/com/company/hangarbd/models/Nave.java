@@ -143,4 +143,9 @@ public class Nave implements Serializable {
         this.nav_capacidad = nav_capacidad;
     }
 
+    @Override
+    public String toString() {
+        return this.getNav_codigo();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.company.hangarbd.controller;
 
+import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.models.Nave;
 import com.company.hangarbd.models.Servicio;
 import com.company.hangarbd.models.Taller;
@@ -32,6 +33,13 @@ public class ServicioController extends Controller<Servicio> {
     public <T> List<T> getColumnsFromServicio(String Column) {
         return this.getAllByColumn(Column, emf, "Servicio");
     }
+    
+        public List<List<String>> getAllFromServicio() {
+        List<Servicio> Servicio = this.getAllFrom("Servicio", emf);
+        List<List<String>> servicioToString = this.mapEntitiesToString(Servicio, 6);
+        return servicioToString;
+    }
+
 
     public void updateServicio(String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
         Servicio updatedServicio = new Servicio(ser_Diagnostico, ser_Acciones, Responsable, ser_tall, ser_nav);

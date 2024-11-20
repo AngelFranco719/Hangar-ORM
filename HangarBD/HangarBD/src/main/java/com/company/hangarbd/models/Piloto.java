@@ -49,4 +49,9 @@ public class Piloto implements Serializable {
         this.pil_horasVuelo = pil_horasVuelo;
     }
 
+    @Override
+    public String toString() {
+        return "ID_Piloto: " + String.valueOf(this.getID_Piloto());
+    }
+
 }

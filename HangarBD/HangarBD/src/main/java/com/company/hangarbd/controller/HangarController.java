@@ -17,6 +17,12 @@ public class HangarController extends Controller<Hangar> {
         this.createElement(newHangar, emf);
     }
 
+    public List<List<String>> getAllFromHangar() {
+        List<Hangar> hangares = this.getAllFrom("Hangar", emf);
+        List<List<String>> hangaresToString = this.mapEntitiesToString(hangares, 6);
+        return hangaresToString;
+    }
+
     public Hangar getHangarByID(Long ID) {
         return this.getElementByID(ID, emf, Hangar.class);
     }

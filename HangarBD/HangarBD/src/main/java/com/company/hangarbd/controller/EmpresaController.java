@@ -22,6 +22,12 @@ public class EmpresaController extends Controller<Empresa> {
         return this.getElementByID(ID, emf, Empresa.class);
     }
 
+    public List<List<String>> getAllFromEmpresa() {
+        List<Empresa> Empresa = this.getAllFrom("Empresa", emf);
+        List<List<String>> empresaToString = this.mapEntitiesToString(Empresa, 3);
+        return empresaToString;
+    }
+
     public <T> List<T> getColumnsFromEmpresa(String Column) {
         return this.getAllByColumn(Column, emf, "Empresa");
     }

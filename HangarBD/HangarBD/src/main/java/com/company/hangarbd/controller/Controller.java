@@ -1,10 +1,13 @@
 package com.company.hangarbd.controller;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.swing.JOptionPane;
+import org.datanucleus.enhancement.StateManager;
 
 public abstract class Controller<T> {
 
@@ -21,6 +24,40 @@ public abstract class Controller<T> {
         } finally {
             em.close();
         }
+    }
+
+    protected List<T> getAllFrom(String Entity, EntityManagerFactory emf) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            List<T> tuples = em.createQuery("SELECT p FROM " + Entity + " p").getResultList();
+            return tuples;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected List<List<String>> mapEntitiesToString(List<T> Tuples, int AttributesNumber) {
+        List<List<String>> Result = new ArrayList();
+        for (T tuple : Tuples) {
+            int index = 0;
+            List<String> Attributes = new ArrayList();
+            for (Field field : tuple.getClass().getDeclaredFields()) {
+                try {
+                    field.setAccessible(true);
+                    if (index >= AttributesNumber) {
+                        break;
+                    }
+                    String attribute = String.valueOf(field.get(tuple));
+                    Attributes.add(attribute);
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            Result.add(Attributes);
+        }
+        return Result;
     }
 
     protected T getElementByID(Long ID, EntityManagerFactory emf, Class<T> type) {
@@ -98,8 +135,8 @@ public abstract class Controller<T> {
     protected <I> Long getIdByColumnValue(EntityManagerFactory emf, String Column, I Value, String Entity) {
         EntityManager em = emf.createEntityManager();
         try {
-            System.out.println("SELECT p.ID_" + Entity + " FROM " + Entity + " p WHERE " + Column + "=" +"'"+Value+"'");
-            Long ID = em.createQuery("SELECT p.ID_" + Entity + " FROM " + Entity + " p WHERE " + Column + "=" +"'"+Value+"'", Long.class).getSingleResult();
+            System.out.println("SELECT p.ID_" + Entity + " FROM " + Entity + " p WHERE " + Column + "=" + "'" + Value + "'");
+            Long ID = em.createQuery("SELECT p.ID_" + Entity + " FROM " + Entity + " p WHERE " + Column + "=" + "'" + Value + "'", Long.class).getSingleResult();
             return ID;
         } catch (Exception e) {
             e.printStackTrace();

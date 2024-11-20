@@ -1,9 +1,12 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,11 +23,11 @@ public class Modelo implements Serializable {
     @Column(name = "mod_año")
     private String mod_año;
 
-    @OneToMany(mappedBy = "nav_mod")
-    public Set<Nave> mod_nav;
+    @OneToMany(mappedBy = "nav_mod", fetch = FetchType.EAGER)
+    public Set<Nave> mod_nav = new HashSet<>();
 
-    @OneToMany(mappedBy = "pil_mod")
-    public Set<Piloto> mod_pil;
+    @OneToMany(mappedBy = "pil_mod", fetch = FetchType.EAGER)
+    public Set<Piloto> mod_pil = new HashSet<>();
 
     public Modelo() {
     }
