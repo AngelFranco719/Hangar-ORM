@@ -20,11 +20,11 @@ public class VueloController extends Controller<Vuelo> {
         Vuelo newVuelo = new Vuelo(vue_Origen, vue_Destino, vue_fechaInicio, vue_fechaFin, vue_Distancia, vue_Duracion, vuel_AltitudPromedio, vue_Pasajeros, vue_nav);
         this.createElement(newVuelo, emf);
     }
-    public List<List<String>> getAllFromVuelo() {
-        List<Vuelo> Vuelo = this.getAllFrom("Vuelo", emf);
-        List<List<String>> vueloToString = this.mapEntitiesToString(Vuelo, 12);
-        return vueloToString;
-    }
+//    public List<List<String>> getAllFromVuelo() {
+//        List<Vuelo> Vuelo = this.getAllFrom("Vuelo", emf);
+//        List<List<String>> vueloToString = this.mapEntitiesToString(Vuelo, 12);
+//        return vueloToString;
+//    }
 
     public Vuelo getVueloByID(Long ID) {
         return this.getElementByID(ID, emf, Vuelo.class);

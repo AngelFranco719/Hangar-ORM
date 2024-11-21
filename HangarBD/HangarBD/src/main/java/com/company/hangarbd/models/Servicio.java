@@ -84,4 +84,9 @@ public class Servicio implements Serializable {
     public void setSer_nav(Nave ser_nav) {
         this.ser_nav = ser_nav;
     }
+
+    @Override
+    public String toString() {
+        return this.getSer_Diagnostico();
+    }
 }

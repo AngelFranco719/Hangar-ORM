@@ -22,12 +22,6 @@ public class EmpresaController extends Controller<Empresa> {
         return this.getElementByID(ID, emf, Empresa.class);
     }
 
-    public List<List<String>> getAllFromEmpresa() {
-        List<Empresa> Empresa = this.getAllFrom("Empresa", emf);
-        List<List<String>> empresaToString = this.mapEntitiesToString(Empresa, 3);
-        return empresaToString;
-    }
-
     public <T> List<T> getColumnsFromEmpresa(String Column) {
         return this.getAllByColumn(Column, emf, "Empresa");
     }
@@ -47,6 +41,10 @@ public class EmpresaController extends Controller<Empresa> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Empresa");
+    }
+
+    public List<String> getColumnsFromEmpresa() {
+        return this.getColumns(emf, Empresa.class, 4);
     }
 
 }

@@ -32,12 +32,6 @@ public class NaveController extends Controller<Nave> {
     public Nave getNaveByID(Long ID) {
         return this.getElementByID(ID, emf, Nave.class);
     }
-    
-    public List<List<String>> getAllFromNave() {
-        List<Nave> naves = this.getAllFrom("Nave", emf);
-        List<List<String>> navesToString = this.mapEntitiesToString(naves, 9);
-        return navesToString;
-    }
 
     public <T> List<T> getColumnsFromNave(String Column) {
         return this.getAllByColumn(Column, emf, "Nave");
@@ -58,6 +52,10 @@ public class NaveController extends Controller<Nave> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Nave");
+    }
+
+    public List<String> getColumnsFromNave() {
+        return this.getColumns(emf, Nave.class, 11);
     }
 
 }

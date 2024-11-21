@@ -1,13 +1,13 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,12 +20,11 @@ public class Persona implements Serializable {
     private String per_licencia;
     private int per_horasVuelo;
 
-    @OneToMany
-    @JoinColumn(name = "tri_per")
-    public Set<Tripulante> per_tri;
+    @OneToMany(mappedBy = "tri_per", fetch = FetchType.EAGER)
+    public Set<Tripulante> per_tri = new HashSet<>();
 
-    @OneToMany(mappedBy = "pil_per")
-    public Set<Piloto> per_pil;
+    @OneToMany(mappedBy = "pil_per", fetch = FetchType.EAGER)
+    public Set<Piloto> per_pil = new HashSet<>();
 
     public Persona() {
     }
@@ -92,7 +91,7 @@ public class Persona implements Serializable {
         this.per_pil = per_pil;
     }
 
-     @Override
+    @Override
     public String toString() {
         return this.getPer_nombre();
     }

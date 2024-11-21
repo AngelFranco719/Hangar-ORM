@@ -24,11 +24,6 @@ public class TripulanteController extends Controller<Tripulante> {
     public Tripulante getTripulanteByID(Long ID) {
         return this.getElementByID(ID, emf, Tripulante.class);
     }
-    public List<List<String>> getAllFromTripulante() {
-        List<Tripulante> Tripulante = this.getAllFrom("Tripulante", emf);
-        List<List<String>> tripulanteToString = this.mapEntitiesToString(Tripulante, 6);
-        return tripulanteToString;
-    }
 
     public <T> List<T> getColumnsFromTripulante(String Column) {
         return this.getAllByColumn(Column, emf, "Tripulante");
@@ -49,6 +44,10 @@ public class TripulanteController extends Controller<Tripulante> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Tripulante");
+    }
+
+    public List<String> getColumnsFromTripulante() {
+        return this.getColumns(emf, Tripulante.class, 4);
     }
 
 }

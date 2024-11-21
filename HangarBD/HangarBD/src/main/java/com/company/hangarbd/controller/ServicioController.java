@@ -34,11 +34,11 @@ public class ServicioController extends Controller<Servicio> {
         return this.getAllByColumn(Column, emf, "Servicio");
     }
     
-    public List<List<String>> getAllFromServicio() {
-        List<Servicio> Servicio = this.getAllFrom("Servicio", emf);
-        List<List<String>> servicioToString = this.mapEntitiesToString(Servicio, 6);
-        return servicioToString;
-    }
+//    public List<List<String>> getAllFromServicio() {
+//        List<Servicio> Servicio = this.getAllFrom("Servicio", emf);
+//        List<List<String>> servicioToString = this.mapEntitiesToString(Servicio, 6);
+//        return servicioToString;
+//    }
 
 
     public void updateServicio(String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {

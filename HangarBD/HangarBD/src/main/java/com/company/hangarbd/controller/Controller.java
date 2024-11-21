@@ -9,7 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.swing.JOptionPane;
 import org.datanucleus.enhancement.StateManager;
 
-public abstract class Controller<T> {
+public class Controller<T> {
 
     protected void createElement(T element, EntityManagerFactory emf) {
         EntityManager em = emf.createEntityManager();
@@ -37,15 +37,16 @@ public abstract class Controller<T> {
         return null;
     }
 
-    protected List<List<String>> mapEntitiesToString(List<T> Tuples, int AttributesNumber) {
+    public List<List<String>> mapEntitiesToString(String Entity, EntityManagerFactory emf, int AttributesNumber) {
+        List<T> Tuples = this.getAllFrom(Entity, emf);
         List<List<String>> Result = new ArrayList();
         for (T tuple : Tuples) {
-            int index = 0;
+            int index = 1;
             List<String> Attributes = new ArrayList();
             for (Field field : tuple.getClass().getDeclaredFields()) {
                 try {
                     field.setAccessible(true);
-                    if (index >= AttributesNumber) {
+                    if (index > AttributesNumber) {
                         break;
                     }
                     String attribute = String.valueOf(field.get(tuple));
@@ -58,6 +59,23 @@ public abstract class Controller<T> {
             Result.add(Attributes);
         }
         return Result;
+    }
+
+    protected List<String> getColumns(EntityManagerFactory enf, Class<T> type, int AttributesNumber) {
+        List<String> Columns = new ArrayList();
+        int index = 1;
+        for (Field field : type.getDeclaredFields()) {
+            if (index > AttributesNumber) {
+                break;
+            }
+            try {
+                Columns.add(field.getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            index++;
+        }
+        return Columns;
     }
 
     protected T getElementByID(Long ID, EntityManagerFactory emf, Class<T> type) {

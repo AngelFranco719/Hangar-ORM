@@ -1,7 +1,6 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;

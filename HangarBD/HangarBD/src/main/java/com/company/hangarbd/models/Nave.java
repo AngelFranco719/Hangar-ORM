@@ -1,8 +1,10 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,20 +28,19 @@ public class Nave implements Serializable {
     @JoinColumn(name = "nav_emp")
     public Empresa nav_emp;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nav_han")
-    public Hangar nav_han;
+    public Hangar nav_han = new Hangar();
 
     @ManyToOne
     @JoinColumn(name = "nav_mod")
     public Modelo nav_mod;
 
-    @OneToMany(mappedBy = "ser_nav")
-    public Set<Servicio> nav_ser;
+    @OneToMany(mappedBy = "ser_nav", fetch = FetchType.EAGER)
+    public Set<Servicio> nav_ser = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "nav_vue")
-    public Set<Vuelo> nav_vue;
+    @OneToMany(mappedBy = "vue_nav", fetch = FetchType.EAGER)
+    public Set<Vuelo> nav_vue = new HashSet<>();
 
     public Nave() {
     }

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity(name = "tripulante")
+@Entity
 public class Tripulante implements Serializable {
 
     @Id
@@ -18,7 +18,7 @@ public class Tripulante implements Serializable {
     private Long ID_Tripulante;
 
     @ManyToOne
-    @JoinColumn(name = "vue_tri")
+    @JoinColumn(name = "tri_vue")
     public Vuelo tri_vue;
 
     @ManyToOne
@@ -26,7 +26,7 @@ public class Tripulante implements Serializable {
     public Cargo tri_car;
 
     @ManyToOne
-    @JoinColumn(name = "per_tri")
+    @JoinColumn(name = "tri_per")
     public Persona tri_per;
 
     public Tripulante() {

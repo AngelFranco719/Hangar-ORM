@@ -24,11 +24,11 @@ public class TallerController extends Controller<Taller> {
     public Taller getTallerByID(Long ID) {
         return this.getElementByID(ID, emf, Taller.class);
     }
-    public List<List<String>> getAllFromTaller() {
-        List<Taller> Taller = this.getAllFrom("Taller", emf);
-        List<List<String>> tallerToString = this.mapEntitiesToString(Taller, 4);
-        return tallerToString;
-    }
+//    public List<List<String>> getAllFromTaller() {
+//        List<Taller> Taller = this.getAllFrom("Taller", emf);
+//        List<List<String>> tallerToString = this.mapEntitiesToString(Taller, 4);
+//        return tallerToString;
+//    }
     
     public <T> List<T> getColumnsFromTaller(String Column) {
         return this.getAllByColumn(Column, emf, "Taller");

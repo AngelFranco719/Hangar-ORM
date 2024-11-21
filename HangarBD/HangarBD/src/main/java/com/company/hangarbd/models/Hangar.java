@@ -1,9 +1,11 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,8 +25,8 @@ public class Hangar implements Serializable {
     private String han_descripcion;
     private String han_codigo;
 
-    @OneToMany(mappedBy = "nav_han")
-    public Set<Nave> han_nav;
+    @OneToMany(mappedBy = "nav_han", fetch = FetchType.EAGER)
+    public Set<Nave> han_nav = new HashSet<>();
 
     public Hangar() {
     }

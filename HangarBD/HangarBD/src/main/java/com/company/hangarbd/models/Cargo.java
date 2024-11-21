@@ -1,8 +1,10 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,9 +24,9 @@ public class Cargo implements Serializable {
     private cargos car_nombre;
     private String car_descripcion;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "tri_car")
-    private Set<Tripulante> car_tri;
+    private Set<Tripulante> car_tri = new HashSet<>();
 
     public Cargo() {
     }
