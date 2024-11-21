@@ -1,13 +1,12 @@
 package com.mycompany.hangarbd;
 
-import com.company.hangarbd.paneles.VerTabla;
-import javax.swing.JFrame;
+import com.company.hangarbd.views.interfaz.FramePrincipal;
 
 public class HangarBD {
 
     public static void main(String[] args) {
-        VerTabla tabla = new VerTabla();
-        tabla.setVisible(true);
+        FramePrincipal FP = new FramePrincipal();
+
     }
 
 }
