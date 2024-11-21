@@ -2,26 +2,35 @@ package com.company.hangarbd.views.interfaz;
 
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Empresa;
 import com.company.hangarbd.controller.EmpresaController;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Insert_Empresa extends javax.swing.JFrame {
-
+    
     Long ID;
     String Nombre;
     String Ubicacion;
     EmpresaController empresaController;
-
+    
     public Formulario_Insert_Empresa() {
         initComponents();
         this.getLastID();
     }
-
+    
+    public Formulario_Insert_Empresa(List<String> Tupla) {
+        initComponents();
+        this.id_empresa.setText(Tupla.get(0));
+        this.emp_nombre.setText(Tupla.get(1));
+        this.emp_ubicacion.setText(Tupla.get(2));
+        this.Button_Enviar.setText("Actualizar");
+    }
+    
     public void getAttributes() {
         this.Nombre = this.emp_nombre.getText();
         this.Ubicacion = this.emp_ubicacion.getText();
     }
-
+    
     public void getLastID() {
         EntityManagerFactory emf = null;
         try {
@@ -33,7 +42,7 @@ public class Formulario_Insert_Empresa extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -48,7 +57,7 @@ public class Formulario_Insert_Empresa extends javax.swing.JFrame {
         Button_Enviar = new javax.swing.JButton();
         Button_Cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("EMPRESA");

@@ -7,9 +7,21 @@ import com.company.hangarbd.controller.HangarController;
 import com.company.hangarbd.controller.NaveController;
 import com.company.hangarbd.controller.PersonaController;
 import com.company.hangarbd.controller.TripulanteController;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Cargo;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Empresa;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Hangar;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Modelo;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Nave;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Persona;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Piloto;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Servicio;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Taller;
+import com.company.hangarbd.views.interfaz.Formulario_Insert_Tripulante;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class VerTabla extends javax.swing.JFrame {
@@ -17,12 +29,71 @@ public class VerTabla extends javax.swing.JFrame {
     EntityManagerFactory emf = null;
     Controller controller = new Controller();
     String OpcionSeleccionada;
+    List<List<String>> Tuplas;
+    List<String> SelectedRow;
     DefaultTableModel modeloTabla;
 
     public VerTabla() {
         initComponents();
         this.Tabla.setVisible(false);
         this.InicializarCombos();
+        B_BuscarTupla.setVisible(false);
+    }
+
+    public VerTabla(boolean isUpdate) {
+        initComponents();
+        this.Tabla.setVisible(false);
+        this.InicializarCombos();
+        this.HandleRowSelected();
+    }
+
+    private void actualizarDatos(List<String> Tupla) {
+        switch (OpcionSeleccionada) {
+            case "Cargo":
+                Formulario_Insert_Cargo FIC = new Formulario_Insert_Cargo(SelectedRow);
+                FIC.setVisible(true);
+                break;
+            case "Empresa":
+                Formulario_Insert_Empresa FIE = new Formulario_Insert_Empresa(SelectedRow);
+                FIE.setVisible(true);
+                break;
+            case "Hangar":
+                Formulario_Insert_Hangar FIH = new Formulario_Insert_Hangar(SelectedRow);
+                FIH.setVisible(true);
+                break;
+            case "Modelo":
+                Formulario_Insert_Modelo FIM = new Formulario_Insert_Modelo();
+                FIM.setVisible(true);
+                break;
+            case "Nave":
+                Formulario_Insert_Nave FIN = new Formulario_Insert_Nave();
+                FIN.setVisible(true);
+                break;
+            case "Persona":
+                Formulario_Insert_Persona FIP = new Formulario_Insert_Persona();
+                FIP.setVisible(true);
+                break;
+            case "Piloto":
+                Formulario_Insert_Piloto FIPi = new Formulario_Insert_Piloto();
+                FIPi.setVisible(true);
+                break;
+            case "Servicio":
+                Formulario_Insert_Servicio FIS = new Formulario_Insert_Servicio();
+                FIS.setVisible(true);
+                break;
+            case "Taller":
+                Formulario_Insert_Taller FIT = new Formulario_Insert_Taller();
+                FIT.setVisible(true);
+                break;
+            case "Tripulante":
+                Formulario_Insert_Tripulante FITr = new Formulario_Insert_Tripulante();
+                FITr.setVisible(true);
+                break;
+            case "Vuelo":
+                Formulario_Insert_Nave FINa = new Formulario_Insert_Nave();
+                FINa.setVisible(true);
+                break;
+        }
     }
 
     private void InicializarCombos() {
@@ -50,7 +121,7 @@ public class VerTabla extends javax.swing.JFrame {
 
     private void getTable(List<String> Columnas, String Entidad, int atributos) {
         try {
-            List<List<String>> Tuplas = this.controller.mapEntitiesToString(Entidad, emf, atributos);
+            Tuplas = this.controller.mapEntitiesToString(Entidad, emf, atributos);
             this.getColumns(Columnas);
             this.getRows(Tuplas);
             this.Tabla.setModel(modeloTabla);
@@ -60,19 +131,31 @@ public class VerTabla extends javax.swing.JFrame {
         }
     }
 
+    private void HandleRowSelected() {
+        this.Tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    SelectedRow = Tuplas.get(Tabla.getSelectedRow());
+                }
+            }
+        });
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TablaPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Cb_Tablas = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         B_Buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+        B_BuscarTupla = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Cb_Tablas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,12 +185,19 @@ public class VerTabla extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla);
 
+        B_BuscarTupla.setText("Buscar");
+        B_BuscarTupla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_BuscarTuplaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -116,36 +206,25 @@ public class VerTabla extends javax.swing.JFrame {
                         .addComponent(Cb_Tablas, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(B_Buscar)))
-                .addGap(39, 39, 39))
+                .addGap(35, 35, 35))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(253, 253, 253)
+                .addComponent(B_BuscarTupla)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(Cb_Tablas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B_Buscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout TablaPanelLayout = new javax.swing.GroupLayout(TablaPanel);
-        TablaPanel.setLayout(TablaPanelLayout);
-        TablaPanelLayout.setHorizontalGroup(
-            TablaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TablaPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        TablaPanelLayout.setVerticalGroup(
-            TablaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TablaPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(358, 358, 358))
+                .addGap(18, 18, 18)
+                .addComponent(B_BuscarTupla)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,14 +232,15 @@ public class VerTabla extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TablaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 593, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TablaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,6 +288,10 @@ public class VerTabla extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_B_BuscarActionPerformed
 
+    private void B_BuscarTuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BuscarTuplaActionPerformed
+        this.actualizarDatos(SelectedRow);
+    }//GEN-LAST:event_B_BuscarTuplaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,9 +329,9 @@ public class VerTabla extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton B_Buscar;
+    private javax.swing.JButton B_BuscarTupla;
     private javax.swing.JComboBox<String> Cb_Tablas;
     private javax.swing.JTable Tabla;
-    private javax.swing.JPanel TablaPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

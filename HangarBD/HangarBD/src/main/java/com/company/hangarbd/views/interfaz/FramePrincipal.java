@@ -3,18 +3,19 @@ package com.company.hangarbd.views.interfaz;
 import com.company.hangarbd.paneles.VerTabla;
 
 public class FramePrincipal extends javax.swing.JFrame {
-    
+
     boolean isBuscarActive = false;
     boolean isInsert = false;
+    boolean isUpdate = false;
     String SelectedEntity;
-    
+
     public FramePrincipal() {
         initComponents();
         this.setVisible(true);
         this.Buscar_JPanel.setVisible(false);
         this.initializeCBEntidades();
     }
-    
+
     public void initializeCBEntidades() {
         String[] Entidades = {"Cargo", "Empresa", "Hangar", "Modelo",
             "Nave", "Persona", "Piloto", "Servicio",
@@ -24,7 +25,7 @@ public class FramePrincipal extends javax.swing.JFrame {
             this.CB_Entidades.addItem(entidad);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,6 +61,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
 
         jToggleButton3.setText("Actualizar Datos");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
 
         jToggleButton4.setText("Borrar Datos");
 
@@ -236,6 +242,12 @@ public class FramePrincipal extends javax.swing.JFrame {
         VerTabla tabla = new VerTabla();
         tabla.setVisible(true);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        this.isUpdate = true;
+        VerTabla tabla = new VerTabla(this.isUpdate);
+        tabla.setVisible(true);
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     /**
      * @param args the command line arguments
