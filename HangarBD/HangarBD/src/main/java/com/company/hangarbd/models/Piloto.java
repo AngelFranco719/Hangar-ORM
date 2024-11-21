@@ -51,7 +51,7 @@ public class Piloto implements Serializable {
 
     @Override
     public String toString() {
-        return "ID_Piloto: " + String.valueOf(this.getID_Piloto());
+        return String.valueOf(this.getID_Piloto());
     }
 
 }

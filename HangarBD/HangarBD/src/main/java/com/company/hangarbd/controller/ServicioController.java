@@ -34,7 +34,7 @@ public class ServicioController extends Controller<Servicio> {
         return this.getAllByColumn(Column, emf, "Servicio");
     }
     
-        public List<List<String>> getAllFromServicio() {
+    public List<List<String>> getAllFromServicio() {
         List<Servicio> Servicio = this.getAllFrom("Servicio", emf);
         List<List<String>> servicioToString = this.mapEntitiesToString(Servicio, 6);
         return servicioToString;

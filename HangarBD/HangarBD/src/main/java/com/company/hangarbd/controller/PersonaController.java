@@ -20,6 +20,11 @@ public class PersonaController extends Controller<Persona> {
     public <T> List<T> getColumnsFromPersona(String Column) {
         return this.getAllByColumn(Column, emf, "Persona");
     }
+    public List<List<String>> getAllFromPersona() {
+        List<Persona> personas = this.getAllFrom("Persona", emf);
+        List<List<String>> personasToString = this.mapEntitiesToString(personas, 6);
+        return personasToString;
+    }
 
     public Persona getPersonaByID(Long ID) {
         return this.getElementByID(ID, emf, Persona.class);

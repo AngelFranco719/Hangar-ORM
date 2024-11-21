@@ -93,4 +93,8 @@ public class Hangar implements Serializable {
         this.han_codigo = han_codigo;
     }
 
+    @Override
+    public String toString() {
+        return this.getHan_nombre();
+    }
 }

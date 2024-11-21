@@ -1,6 +1,7 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Cargo;
+import com.company.hangarbd.models.Empresa;
 import com.company.hangarbd.models.Persona;
 import com.company.hangarbd.models.Tripulante;
 import com.company.hangarbd.models.Vuelo;
@@ -22,6 +23,11 @@ public class TripulanteController extends Controller<Tripulante> {
 
     public Tripulante getTripulanteByID(Long ID) {
         return this.getElementByID(ID, emf, Tripulante.class);
+    }
+    public List<List<String>> getAllFromTripulante() {
+        List<Tripulante> Tripulante = this.getAllFrom("Tripulante", emf);
+        List<List<String>> tripulanteToString = this.mapEntitiesToString(Tripulante, 6);
+        return tripulanteToString;
     }
 
     public <T> List<T> getColumnsFromTripulante(String Column) {

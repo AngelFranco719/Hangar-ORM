@@ -63,8 +63,12 @@ public class Empresa implements Serializable {
         this.emp_ubicacion = emp_ubicacion;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Empresa{" + "ID_Empresa=" + ID_Empresa + ", emp_nombre=" + emp_nombre + ", emp_ubicacion=" + emp_ubicacion + '}';
+    }*/
+    @Override
+    public String toString() {
+        return this.getEmp_nombre();
     }
 }

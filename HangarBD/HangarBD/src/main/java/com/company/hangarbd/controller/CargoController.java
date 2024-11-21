@@ -3,6 +3,7 @@ package com.company.hangarbd.controller;
 import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.models.Cargo.cargos;
 import java.util.List;
+import java.util.Vector;
 import javax.persistence.EntityManagerFactory;
 
 public class CargoController extends Controller<Cargo> {
@@ -22,10 +23,14 @@ public class CargoController extends Controller<Cargo> {
         return this.getElementByID(ID, emf, Cargo.class);
     }
 
-    public List<List<String>> getAllFromHangar() {
+    public List<List<String>> getAllFromCargo() {
         List<Cargo> Cargos = this.getAllFrom("Cargo", emf);
         List<List<String>> cargoToString = this.mapEntitiesToString(Cargos, 3);
         return cargoToString;
+    }
+   
+    public String[] getAttributes(){
+        return new String[]{"Código", "Nombre", "Descripcion"};
     }
 
     public void updateCargo(cargos car_nombre, String car_descripcion) {
@@ -39,6 +44,10 @@ public class CargoController extends Controller<Cargo> {
 
     public Long getLastID_Cargo() {
         return (this.getLastID(emf, "Cargo"));
+    }
+
+    public Vector<?> getAtributes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

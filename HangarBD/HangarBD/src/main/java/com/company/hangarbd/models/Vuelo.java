@@ -147,5 +147,9 @@ public class Vuelo implements Serializable {
     public void setVue_Pasajeros(int vue_Pasajeros) {
         this.vue_Pasajeros = vue_Pasajeros;
     }
-
+    
+    @Override
+    public String toString() {
+        return String.valueOf(this.getId_Vuelo());
+    }
 }

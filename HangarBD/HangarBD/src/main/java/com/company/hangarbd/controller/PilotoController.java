@@ -33,6 +33,12 @@ public class PilotoController extends Controller<Piloto> {
     public Piloto getPilotoByID(Long ID) {
         return this.getElementByID(ID, emf, Piloto.class);
     }
+    
+    public List<List<String>> getAllFromPiloto() {
+        List<Piloto> pilotos = this.getAllFrom("Piloto", emf);
+        List<List<String>> pilotosToString = this.mapEntitiesToString(pilotos, 4);
+        return pilotosToString;
+    }
 
     public void updatePiloto(int pil_horasVuelo, Persona pil_per, Modelo pil_mod) {
         Piloto updatedPiloto = new Piloto(pil_horasVuelo, pil_per, pil_mod);

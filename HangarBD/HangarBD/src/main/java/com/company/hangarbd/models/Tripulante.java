@@ -70,4 +70,8 @@ public class Tripulante implements Serializable {
         this.tri_per = tri_Per;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(this.getID_Tripulante());
+    }
 }

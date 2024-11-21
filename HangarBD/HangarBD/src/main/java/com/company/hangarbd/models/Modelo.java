@@ -85,4 +85,8 @@ public class Modelo implements Serializable {
         this.mod_año = mod_anio;
     }
 
+    @Override
+    public String toString() {
+        return this.getMod_nombre();
+    }
 }

@@ -92,4 +92,8 @@ public class Persona implements Serializable {
         this.per_pil = per_pil;
     }
 
+     @Override
+    public String toString() {
+        return this.getPer_nombre();
+    }
 }
