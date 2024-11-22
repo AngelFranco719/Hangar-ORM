@@ -11,13 +11,22 @@ import javax.persistence.EntityManagerFactory;
 public class TripulanteController extends Controller<Tripulante> {
 
     final private EntityManagerFactory emf;
+    private VueloController vueloController;
+    private PersonaController personaController;
+    private CargoController cargoController;
 
     public TripulanteController(EntityManagerFactory emf) {
         this.emf = emf;
+        vueloController = new VueloController(emf);
+        personaController = new PersonaController(emf);
+        cargoController = new CargoController(emf);
     }
 
-    public void createTripulante(Vuelo tri_vue, Cargo tri_car, Persona tri_per) {
-        Tripulante newTripulante = new Tripulante(tri_vue, tri_car, tri_per);
+    public void createTripulante(Long tri_vue, Long tri_car, Long tri_per) {
+        Vuelo vuelo = vueloController.getVueloByID(tri_vue);
+        Cargo cargo = cargoController.getCargoByID(tri_car);
+        Persona persona = personaController.getPersonaByID(tri_per);
+        Tripulante newTripulante = new Tripulante(vuelo, cargo, persona);
         this.createElement(newTripulante, emf);
     }
 
@@ -29,8 +38,12 @@ public class TripulanteController extends Controller<Tripulante> {
         return this.getAllByColumn(Column, emf, "Tripulante");
     }
 
-    public void updateTripulante(Vuelo tri_vue, Cargo tri_car, Persona tri_per) {
-        Tripulante updatedTripulante = new Tripulante(tri_vue, tri_car, tri_per);
+    public void updateTripulante(Long ID, Long tri_vue, Long tri_car, Long tri_per) {
+        Vuelo vuelo = vueloController.getVueloByID(tri_vue);
+        Cargo cargo = cargoController.getCargoByID(tri_car);
+        Persona persona = personaController.getPersonaByID(tri_per);
+        Tripulante updatedTripulante = new Tripulante(ID, vuelo, cargo, persona);
+        System.out.println(updatedTripulante);
         this.updateElement(updatedTripulante, emf);
     }
 

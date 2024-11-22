@@ -43,6 +43,10 @@ public class CargoController extends Controller<Cargo> {
         return (this.getLastID(emf, "Cargo"));
     }
 
+    public <T> Long getIdByColumn(String Column, T Value) {
+        return this.getIdByColumnValue(emf, Column, Value, "Cargo");
+    }
+
     public List<String> getColumnsFromCargo() {
         return this.getColumns(emf, Cargo.class, 3);
     }

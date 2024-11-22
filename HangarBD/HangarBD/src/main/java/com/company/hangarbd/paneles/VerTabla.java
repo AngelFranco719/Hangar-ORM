@@ -102,7 +102,7 @@ public class VerTabla extends javax.swing.JFrame {
                 FIT.setVisible(true);
                 break;
             case "Tripulante":
-                Formulario_Insert_Tripulante FITr = new Formulario_Insert_Tripulante();
+                Formulario_Insert_Tripulante FITr = new Formulario_Insert_Tripulante(SelectedRow);
                 FITr.setVisible(true);
                 break;
             case "Vuelo":
@@ -308,28 +308,28 @@ public class VerTabla extends javax.swing.JFrame {
                 PilotoController pilotoController = new PilotoController(emf);
                 Columnas = pilotoController.getColumnsFromPiloto();
                 this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
-                break; 
+                break;
             case "Servicio":
                 ServicioController servicioController = new ServicioController(emf);
                 Columnas = servicioController.getColumnsFromServicio();
                 this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
-                break; 
+                break;
             case "Modelo":
                 ModeloController modeloController = new ModeloController(emf);
                 Columnas = modeloController.getColumnsFromModelo();
                 this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
-                break; 
+                break;
             case "Vuelo":
                 VueloController vueloController = new VueloController(emf);
                 Columnas = vueloController.getColumnsFromVuelo();
                 this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
-                break; 
+                break;
             case "Taller":
                 TallerController tallerController = new TallerController(emf);
                 Columnas = tallerController.getColumnsFromTaller();
                 this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
                 break;
-         
+
         }
     }//GEN-LAST:event_B_BuscarActionPerformed
 

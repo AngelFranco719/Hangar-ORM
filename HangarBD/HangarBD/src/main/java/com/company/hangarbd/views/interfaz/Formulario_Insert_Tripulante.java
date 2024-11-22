@@ -4,6 +4,8 @@ import com.company.hangarbd.controller.CargoController;
 import com.company.hangarbd.controller.PersonaController;
 import com.company.hangarbd.controller.TripulanteController;
 import com.company.hangarbd.controller.VueloController;
+import com.company.hangarbd.models.Cargo;
+import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Tripulante;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,7 +14,7 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
 
     Long ID;
     String Vuelo;
-    String Cargo;
+    Cargo.cargos Cargo;
     String Persona;
 
     TripulanteController tripulanteController;
@@ -25,6 +27,44 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
     public Formulario_Insert_Tripulante() {
         initComponents();
         this.getLastID();
+        this.getVuelo();
+        this.getCargo();
+        this.getPersona();
+    }
+
+    public Formulario_Insert_Tripulante(List<String> Tupla) {
+        initComponents();
+        this.getVuelo();
+        this.getCargo();
+        this.getPersona();
+        this.id_tripulante.setText(Tupla.get(0).toString());
+        this.tri_vuelo.setSelectedItem(Tupla.get(1));
+        this.tri_cargo.setSelectedItem(Tupla.get(2));
+        this.tri_persona.setSelectedItem(Tupla.get(3));
+
+        this.ID = Long.valueOf(this.id_tripulante.getText());
+        this.isUpdate = true;
+        this.Button_Enviar.setText("Actualizar");
+    }
+
+    public void getAttributes() {
+        this.ID = Long.valueOf(this.id_tripulante.getText());
+        this.Vuelo = this.tri_vuelo.getSelectedItem().toString();
+        switch (this.tri_cargo.getSelectedItem().toString()) {
+            case "INGENIERO":
+                this.Cargo = Cargo.INGENIERO;
+                break;
+            case "PILOTO":
+                this.Cargo = Cargo.PILOTO;
+                break;
+            case "COPILOTO":
+                this.Cargo = Cargo.COPILOTO;
+                break;
+            case "AUXILIAR":
+                this.Cargo = Cargo.AUXILIAR;
+                break;
+        }
+        this.Persona = this.tri_persona.getSelectedItem().toString();
     }
 
     public void getLastID() {
@@ -45,8 +85,40 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
             emf = Persistence.createEntityManagerFactory("hangar");
             vueloController = new VueloController(emf);
             List<String> vuelos = vueloController.getColumnsFromVuelo("vue_codigo");
-
+            for (String vuelo : vuelos) {
+                this.tri_vuelo.addItem(vuelo);
+            }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getCargo() {
+        EntityManagerFactory emf = null;
+        try {
+            emf = Persistence.createEntityManagerFactory("hangar");
+            cargoController = new CargoController(emf);
+            List<Cargo.cargos> cargos = cargoController.getColumnsFromCargo("car_nombre");
+            System.out.println(cargos.getFirst().getClass());
+            for (Cargo.cargos cargo : cargos) {
+                this.tri_cargo.addItem(cargo.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getPersona() {
+        EntityManagerFactory emf = null;
+        try {
+            emf = Persistence.createEntityManagerFactory("hangar");
+            personaController = new PersonaController(emf);
+            List<String> personas = personaController.getColumnsFromPersona("per_nombre");
+            for (String persona : personas) {
+                this.tri_persona.addItem(persona);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -77,17 +149,28 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
 
         jLabel3.setText("Vuelo:");
 
-        tri_vuelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Cargo:");
 
         jLabel5.setText("Persona:");
 
-        tri_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tri_cargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tri_cargoActionPerformed(evt);
+            }
+        });
 
-        tri_persona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tri_persona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tri_personaActionPerformed(evt);
+            }
+        });
 
         Button_Enviar.setText("Enviar");
+        Button_Enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_EnviarActionPerformed(evt);
+            }
+        });
 
         Button_Cancelar.setText("Cancelar");
 
@@ -96,35 +179,38 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Button_Enviar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(138, 138, 138)
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tri_vuelo, 0, 142, Short.MAX_VALUE)
-                                        .addComponent(tri_cargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(id_tripulante, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(tri_persona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addGap(38, 38, 38)
-                .addComponent(Button_Cancelar)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(40, 40, 40)
+                                .addComponent(tri_persona, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(48, 48, 48)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tri_vuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tri_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(id_tripulante, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(85, 85, 85)
+                                        .addComponent(Button_Enviar)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(Button_Cancelar)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel1)))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,6 +242,28 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tri_personaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tri_personaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tri_personaActionPerformed
+
+    private void tri_cargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tri_cargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tri_cargoActionPerformed
+
+    private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
+        this.getAttributes();
+        if (!isUpdate) {
+            System.out.println("No es actu");
+            Formulario_Confirmacion_Tripulante FCT = new Formulario_Confirmacion_Tripulante(ID, Vuelo, Cargo, Persona);
+            FCT.setVisible(true);
+        } else {
+            System.out.println("Si es actu");
+            Formulario_Confirmacion_Tripulante FCT = new Formulario_Confirmacion_Tripulante(isUpdate, ID, Vuelo, Cargo, Persona);
+            FCT.setVisible(true);
+        }
+
+    }//GEN-LAST:event_Button_EnviarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
