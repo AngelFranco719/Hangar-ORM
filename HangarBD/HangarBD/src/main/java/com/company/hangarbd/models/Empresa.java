@@ -28,6 +28,12 @@ public class Empresa implements Serializable {
         this.emp_ubicacion = emp_ubicacion;
     }
 
+    public Empresa(Long ID, String emp_nombre, String emp_ubicacion) {
+        this.ID_Empresa = ID;
+        this.emp_nombre = emp_nombre;
+        this.emp_ubicacion = emp_ubicacion;
+    }
+
     public Empresa() {
     }
 

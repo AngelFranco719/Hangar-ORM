@@ -36,6 +36,12 @@ public class Cargo implements Serializable {
         this.car_descripcion = car_descripcion;
     }
 
+    public Cargo(Long ID, cargos car_nombre, String car_descripcion) {
+        this.ID_Cargo = ID;
+        this.car_nombre = car_nombre;
+        this.car_descripcion = car_descripcion;
+    }
+
     public Set<Tripulante> getCar_tri() {
         return car_tri;
     }

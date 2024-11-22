@@ -12,6 +12,7 @@ public class Formulario_Confirmacion_Cargo extends javax.swing.JFrame {
     Cargo.cargos nombre;
     String descripcion;
     CargoController cargoController;
+    boolean isUpdate = false;
 
     public Formulario_Confirmacion_Cargo(Long ID, Cargo.cargos nombre, String descripcion) throws HeadlessException {
         initComponents();
@@ -22,12 +23,24 @@ public class Formulario_Confirmacion_Cargo extends javax.swing.JFrame {
         this.initializeForm();
     }
 
-    public void initializeForm(){
+    public Formulario_Confirmacion_Cargo(boolean isUpdate, Long ID, Cargo.cargos nombre, String descripcion) throws HeadlessException {
+        initComponents();
+        this.isUpdate = isUpdate;
+        System.out.println(isUpdate);
+        this.ID = ID;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.setVisible(true);
+        this.initializeForm();
+        this.Button_Enviar.setText("Actualizar");
+    }
+
+    public void initializeForm() {
         this.id_Cargo.setText(ID.toString());
-        this.car_nombre.setText(nombre.toString()); 
+        this.car_nombre.setText(nombre.toString());
         this.car_descripcion.setText(descripcion);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,12 +55,15 @@ public class Formulario_Confirmacion_Cargo extends javax.swing.JFrame {
         car_nombre = new javax.swing.JLabel();
         car_descripcion = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("ID_Cargo:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Nombre:");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Descripcion:");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -88,15 +104,15 @@ public class Formulario_Confirmacion_Cargo extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(id_Cargo, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                    .addComponent(id_Cargo, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                                     .addComponent(car_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(car_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(car_descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,11 +143,17 @@ public class Formulario_Confirmacion_Cargo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
+
         EntityManagerFactory emf = null;
         try {
-            emf=Persistence.createEntityManagerFactory("hangar");
+            emf = Persistence.createEntityManagerFactory("hangar");
             cargoController = new CargoController(emf);
-            cargoController.createCargo(nombre,  descripcion);
+            if (!isUpdate) {
+                cargoController.createCargo(nombre, descripcion);
+            } else {
+
+                cargoController.updateCargo(ID, nombre, descripcion);
+            }
             this.dispose();
         } catch (Exception e) {
         }

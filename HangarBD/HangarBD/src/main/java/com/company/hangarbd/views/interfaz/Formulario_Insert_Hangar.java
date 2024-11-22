@@ -15,6 +15,7 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
     String codigo;
     String descripcion;
     HangarController hangarController;
+    boolean isUpdate = false;
 
     public Formulario_Insert_Hangar() {
         initComponents();
@@ -38,6 +39,9 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
         this.han_codigo.setText(Tupla.get(5));
         this.han_descripcion.setText(Tupla.get(4));
         this.Button_Enviar.setText("Actualizar");
+
+        this.ID = Long.valueOf(this.Id_Hangar.getText());
+        this.isUpdate = true;
     }
 
     public void getActualID() {
@@ -195,9 +199,8 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
     }//GEN-LAST:event_Id_HangarActionPerformed
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
-
         this.setAttributes();
-        Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(ID, capacidad, nombre, ubicacion, descripcion, codigo);
+        Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(isUpdate, ID, capacidad, nombre, ubicacion, descripcion, codigo);
         FCH.setVisible(true);
 
     }//GEN-LAST:event_Button_EnviarActionPerformed

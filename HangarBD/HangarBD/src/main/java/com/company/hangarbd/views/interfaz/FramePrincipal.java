@@ -68,6 +68,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
 
         jToggleButton4.setText("Borrar Datos");
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Selecciona la Entidad:");
@@ -249,9 +254,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         tabla.setVisible(true);
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+        VerTabla tabla = new VerTabla("isDelete");
+        tabla.setVisible(true);
+    }//GEN-LAST:event_jToggleButton4ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

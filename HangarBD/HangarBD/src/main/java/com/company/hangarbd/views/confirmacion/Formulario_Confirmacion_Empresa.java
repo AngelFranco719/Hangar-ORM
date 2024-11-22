@@ -5,12 +5,24 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Confirmacion_Empresa extends javax.swing.JFrame {
-    
+
     Long ID;
     String Nombre;
     String Ubicación;
     EmpresaController empresaController;
-    
+    boolean isUpdate = false;
+
+    public Formulario_Confirmacion_Empresa(boolean isUpdate, Long ID, String Nombre, String Ubicación) {
+        initComponents();
+        this.ID = ID;
+        this.Nombre = Nombre;
+        this.Ubicación = Ubicación;
+        this.setVisible(true);
+        this.initializeForms();
+        this.isUpdate = true;
+        this.Button_Enviar.setText("Actualizar");
+    }
+
     public Formulario_Confirmacion_Empresa(Long ID, String Nombre, String Ubicación) {
         initComponents();
         this.ID = ID;
@@ -19,13 +31,13 @@ public class Formulario_Confirmacion_Empresa extends javax.swing.JFrame {
         this.setVisible(true);
         this.initializeForms();
     }
-    
+
     public void initializeForms() {
         this.id_empresa.setText(ID.toString());
         this.emp_nombre.setText(Nombre);
         this.emp_ubicacion.setText(Ubicación);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,15 +52,18 @@ public class Formulario_Confirmacion_Empresa extends javax.swing.JFrame {
         emp_nombre = new javax.swing.JLabel();
         emp_ubicacion = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("EMPRESA");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("ID_Empresa:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Nombre:");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ubicación:");
 
         Button_Enviar.setText("Enviar");
@@ -72,25 +87,25 @@ public class Formulario_Confirmacion_Empresa extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(id_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(id_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(emp_ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(emp_ubicacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(emp_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(emp_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(Button_Enviar)
                         .addGap(42, 42, 42)
                         .addComponent(Button_Cancelar)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -127,8 +142,14 @@ public class Formulario_Confirmacion_Empresa extends javax.swing.JFrame {
         EntityManagerFactory emf = null;
         try {
             emf = Persistence.createEntityManagerFactory("hangar");
-            empresaController = new EmpresaController(emf);            
-            empresaController.createEmpresa(Nombre, Ubicación);
+            empresaController = new EmpresaController(emf);
+            if (!isUpdate) {
+                empresaController.createEmpresa(Nombre, Ubicación);
+                this.dispose();
+            } else {
+                empresaController.updateEmpresa(ID, Nombre, Ubicación);
+                this.dispose();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,7 +185,7 @@ public class Formulario_Confirmacion_Empresa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }

@@ -26,8 +26,8 @@ public class EmpresaController extends Controller<Empresa> {
         return this.getAllByColumn(Column, emf, "Empresa");
     }
 
-    public void updateCargo(String emp_nombre, String emp_ubicacion) {
-        Empresa updatedEmpresa = new Empresa(emp_nombre, emp_ubicacion);
+    public void updateEmpresa(Long ID, String emp_nombre, String emp_ubicacion) {
+        Empresa updatedEmpresa = new Empresa(ID, emp_nombre, emp_ubicacion);
         this.updateElement(updatedEmpresa, emf);
     }
 

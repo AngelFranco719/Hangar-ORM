@@ -7,30 +7,33 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Insert_Empresa extends javax.swing.JFrame {
-    
+
     Long ID;
     String Nombre;
     String Ubicacion;
     EmpresaController empresaController;
-    
+    boolean isUpdate = false;
+
     public Formulario_Insert_Empresa() {
         initComponents();
         this.getLastID();
     }
-    
+
     public Formulario_Insert_Empresa(List<String> Tupla) {
         initComponents();
         this.id_empresa.setText(Tupla.get(0));
         this.emp_nombre.setText(Tupla.get(1));
         this.emp_ubicacion.setText(Tupla.get(2));
         this.Button_Enviar.setText("Actualizar");
+        this.isUpdate = true;
+        this.ID = Long.valueOf(this.id_empresa.getText());
     }
-    
+
     public void getAttributes() {
         this.Nombre = this.emp_nombre.getText();
         this.Ubicacion = this.emp_ubicacion.getText();
     }
-    
+
     public void getLastID() {
         EntityManagerFactory emf = null;
         try {
@@ -42,7 +45,7 @@ public class Formulario_Insert_Empresa extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -148,7 +151,11 @@ public class Formulario_Insert_Empresa extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Empresa FCE = new Formulario_Confirmacion_Empresa(ID, Nombre, Ubicacion);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Empresa FCE = new Formulario_Confirmacion_Empresa(ID, Nombre, Ubicacion);
+        } else {
+            Formulario_Confirmacion_Empresa FCE = new Formulario_Confirmacion_Empresa(isUpdate, ID, Nombre, Ubicacion);
+        }
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     /**

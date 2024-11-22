@@ -2,9 +2,7 @@ package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.models.Cargo.cargos;
-import com.company.hangarbd.models.Hangar;
 import java.util.List;
-import java.util.Vector;
 import javax.persistence.EntityManagerFactory;
 
 public class CargoController extends Controller<Cargo> {
@@ -32,8 +30,8 @@ public class CargoController extends Controller<Cargo> {
         return new String[]{"Código", "Nombre", "Descripcion"};
     }
 
-    public void updateCargo(cargos car_nombre, String car_descripcion) {
-        Cargo updatedCargo = new Cargo(car_nombre, car_descripcion);
+    public void updateCargo(Long ID, cargos car_nombre, String car_descripcion) {
+        Cargo updatedCargo = new Cargo(ID, car_nombre, car_descripcion);
         this.updateElement(updatedCargo, emf);
     }
 

@@ -25,8 +25,8 @@ public class HangarController extends Controller<Hangar> {
         return this.getAllByColumn(Column, emf, "Hangar");
     }
 
-    public void updateHangar(int han_Capacidad, String han_Nombre, String han_Ubicacion, String han_Descripcion, String han_Codigo) {
-        Hangar updatedHangar = new Hangar(han_Capacidad, han_Nombre, han_Ubicacion, han_Descripcion, han_Codigo);
+    public void updateHangar(Long ID, int han_Capacidad, String han_Nombre, String han_Ubicacion, String han_Descripcion, String han_Codigo) {
+        Hangar updatedHangar = new Hangar(ID, han_Capacidad, han_Nombre, han_Ubicacion, han_Descripcion, han_Codigo);
         this.updateElement(updatedHangar, emf);
     }
 

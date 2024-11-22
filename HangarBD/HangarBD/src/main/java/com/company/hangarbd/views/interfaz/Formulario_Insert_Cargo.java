@@ -8,12 +8,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Insert_Cargo extends javax.swing.JFrame {
-    
+
     Long ID;
     Cargo.cargos nombre;
     String Descripcion;
     CargoController cargoController;
-    
+    boolean isUpdate = false;
+
     public Formulario_Insert_Cargo(List<String> Tupla) {
         initComponents();
         this.id_cargo.setText(Tupla.get(0));
@@ -23,7 +24,7 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
                 break;
             case "COPILOTO":
                 this.car_nombre.setSelectedItem("COPILOTO");
-                break;            
+                break;
             case "INGENIERO":
                 this.car_nombre.setSelectedItem("INGENIERO");
                 break;
@@ -33,18 +34,19 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
         }
         this.car_descripcion.setText(Tupla.get(2));
         this.Button_Enviar.setText("Actualizar");
+        this.isUpdate = true;
     }
-    
+
     public Formulario_Insert_Cargo() {
         initComponents();
         this.getLastID();
     }
-    
+
     public void getAttributes() {
         this.nombre = (Cargo.cargos.valueOf(this.car_nombre.getSelectedItem().toString()));
         this.Descripcion = this.car_descripcion.getText();
     }
-    
+
     public void getLastID() {
         EntityManagerFactory emf = null;
         try {
@@ -56,7 +58,7 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
         }
         this.id_cargo.setText(String.valueOf(ID));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,7 +157,15 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Cargo FCC = new Formulario_Confirmacion_Cargo(ID, nombre, Descripcion);
+        System.out.println(this.nombre);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Cargo FCC = new Formulario_Confirmacion_Cargo(ID, nombre, Descripcion);
+        } else {
+            this.ID = Long.valueOf(this.id_cargo.getText());
+            Formulario_Confirmacion_Cargo FCC = new Formulario_Confirmacion_Cargo(isUpdate, ID, nombre, Descripcion);
+        }
+
+
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     /**

@@ -102,10 +102,12 @@ public class Controller<T> {
     protected void updateElement(T updatedElement, EntityManagerFactory emf) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
+        System.out.println(updatedElement.toString());
         try {
             tx.begin();
             em.merge(updatedElement);
             tx.commit();
+            JOptionPane.showMessageDialog(null, "Actualización Exitosa", "Se Actualizó el Campo", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -128,6 +130,17 @@ public class Controller<T> {
             e.printStackTrace();
         } finally {
             em.close();
+        }
+    }
+
+    public void deleteElementByTuple(List<String> Tuple, EntityManagerFactory emf, String Entity) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "DELETE FROM " + Entity + " p WHERE p.ID_" + Entity + " = :id";
+            em.createQuery(query).setParameter("id", Long.valueOf(Tuple.getFirst())).executeUpdate();
+            JOptionPane.showMessageDialog(null, "Se Borró el Registro", "Borrado con Exito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
