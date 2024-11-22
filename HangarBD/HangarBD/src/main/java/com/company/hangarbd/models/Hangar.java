@@ -39,6 +39,15 @@ public class Hangar implements Serializable {
         this.han_codigo = han_codigo;
     }
 
+    public Hangar(Long ID, int han_capacidad, String han_nombre, String han_ubicacion, String han_descripcion, String han_codigo) {
+        this.ID_Hangar = ID;
+        this.han_capacidad = han_capacidad;
+        this.han_nombre = han_nombre;
+        this.han_ubicacion = han_ubicacion;
+        this.han_descripcion = han_descripcion;
+        this.han_codigo = han_codigo;
+    }
+
     public Long getID_Hangar() {
         return ID_Hangar;
     }
