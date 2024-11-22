@@ -32,6 +32,8 @@ public class VerTabla extends javax.swing.JFrame {
     List<List<String>> Tuplas;
     List<String> SelectedRow;
     DefaultTableModel modeloTabla;
+    List<String> Columnas;
+    boolean isUpdate = false;
 
     public VerTabla() {
         initComponents();
@@ -45,6 +47,19 @@ public class VerTabla extends javax.swing.JFrame {
         this.Tabla.setVisible(false);
         this.InicializarCombos();
         this.HandleRowSelected();
+        this.isUpdate = isUpdate;
+    }
+
+    public VerTabla(String isDelete) {
+        initComponents();
+        this.Tabla.setVisible(false);
+        this.InicializarCombos();
+        this.HandleRowSelected();
+        this.B_BuscarTupla.setText("Eliminar");
+    }
+
+    private void DeleteRow() {
+        controller.deleteElementByTuple(SelectedRow, emf, OpcionSeleccionada);
     }
 
     private void actualizarDatos(List<String> Tupla) {
@@ -135,7 +150,7 @@ public class VerTabla extends javax.swing.JFrame {
         this.Tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+                if (!e.getValueIsAdjusting() && Tabla.getSelectedRow() > -1) {
                     SelectedRow = Tuplas.get(Tabla.getSelectedRow());
                 }
             }
@@ -253,7 +268,6 @@ public class VerTabla extends javax.swing.JFrame {
     private void B_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BuscarActionPerformed
         modeloTabla = new DefaultTableModel();
         emf = Persistence.createEntityManagerFactory("hangar");
-        List<String> Columnas;
         switch (OpcionSeleccionada) {
             case "Hangar":
                 HangarController hangarController = new HangarController(emf);
@@ -289,7 +303,13 @@ public class VerTabla extends javax.swing.JFrame {
     }//GEN-LAST:event_B_BuscarActionPerformed
 
     private void B_BuscarTuplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BuscarTuplaActionPerformed
-        this.actualizarDatos(SelectedRow);
+        if (isUpdate) {
+            this.actualizarDatos(SelectedRow);
+        } else {
+            this.DeleteRow();
+            this.modeloTabla = new DefaultTableModel();
+            this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
+        }
     }//GEN-LAST:event_B_BuscarTuplaActionPerformed
 
     /**
