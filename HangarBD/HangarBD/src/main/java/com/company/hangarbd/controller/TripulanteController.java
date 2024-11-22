@@ -1,6 +1,7 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Cargo;
+import com.company.hangarbd.models.Empresa;
 import com.company.hangarbd.models.Persona;
 import com.company.hangarbd.models.Tripulante;
 import com.company.hangarbd.models.Vuelo;
@@ -43,6 +44,10 @@ public class TripulanteController extends Controller<Tripulante> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Tripulante");
+    }
+
+    public List<String> getColumnsFromTripulante() {
+        return this.getColumns(emf, Tripulante.class, 4);
     }
 
 }

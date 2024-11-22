@@ -2,6 +2,7 @@ package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.models.Nave;
+import com.company.hangarbd.models.Piloto;
 import com.company.hangarbd.models.Servicio;
 import com.company.hangarbd.models.Taller;
 import java.util.List;
@@ -34,11 +35,11 @@ public class ServicioController extends Controller<Servicio> {
         return this.getAllByColumn(Column, emf, "Servicio");
     }
     
-        public List<List<String>> getAllFromServicio() {
-        List<Servicio> Servicio = this.getAllFrom("Servicio", emf);
-        List<List<String>> servicioToString = this.mapEntitiesToString(Servicio, 6);
-        return servicioToString;
-    }
+//    public List<List<String>> getAllFromServicio() {
+//        List<Servicio> Servicio = this.getAllFrom("Servicio", emf);
+//        List<List<String>> servicioToString = this.mapEntitiesToString(Servicio, 6);
+//        return servicioToString;
+//    }
 
 
     public void updateServicio(String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
@@ -56,6 +57,10 @@ public class ServicioController extends Controller<Servicio> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Servicio");
+    }
+    
+    public List<String> getColumnsFromServicio() {
+        return this.getColumns(emf, Servicio.class, 6);
     }
 
 }

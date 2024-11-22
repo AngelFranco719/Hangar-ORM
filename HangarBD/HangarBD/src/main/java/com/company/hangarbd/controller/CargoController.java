@@ -22,14 +22,16 @@ public class CargoController extends Controller<Cargo> {
         return this.getElementByID(ID, emf, Cargo.class);
     }
 
-    public List<List<String>> getAllFromHangar() {
-        List<Cargo> Cargos = this.getAllFrom("Cargo", emf);
-        List<List<String>> cargoToString = this.mapEntitiesToString(Cargos, 3);
-        return cargoToString;
+    public <T> List<T> getColumnsFromCargo(String Column) {
+        return this.getAllByColumn(Column, emf, "Cargo");
     }
 
-    public void updateCargo(cargos car_nombre, String car_descripcion) {
-        Cargo updatedCargo = new Cargo(car_nombre, car_descripcion);
+    public String[] getAttributes() {
+        return new String[]{"Código", "Nombre", "Descripcion"};
+    }
+
+    public void updateCargo(Long ID, cargos car_nombre, String car_descripcion) {
+        Cargo updatedCargo = new Cargo(ID, car_nombre, car_descripcion);
         this.updateElement(updatedCargo, emf);
     }
 
@@ -39,6 +41,10 @@ public class CargoController extends Controller<Cargo> {
 
     public Long getLastID_Cargo() {
         return (this.getLastID(emf, "Cargo"));
+    }
+
+    public List<String> getColumnsFromCargo() {
+        return this.getColumns(emf, Cargo.class, 3);
     }
 
 }

@@ -31,7 +31,7 @@ public class Vuelo implements Serializable {
     private int vue_Pasajeros;
 
     @ManyToOne
-    @JoinColumn(name = "nav_vue")
+    @JoinColumn(name = "vue_nav")
     public Nave vue_nav;
 
     @OneToMany
@@ -49,8 +49,6 @@ public class Vuelo implements Serializable {
         this.vue_Pasajeros = vue_Pasajeros;
         this.vue_nav = vue_nav;
     }
-    
-    
 
     public Nave getVue_nav() {
         return vue_nav;
@@ -148,4 +146,8 @@ public class Vuelo implements Serializable {
         this.vue_Pasajeros = vue_Pasajeros;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(this.getId_Vuelo());
+    }
 }

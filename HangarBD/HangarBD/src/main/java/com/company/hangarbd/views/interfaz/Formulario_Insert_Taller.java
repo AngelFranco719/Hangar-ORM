@@ -22,6 +22,16 @@ public class Formulario_Insert_Taller extends javax.swing.JFrame {
         this.getLastID();
         this.getHangares();
     }
+    
+    public Formulario_Insert_Taller(List<String> Tupla) {
+        initComponents();
+        this.id_taller.setText(Tupla.get(0));
+        this.tall_nombre.setText(Tupla.get(1));
+        this.tall_descripcion.setText(Tupla.get(2));
+        this.getHangares();
+        this.tall_hangar.setSelectedItem(Tupla.get(3)); 
+        this.Button_Enviar.setText("Actualizar");
+    }
 
     public void getHangares() {
         EntityManagerFactory emf = null;
@@ -54,7 +64,8 @@ public class Formulario_Insert_Taller extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,7 +83,7 @@ public class Formulario_Insert_Taller extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tall_nombre = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("TALLER");

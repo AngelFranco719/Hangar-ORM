@@ -1,7 +1,6 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -85,4 +84,8 @@ public class Modelo implements Serializable {
         this.mod_año = mod_anio;
     }
 
+    @Override
+    public String toString() {
+        return this.getMod_nombre();
+    }
 }

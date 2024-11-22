@@ -1,13 +1,13 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,17 +20,23 @@ public class Persona implements Serializable {
     private String per_licencia;
     private int per_horasVuelo;
 
-    @OneToMany
-    @JoinColumn(name = "tri_per")
-    public Set<Tripulante> per_tri;
+    @OneToMany(mappedBy = "tri_per", fetch = FetchType.EAGER)
+    public Set<Tripulante> per_tri = new HashSet<>();
 
-    @OneToMany(mappedBy = "pil_per")
-    public Set<Piloto> per_pil;
+    @OneToMany(mappedBy = "pil_per", fetch = FetchType.EAGER)
+    public Set<Piloto> per_pil = new HashSet<>();
 
     public Persona() {
     }
 
     public Persona(String per_nombre, String per_licencia, int per_horasVuelo) {
+        this.per_nombre = per_nombre;
+        this.per_licencia = per_licencia;
+        this.per_horasVuelo = per_horasVuelo;
+    }
+
+    public Persona(Long ID, String per_nombre, String per_licencia, int per_horasVuelo) {
+        this.ID_Persona = ID;
         this.per_nombre = per_nombre;
         this.per_licencia = per_licencia;
         this.per_horasVuelo = per_horasVuelo;
@@ -92,4 +98,8 @@ public class Persona implements Serializable {
         this.per_pil = per_pil;
     }
 
+    @Override
+    public String toString() {
+        return this.getPer_nombre();
+    }
 }

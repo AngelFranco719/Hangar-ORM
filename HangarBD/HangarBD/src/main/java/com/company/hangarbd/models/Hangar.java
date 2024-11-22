@@ -1,9 +1,11 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,13 +25,22 @@ public class Hangar implements Serializable {
     private String han_descripcion;
     private String han_codigo;
 
-    @OneToMany(mappedBy = "nav_han")
-    public Set<Nave> han_nav;
+    @OneToMany(mappedBy = "nav_han", fetch = FetchType.EAGER)
+    public Set<Nave> han_nav = new HashSet<>();
 
     public Hangar() {
     }
 
     public Hangar(int han_capacidad, String han_nombre, String han_ubicacion, String han_descripcion, String han_codigo) {
+        this.han_capacidad = han_capacidad;
+        this.han_nombre = han_nombre;
+        this.han_ubicacion = han_ubicacion;
+        this.han_descripcion = han_descripcion;
+        this.han_codigo = han_codigo;
+    }
+
+    public Hangar(Long ID, int han_capacidad, String han_nombre, String han_ubicacion, String han_descripcion, String han_codigo) {
+        this.ID_Hangar = ID;
         this.han_capacidad = han_capacidad;
         this.han_nombre = han_nombre;
         this.han_ubicacion = han_ubicacion;
@@ -93,4 +104,8 @@ public class Hangar implements Serializable {
         this.han_codigo = han_codigo;
     }
 
+    @Override
+    public String toString() {
+        return this.getHan_nombre();
+    }
 }

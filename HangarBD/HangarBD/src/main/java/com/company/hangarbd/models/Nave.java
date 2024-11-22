@@ -1,8 +1,10 @@
 package com.company.hangarbd.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,25 +28,36 @@ public class Nave implements Serializable {
     @JoinColumn(name = "nav_emp")
     public Empresa nav_emp;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nav_han")
-    public Hangar nav_han;
+    public Hangar nav_han = new Hangar();
 
     @ManyToOne
     @JoinColumn(name = "nav_mod")
     public Modelo nav_mod;
 
-    @OneToMany(mappedBy = "ser_nav")
-    public Set<Servicio> nav_ser;
+    @OneToMany(mappedBy = "ser_nav", fetch = FetchType.EAGER)
+    public Set<Servicio> nav_ser = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "nav_vue")
-    public Set<Vuelo> nav_vue;
+    @OneToMany(mappedBy = "vue_nav", fetch = FetchType.EAGER)
+    public Set<Vuelo> nav_vue = new HashSet<>();
 
     public Nave() {
     }
 
     public Nave(String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
+        this.nav_codigo = nav_codigo;
+        this.nav_peso = nav_peso;
+        this.nav_estado = nav_estado;
+        this.nav_descripcion = nav_descripcion;
+        this.nav_capacidad = nav_capacidad;
+        this.nav_emp = nav_emp;
+        this.nav_han = nav_han;
+        this.nav_mod = nav_mod;
+    }
+
+    public Nave(Long ID, String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
+        this.ID_Nave = ID;
         this.nav_codigo = nav_codigo;
         this.nav_peso = nav_peso;
         this.nav_estado = nav_estado;

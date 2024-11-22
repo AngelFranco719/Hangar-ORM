@@ -2,6 +2,7 @@ package com.company.hangarbd.models;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,11 +17,11 @@ public class Piloto implements Serializable {
     private Long ID_Piloto;
     private int pil_horasVuelo;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "pil_per")
     public Persona pil_per;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "pil_mod")
     public Modelo pil_mod;
 
@@ -51,7 +52,7 @@ public class Piloto implements Serializable {
 
     @Override
     public String toString() {
-        return "ID_Piloto: " + String.valueOf(this.getID_Piloto());
+        return String.valueOf(this.getID_Piloto());
     }
 
 }

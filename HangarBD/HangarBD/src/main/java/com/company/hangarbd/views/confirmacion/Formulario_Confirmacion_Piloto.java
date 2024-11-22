@@ -7,16 +7,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
-
+    
     Long ID;
     int Horas;
     String Persona;
     String Modelo;
-
+    
     PilotoController pilotoController;
     PersonaController personaController;
     ModeloController modeloController;
-
+    
+    boolean isUpdate = false;
+    
     public Formulario_Confirmacion_Piloto(Long ID, int Horas, String Persona, String Modelo) {
         initComponents();
         this.ID = ID;
@@ -25,14 +27,24 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
         this.Modelo = Modelo;
         this.initializeForm();
     }
-
+    
+    public Formulario_Confirmacion_Piloto(boolean isUpdate, Long ID, int Horas, String Persona, String Modelo) {
+        initComponents();
+        this.ID = ID;
+        this.Horas = Horas;
+        this.Persona = Persona;
+        this.Modelo = Modelo;
+        this.initializeForm();
+        this.Button_Enviar.setText("Actualizar");
+    }
+    
     public void initializeForm() {
         this.id_piloto.setText(ID.toString());
         this.pil_horasVuelo.setText(String.valueOf(Horas));
         this.pil_persona.setText(Persona);
         this.pil_modelo.setText(Modelo);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -152,16 +164,16 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
             pilotoController = new PilotoController(emf);
             personaController = new PersonaController(emf);
             modeloController = new ModeloController(emf);
-
+            
             Long ID_Persona = personaController.getIdByColumn("per_nombre", Persona);
             Long ID_Modelo = modeloController.getIdByColumn("mod_nombre", Modelo);
-
+            
             pilotoController.createPiloto(Horas, ID_Persona, ID_Modelo);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_Button_EnviarActionPerformed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -189,7 +201,7 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
             }
         });
     }

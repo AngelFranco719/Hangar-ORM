@@ -37,8 +37,11 @@ public class NaveController extends Controller<Nave> {
         return this.getAllByColumn(Column, emf, "Nave");
     }
 
-    public void updateNave(String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
-        Nave updatedNave = new Nave(nav_codigo, nav_peso, nav_estado, nav_descripcion, nav_capacidad, nav_emp, nav_han, nav_mod);
+    public void updateNave(Long ID, String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Long nav_emp, Long nav_han, Long nav_mod) {
+        Empresa empresa = empresaController.getEmpresaByID(nav_emp);
+        Modelo modelo = modeloController.getModeloByID(nav_mod);
+        Hangar hangar = hangarController.getHangarByID(nav_han);
+        Nave updatedNave = new Nave(ID, nav_codigo, nav_peso, nav_estado, nav_descripcion, nav_capacidad, empresa, hangar, modelo);
         this.updateElement(updatedNave, emf);
     }
 
@@ -52,6 +55,10 @@ public class NaveController extends Controller<Nave> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Nave");
+    }
+
+    public List<String> getColumnsFromNave() {
+        return this.getColumns(emf, Nave.class, 11);
     }
 
 }

@@ -27,6 +27,20 @@ public class Formulario_Insert_Servicio extends javax.swing.JFrame {
         this.getTaller();
         this.getNave();
     }
+    
+    public Formulario_Insert_Servicio(List<String> Tupla) {
+        initComponents();
+        EntityManagerFactory emf = null;
+        this.id_servicio.setText(Tupla.get(0));
+        this.ser_diagnostico.setText(Tupla.get(1));
+        this.ser_acciones.setText(Tupla.get(2));
+        this.ser_responsable.setText(Tupla.get(3));
+        this.getNave();
+        this.getTaller();
+        this.ser_taller.setSelectedItem(Tupla.get(4));
+        this.ser_nave.setSelectedItem(Tupla.get(5));
+        this.Button_Enviar.setText("Actualizar");
+    }
 
     public void getAttributes() {
         this.Diagnostico = this.ser_diagnostico.getText();
@@ -96,7 +110,7 @@ public class Formulario_Insert_Servicio extends javax.swing.JFrame {
         Button_Enviar = new javax.swing.JButton();
         Button_Cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("SERVICIO");

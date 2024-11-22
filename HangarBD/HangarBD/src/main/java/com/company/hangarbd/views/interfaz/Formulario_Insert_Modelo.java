@@ -3,6 +3,7 @@ package com.company.hangarbd.views.interfaz;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Modelo;
 import com.company.hangarbd.controller.ModeloController;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Modelo;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -13,10 +14,22 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
     String Fabricante;
     String Año;
     ModeloController modeloController;
+    boolean isUpdate = false;
 
     public Formulario_Insert_Modelo() {
         initComponents();
         this.getLastID();
+    }
+
+    public Formulario_Insert_Modelo(List<String> Tupla) {
+        initComponents();
+        this.id_modelo.setText(Tupla.get(0));
+        this.mod_nombre.setText(Tupla.get(1));
+        this.mod_fabricante.setText(Tupla.get(2));
+        this.mod_año.setText(Tupla.get(3));
+        this.Button_Enviar.setText("Actualizar");
+        this.ID = Long.valueOf(this.id_modelo.getText());
+        this.isUpdate = true;
     }
 
     public void getLastID() {
@@ -24,7 +37,7 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
         try {
             emf = Persistence.createEntityManagerFactory("hangar");
             modeloController = new ModeloController(emf);
-            ID = modeloController.getLastID_Modelo()+1;
+            ID = modeloController.getLastID_Modelo() + 1;
             this.id_modelo.setText(ID.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +66,7 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
         Button_Enviar = new javax.swing.JButton();
         Button_Cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("MODELO");
@@ -166,7 +179,12 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Modelo FCM = new Formulario_Confirmacion_Modelo(ID, Nombre, Fabricante, Año);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Modelo FCM = new Formulario_Confirmacion_Modelo(ID, Nombre, Fabricante, Año);
+        } else {
+            Formulario_Confirmacion_Modelo FCM = new Formulario_Confirmacion_Modelo(isUpdate, ID, Nombre, Fabricante, Año);
+        }
+
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     /**

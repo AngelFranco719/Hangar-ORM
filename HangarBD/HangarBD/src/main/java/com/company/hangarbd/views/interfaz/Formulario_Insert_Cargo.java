@@ -3,6 +3,7 @@ package com.company.hangarbd.views.interfaz;
 import com.company.hangarbd.controller.CargoController;
 import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Cargo;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -12,6 +13,29 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
     Cargo.cargos nombre;
     String Descripcion;
     CargoController cargoController;
+    boolean isUpdate = false;
+
+    public Formulario_Insert_Cargo(List<String> Tupla) {
+        initComponents();
+        this.id_cargo.setText(Tupla.get(0));
+        switch (Tupla.get(1)) {
+            case "PILOTO":
+                this.car_nombre.setSelectedItem("PILOTO");
+                break;
+            case "COPILOTO":
+                this.car_nombre.setSelectedItem("COPILOTO");
+                break;
+            case "INGENIERO":
+                this.car_nombre.setSelectedItem("INGENIERO");
+                break;
+            case "AUXILIAR":
+                this.car_nombre.setSelectedItem("AUXILIAR");
+                break;
+        }
+        this.car_descripcion.setText(Tupla.get(2));
+        this.Button_Enviar.setText("Actualizar");
+        this.isUpdate = true;
+    }
 
     public Formulario_Insert_Cargo() {
         initComponents();
@@ -28,7 +52,7 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
         try {
             emf = Persistence.createEntityManagerFactory("hangar");
             cargoController = new CargoController(emf);
-            ID = cargoController.getLastID_Cargo()+1;
+            ID = cargoController.getLastID_Cargo() + 1;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,12 +73,14 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
         Button_Cancelar = new javax.swing.JButton();
         car_nombre = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("CARGO");
 
         jLabel2.setText("ID_Cargo:");
+
+        id_cargo.setEditable(false);
 
         jLabel3.setText("Nombre:");
 
@@ -131,7 +157,15 @@ public class Formulario_Insert_Cargo extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Cargo FCC = new Formulario_Confirmacion_Cargo(ID, nombre, Descripcion);
+        System.out.println(this.nombre);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Cargo FCC = new Formulario_Confirmacion_Cargo(ID, nombre, Descripcion);
+        } else {
+            this.ID = Long.valueOf(this.id_cargo.getText());
+            Formulario_Confirmacion_Cargo FCC = new Formulario_Confirmacion_Cargo(isUpdate, ID, nombre, Descripcion);
+        }
+
+
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     /**

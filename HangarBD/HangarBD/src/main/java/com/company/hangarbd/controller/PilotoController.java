@@ -1,5 +1,6 @@
 package com.company.hangarbd.controller;
 
+import com.company.hangarbd.models.Hangar;
 import com.company.hangarbd.models.Modelo;
 import com.company.hangarbd.models.Persona;
 import com.company.hangarbd.models.Piloto;
@@ -33,6 +34,12 @@ public class PilotoController extends Controller<Piloto> {
     public Piloto getPilotoByID(Long ID) {
         return this.getElementByID(ID, emf, Piloto.class);
     }
+    
+//    public List<List<String>> getAllFromPiloto() {
+//        List<Piloto> pilotos = this.getAllFrom("Piloto", emf);
+//        List<List<String>> pilotosToString = this.mapEntitiesToString(pilotos, 4);
+//        return pilotosToString;
+//    }
 
     public void updatePiloto(int pil_horasVuelo, Persona pil_per, Modelo pil_mod) {
         Piloto updatedPiloto = new Piloto(pil_horasVuelo, pil_per, pil_mod);
@@ -49,6 +56,9 @@ public class PilotoController extends Controller<Piloto> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Piloto");
+    }
+    public List<String> getColumnsFromPiloto() {
+        return this.getColumns(emf, Piloto.class, 4);
     }
 
 }

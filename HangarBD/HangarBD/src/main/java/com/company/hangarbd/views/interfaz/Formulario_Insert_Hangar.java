@@ -2,6 +2,7 @@ package com.company.hangarbd.views.interfaz;
 
 import com.company.hangarbd.controller.HangarController;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Hangar;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -14,6 +15,7 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
     String codigo;
     String descripcion;
     HangarController hangarController;
+    boolean isUpdate = false;
 
     public Formulario_Insert_Hangar() {
         initComponents();
@@ -21,10 +23,25 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
         try {
             emf = Persistence.createEntityManagerFactory("hangar");
             hangarController = new HangarController(emf);
-            this.Id_Hangar.setText(String.valueOf(hangarController.getLastID_Hangar()+1));
+            this.Id_Hangar.setText(String.valueOf(hangarController.getLastID_Hangar() + 1));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Formulario_Insert_Hangar(List<String> Tupla) {
+        initComponents();
+        EntityManagerFactory emf = null;
+        this.Id_Hangar.setText(Tupla.get(0));
+        this.han_capacidad.setText(Tupla.get(1));
+        this.han_nombre.setText(Tupla.get(2));
+        this.han_ubicacion.setText(Tupla.get(3));
+        this.han_codigo.setText(Tupla.get(5));
+        this.han_descripcion.setText(Tupla.get(4));
+        this.Button_Enviar.setText("Actualizar");
+
+        this.ID = Long.valueOf(this.Id_Hangar.getText());
+        this.isUpdate = true;
     }
 
     public void getActualID() {
@@ -61,7 +78,7 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
         Button_Enviar = new javax.swing.JButton();
         Button_Cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("HANGAR");
@@ -182,10 +199,15 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
     }//GEN-LAST:event_Id_HangarActionPerformed
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
-
         this.setAttributes();
-        Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(ID, capacidad, nombre, ubicacion, descripcion, codigo);
-        FCH.setVisible(true);
+        if (isUpdate) {
+            Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(isUpdate, ID, capacidad, nombre, ubicacion, descripcion, codigo);
+            FCH.setVisible(true);
+        } else {
+            Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(ID, capacidad, nombre, ubicacion, descripcion, codigo);
+            FCH.setVisible(true);
+        }
+
 
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
