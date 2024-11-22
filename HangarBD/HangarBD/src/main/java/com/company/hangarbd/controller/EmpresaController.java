@@ -44,7 +44,7 @@ public class EmpresaController extends Controller<Empresa> {
     }
 
     public List<String> getColumnsFromEmpresa() {
-        return this.getColumns(emf, Empresa.class, 4);
+        return this.getColumns(emf, Empresa.class, 3);
     }
 
 }

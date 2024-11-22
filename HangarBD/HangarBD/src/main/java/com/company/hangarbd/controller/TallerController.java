@@ -1,6 +1,7 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Hangar;
+import com.company.hangarbd.models.Servicio;
 import com.company.hangarbd.models.Taller;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -50,6 +51,10 @@ public class TallerController extends Controller<Taller> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Taller");
+    }
+    
+    public List<String> getColumnsFromTaller() {
+        return this.getColumns(emf, Taller.class, 4);
     }
 
 }

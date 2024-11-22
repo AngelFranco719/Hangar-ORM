@@ -7,6 +7,11 @@ import com.company.hangarbd.controller.HangarController;
 import com.company.hangarbd.controller.NaveController;
 import com.company.hangarbd.controller.PersonaController;
 import com.company.hangarbd.controller.TripulanteController;
+import com.company.hangarbd.controller.PilotoController;
+import com.company.hangarbd.controller.ServicioController;
+import com.company.hangarbd.controller.ModeloController;
+import com.company.hangarbd.controller.VueloController;
+import com.company.hangarbd.controller.TallerController;
 import com.company.hangarbd.views.interfaz.Formulario_Insert_Cargo;
 import com.company.hangarbd.views.interfaz.Formulario_Insert_Empresa;
 import com.company.hangarbd.views.interfaz.Formulario_Insert_Hangar;
@@ -62,27 +67,23 @@ public class VerTabla extends javax.swing.JFrame {
                 FIH.setVisible(true);
                 break;
             case "Modelo":
-                Formulario_Insert_Modelo FIM = new Formulario_Insert_Modelo();
+                Formulario_Insert_Modelo FIM = new Formulario_Insert_Modelo(SelectedRow);
                 FIM.setVisible(true);
                 break;
             case "Nave":
-                Formulario_Insert_Nave FIN = new Formulario_Insert_Nave();
+                Formulario_Insert_Nave FIN = new Formulario_Insert_Nave(SelectedRow);
                 FIN.setVisible(true);
                 break;
             case "Persona":
-                Formulario_Insert_Persona FIP = new Formulario_Insert_Persona();
+                Formulario_Insert_Persona FIP = new Formulario_Insert_Persona(SelectedRow);
                 FIP.setVisible(true);
                 break;
-            case "Piloto":
-                Formulario_Insert_Piloto FIPi = new Formulario_Insert_Piloto();
-                FIPi.setVisible(true);
-                break;
             case "Servicio":
-                Formulario_Insert_Servicio FIS = new Formulario_Insert_Servicio();
+                Formulario_Insert_Servicio FIS = new Formulario_Insert_Servicio(SelectedRow);
                 FIS.setVisible(true);
                 break;
             case "Taller":
-                Formulario_Insert_Taller FIT = new Formulario_Insert_Taller();
+                Formulario_Insert_Taller FIT = new Formulario_Insert_Taller(SelectedRow);
                 FIT.setVisible(true);
                 break;
             case "Tripulante":
@@ -92,6 +93,10 @@ public class VerTabla extends javax.swing.JFrame {
             case "Vuelo":
                 Formulario_Insert_Nave FINa = new Formulario_Insert_Nave();
                 FINa.setVisible(true);
+                break;
+            case "Piloto":
+                Formulario_Insert_Piloto FIPi = new Formulario_Insert_Piloto(SelectedRow);
+                FIPi.setVisible(true);
                 break;
         }
     }
@@ -185,7 +190,7 @@ public class VerTabla extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla);
 
-        B_BuscarTupla.setText("Buscar");
+        B_BuscarTupla.setText("Editar");
         B_BuscarTupla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 B_BuscarTuplaActionPerformed(evt);
@@ -285,6 +290,32 @@ public class VerTabla extends javax.swing.JFrame {
                 Columnas = naveController.getColumnsFromNave();
                 this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
                 break;
+            case "Piloto":
+                PilotoController pilotoController = new PilotoController(emf);
+                Columnas = pilotoController.getColumnsFromPiloto();
+                this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
+                break; 
+            case "Servicio":
+                ServicioController servicioController = new ServicioController(emf);
+                Columnas = servicioController.getColumnsFromServicio();
+                this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
+                break; 
+            case "Modelo":
+                ModeloController modeloController = new ModeloController(emf);
+                Columnas = modeloController.getColumnsFromModelo();
+                this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
+                break; 
+            case "Vuelo":
+                VueloController vueloController = new VueloController(emf);
+                Columnas = vueloController.getColumnsFromVuelo();
+                this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
+                break; 
+            case "Taller":
+                TallerController tallerController = new TallerController(emf);
+                Columnas = tallerController.getColumnsFromTaller();
+                this.getTable(Columnas, OpcionSeleccionada, Columnas.size());
+                break;
+         
         }
     }//GEN-LAST:event_B_BuscarActionPerformed
 

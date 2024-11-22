@@ -47,8 +47,9 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
 
         } catch (Exception e) {
         }
-
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

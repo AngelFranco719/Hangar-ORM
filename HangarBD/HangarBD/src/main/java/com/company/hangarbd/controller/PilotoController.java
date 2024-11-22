@@ -1,5 +1,6 @@
 package com.company.hangarbd.controller;
 
+import com.company.hangarbd.models.Hangar;
 import com.company.hangarbd.models.Modelo;
 import com.company.hangarbd.models.Persona;
 import com.company.hangarbd.models.Piloto;
@@ -55,6 +56,9 @@ public class PilotoController extends Controller<Piloto> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Piloto");
+    }
+    public List<String> getColumnsFromPiloto() {
+        return this.getColumns(emf, Piloto.class, 4);
     }
 
 }

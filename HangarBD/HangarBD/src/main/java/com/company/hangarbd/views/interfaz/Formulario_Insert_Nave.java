@@ -33,6 +33,20 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
         this.getAllHangar();
         this.getAllModelo();
     }
+    
+    public Formulario_Insert_Nave(List<String> Tupla) {
+        initComponents();
+        this.id_nave.setText(Tupla.get(0));
+        this.nav_codigo.setText(Tupla.get(1));
+        this.nav_capacidad.setText(Tupla.get(2));
+        this.nav_peso.setText(Tupla.get(3));  
+        this.nav_estado.setText(Tupla.get(4));
+        this.nav_descripcion.setText(Tupla.get(5));
+        this.nav_empresa.setSelectedItem(Tupla.get(6));
+        this.nav_modelo.setSelectedItem(Tupla.get(7));
+        this.nav_hangar.setSelectedItem(Tupla.get(8));
+        this.Button_Enviar.setText("Actualizar");
+    }
 
     public void getAttributes() {
         this.Codigo = this.nav_codigo.getText();

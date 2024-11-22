@@ -43,7 +43,7 @@ public class PersonaController extends Controller<Persona> {
     }
 
     public List<String> getColumnsFromPersona() {
-        return this.getColumns(emf, Persona.class, 6);
+        return this.getColumns(emf, Persona.class, 4);
     }
 
 }

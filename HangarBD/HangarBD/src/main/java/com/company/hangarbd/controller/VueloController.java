@@ -50,5 +50,9 @@ public class VueloController extends Controller<Vuelo> {
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Vuelo");
     }
+    
+    public List<String> getColumnsFromVuelo() {
+        return this.getColumns(emf, Vuelo.class, 10);
+    }
 
 }

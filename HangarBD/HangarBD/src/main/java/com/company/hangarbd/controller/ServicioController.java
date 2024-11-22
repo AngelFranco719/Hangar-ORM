@@ -2,6 +2,7 @@ package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Cargo;
 import com.company.hangarbd.models.Nave;
+import com.company.hangarbd.models.Piloto;
 import com.company.hangarbd.models.Servicio;
 import com.company.hangarbd.models.Taller;
 import java.util.List;
@@ -56,6 +57,10 @@ public class ServicioController extends Controller<Servicio> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Servicio");
+    }
+    
+    public List<String> getColumnsFromServicio() {
+        return this.getColumns(emf, Servicio.class, 6);
     }
 
 }

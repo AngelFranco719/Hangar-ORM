@@ -2,6 +2,7 @@ package com.company.hangarbd.views.interfaz;
 
 import com.company.hangarbd.controller.PersonaController;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Persona;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -16,6 +17,15 @@ public class Formulario_Insert_Persona extends javax.swing.JFrame {
     public Formulario_Insert_Persona() {
         initComponents();
         this.getLastID();
+    }
+    
+    public Formulario_Insert_Persona(List<String> Tupla) {
+        initComponents();
+        this.id_persona.setText(Tupla.get(0));
+        this.per_nombre.setText(Tupla.get(1));
+        this.per_licencia.setText(Tupla.get(2));
+        this.per_horasTotal.setText(Tupla.get(3));  
+        this.Button_Enviar.setText("Actualizar");
     }
 
     public void getAttributes() {

@@ -3,6 +3,7 @@ package com.company.hangarbd.views.interfaz;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Modelo;
 import com.company.hangarbd.controller.ModeloController;
 import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Modelo;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -17,6 +18,15 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
     public Formulario_Insert_Modelo() {
         initComponents();
         this.getLastID();
+    }
+    
+    public Formulario_Insert_Modelo(List<String> Tupla) {
+        initComponents();
+        this.id_modelo.setText(Tupla.get(0));
+        this.mod_nombre.setText(Tupla.get(1));
+        this.mod_fabricante.setText(Tupla.get(2));
+        this.mod_año.setText(Tupla.get(3));      
+        this.Button_Enviar.setText("Actualizar");
     }
 
     public void getLastID() {

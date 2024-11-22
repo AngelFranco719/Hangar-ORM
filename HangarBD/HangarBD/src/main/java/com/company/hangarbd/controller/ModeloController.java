@@ -1,6 +1,7 @@
 package com.company.hangarbd.controller;
 
 import com.company.hangarbd.models.Modelo;
+import com.company.hangarbd.models.Servicio;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -47,6 +48,10 @@ public class ModeloController extends Controller<Modelo> {
 
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Modelo");
+    }
+    
+    public List<String> getColumnsFromModelo() {
+        return this.getColumns(emf, Modelo.class, 4);
     }
 
 }

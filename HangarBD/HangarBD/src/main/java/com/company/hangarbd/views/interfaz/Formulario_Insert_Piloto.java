@@ -32,6 +32,16 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
         this.Modelo = this.pil_modelo.getSelectedItem().toString();
     }
     
+    public Formulario_Insert_Piloto(List<String> Tupla) {
+        initComponents();
+        this.ID_Piloto.setText(Tupla.get(0));
+        this.pil_horasVuelo.setText(Tupla.get(1));
+        this.getPersonas();
+        this.getModelo();
+        this.pil_persona.setSelectedItem(Tupla.get(2));
+        this.pil_modelo.setSelectedItem(Tupla.get(3));  
+        this.Button_Enviar.setText("Actualizar");
+    }
     public void getLastID() {
         EntityManagerFactory emf = null;
         try {
