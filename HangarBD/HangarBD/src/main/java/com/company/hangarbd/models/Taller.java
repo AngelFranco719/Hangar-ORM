@@ -33,6 +33,13 @@ public class Taller implements Serializable {
         this.tall_han = tall_han;
     }
 
+    public Taller(Long ID, String tall_nombre, String tal_Descripcion, Hangar tall_han) {
+        this.ID_Taller = ID;
+        this.tall_nombre = tall_nombre;
+        this.tall_descripcion = tal_Descripcion;
+        this.tall_han = tall_han;
+    }
+
     public Long getID_Taller() {
         return ID_Taller;
     }

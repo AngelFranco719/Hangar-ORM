@@ -34,6 +34,13 @@ public class Piloto implements Serializable {
         this.pil_mod = pil_mod;
     }
 
+    public Piloto(Long ID, int pil_horasVuelo, Persona pil_per, Modelo pil_mod) {
+        this.ID_Piloto = ID;
+        this.pil_horasVuelo = pil_horasVuelo;
+        this.pil_per = pil_per;
+        this.pil_mod = pil_mod;
+    }
+
     public Long getID_Piloto() {
         return ID_Piloto;
     }

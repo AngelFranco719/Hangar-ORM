@@ -30,14 +30,14 @@ public class TallerController extends Controller<Taller> {
 //        List<List<String>> tallerToString = this.mapEntitiesToString(Taller, 4);
 //        return tallerToString;
 //    }
-    
+
     public <T> List<T> getColumnsFromTaller(String Column) {
         return this.getAllByColumn(Column, emf, "Taller");
     }
 
-    public void updateTaller(String tall_nombre, String tal_Descripcion, Hangar tall_han) {
-        Taller updatedTaller = new Taller(tall_nombre, tal_Descripcion, tall_han
-        );
+    public void updateTaller(Long ID, String tall_nombre, String tal_Descripcion, Long tall_han) {
+        Hangar selectedHangar = hangarController.getHangarByID(tall_han);
+        Taller updatedTaller = new Taller(ID, tall_nombre, tal_Descripcion, selectedHangar);
         this.updateElement(updatedTaller, emf);
     }
 
@@ -52,7 +52,7 @@ public class TallerController extends Controller<Taller> {
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Taller");
     }
-    
+
     public List<String> getColumnsFromTaller() {
         return this.getColumns(emf, Taller.class, 4);
     }

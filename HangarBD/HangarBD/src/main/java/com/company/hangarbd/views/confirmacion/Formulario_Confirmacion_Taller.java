@@ -14,6 +14,8 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
     TallerController tallerController;
     HangarController hangarController;
 
+    boolean isUpdate = false;
+
     public Formulario_Confirmacion_Taller(Long ID, String Nombre, String Descripcion, String Hangar) {
         initComponents();
         this.ID = ID;
@@ -21,6 +23,17 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
         this.Descripcion = Descripcion;
         this.Hangar = Hangar;
         this.initializeForm();
+    }
+
+    public Formulario_Confirmacion_Taller(boolean isUpdate, Long ID, String Nombre, String Descripcion, String Hangar) {
+        initComponents();
+        this.ID = ID;
+        this.Nombre = Nombre;
+        this.Descripcion = Descripcion;
+        this.Hangar = Hangar;
+        this.initializeForm();
+        this.Button_Enviar.setText("Actualizar");
+        this.isUpdate = true;
     }
 
     public void initializeForm() {
@@ -45,7 +58,7 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tall_nombre = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("TALLER");
@@ -80,25 +93,23 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
                         .addComponent(Button_Enviar)
                         .addGap(53, 53, 53)
                         .addComponent(Button_Cancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tall_nombre)
-                            .addComponent(tall_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tall_hangar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(id_taller, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(78, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(id_taller, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tall_descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                        .addComponent(tall_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tall_hangar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,11 +138,11 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(tall_hangar))
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Enviar)
                     .addComponent(Button_Cancelar))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -153,8 +164,13 @@ public class Formulario_Confirmacion_Taller extends javax.swing.JFrame {
 
             Long ID_Hangar = hangarController.getIdByColumn("han_nombre", Hangar);
 
-            tallerController.createTaller(Nombre, Descripcion, ID_Hangar);
-
+            if (!isUpdate) {
+                tallerController.createTaller(Nombre, Descripcion, ID_Hangar);
+                this.dispose();
+            } else {
+                tallerController.updateTaller(ID, Nombre, Descripcion, ID_Hangar);
+                this.dispose();
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_Button_EnviarActionPerformed
