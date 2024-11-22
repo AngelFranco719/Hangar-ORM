@@ -9,29 +9,31 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Insert_Piloto extends javax.swing.JFrame {
-    
+
     Long ID;
     int Horas;
     String Persona;
     String Modelo;
-    
+
     PilotoController pilotoController;
     PersonaController personaController;
     ModeloController modeloController;
-    
+
+    boolean isUpdate = false;
+
     public Formulario_Insert_Piloto() {
         initComponents();
         this.getLastID();
         this.getPersonas();
         this.getModelo();
     }
-    
+
     public void getAtributtes() {
         this.Horas = Integer.parseInt(this.pil_horasVuelo.getText());
         this.Persona = this.pil_persona.getSelectedItem().toString();
         this.Modelo = this.pil_modelo.getSelectedItem().toString();
     }
-    
+
     public Formulario_Insert_Piloto(List<String> Tupla) {
         initComponents();
         this.ID_Piloto.setText(Tupla.get(0));
@@ -39,9 +41,13 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
         this.getPersonas();
         this.getModelo();
         this.pil_persona.setSelectedItem(Tupla.get(2));
-        this.pil_modelo.setSelectedItem(Tupla.get(3));  
+        this.pil_modelo.setSelectedItem(Tupla.get(3));
         this.Button_Enviar.setText("Actualizar");
+
+        this.ID = Long.valueOf(this.ID_Piloto.getText());
+        this.isUpdate = true;
     }
+
     public void getLastID() {
         EntityManagerFactory emf = null;
         try {
@@ -53,7 +59,7 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     public void getPersonas() {
         EntityManagerFactory emf = null;
         try {
@@ -67,7 +73,7 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     public void getModelo() {
         EntityManagerFactory emf = null;
         try {
@@ -80,9 +86,9 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -136,15 +142,15 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pil_horasVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(ID_Piloto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(pil_horasVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
                                     .addComponent(Button_Enviar)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -191,10 +197,16 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAtributtes();
-        Formulario_Confirmacion_Piloto FCP = new Formulario_Confirmacion_Piloto(ID, Horas, Persona, Modelo);
-        FCP.setVisible(true);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Piloto FCP = new Formulario_Confirmacion_Piloto(ID, Horas, Persona, Modelo);
+            FCP.setVisible(true);
+        } else {
+            Formulario_Confirmacion_Piloto FCP = new Formulario_Confirmacion_Piloto(isUpdate, ID, Horas, Persona, Modelo);
+            FCP.setVisible(true);
+        }
+
     }//GEN-LAST:event_Button_EnviarActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

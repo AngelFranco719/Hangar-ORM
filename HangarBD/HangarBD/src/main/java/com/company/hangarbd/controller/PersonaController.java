@@ -25,8 +25,8 @@ public class PersonaController extends Controller<Persona> {
         return this.getElementByID(ID, emf, Persona.class);
     }
 
-    public void updatePersona(String per_nombre, String per_licencia, int per_horasVuelo) {
-        Persona updatedPersona = new Persona(per_nombre, per_licencia, per_horasVuelo);
+    public void updatePersona(Long ID, String per_nombre, String per_licencia, int per_horasVuelo) {
+        Persona updatedPersona = new Persona(ID, per_nombre, per_licencia, per_horasVuelo);
         this.updateElement(updatedPersona, emf);
     }
 
