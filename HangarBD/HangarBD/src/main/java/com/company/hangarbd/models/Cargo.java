@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-@Entity(name = "Cargo")
+@Entity
 public class Cargo implements Serializable {
 
     @Id
@@ -24,8 +24,7 @@ public class Cargo implements Serializable {
     private cargos car_nombre;
     private String car_descripcion;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "tri_car")
+    @OneToMany(mappedBy = "tri_car", fetch = FetchType.EAGER)
     private Set<Tripulante> car_tri = new HashSet<>();
 
     public Cargo() {
@@ -76,7 +75,7 @@ public class Cargo implements Serializable {
 
     @Override
     public String toString() {
-        return "Cargo{" + "ID_Cargo=" + ID_Cargo + ", car_nombre=" + car_nombre + ", car_descripcion=" + car_descripcion + '}';
+        return this.getCar_nombre().toString();
     }
 
 }

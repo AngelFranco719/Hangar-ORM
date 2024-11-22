@@ -22,13 +22,15 @@ public class Formulario_Insert_Servicio extends javax.swing.JFrame {
     TallerController tallerController;
     NaveController naveController;
 
+    boolean isUpdate = false;
+
     public Formulario_Insert_Servicio() {
         initComponents();
         this.getLastID();
         this.getTaller();
         this.getNave();
     }
-    
+
     public Formulario_Insert_Servicio(List<String> Tupla) {
         initComponents();
         EntityManagerFactory emf = null;
@@ -41,6 +43,9 @@ public class Formulario_Insert_Servicio extends javax.swing.JFrame {
         this.ser_taller.setSelectedItem(Tupla.get(4));
         this.ser_nave.setSelectedItem(Tupla.get(5));
         this.Button_Enviar.setText("Actualizar");
+
+        this.ID = Long.valueOf(this.id_servicio.getText());
+        this.isUpdate = true;
     }
 
     public void getAttributes() {
@@ -125,7 +130,9 @@ public class Formulario_Insert_Servicio extends javax.swing.JFrame {
         jLabel4.setText("Acciones:");
 
         ser_acciones.setColumns(20);
+        ser_acciones.setLineWrap(true);
         ser_acciones.setRows(5);
+        ser_acciones.setWrapStyleWord(true);
         jScrollPane1.setViewportView(ser_acciones);
 
         jLabel5.setText("Responsable:");
@@ -237,8 +244,13 @@ public class Formulario_Insert_Servicio extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Servicio FCS = new Formulario_Confirmacion_Servicio(ID, Diagnostico, Acciones, Responsable, Taller, Nave);
-        FCS.setVisible(true);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Servicio FCS = new Formulario_Confirmacion_Servicio(ID, Diagnostico, Acciones, Responsable, Taller, Nave);
+            FCS.setVisible(true);
+        } else {
+            Formulario_Confirmacion_Servicio FCS = new Formulario_Confirmacion_Servicio(isUpdate, ID, Diagnostico, Acciones, Responsable, Taller, Nave);
+            FCS.setVisible(true);
+        }
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     private void Button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CancelarActionPerformed

@@ -37,6 +37,15 @@ public class Servicio implements Serializable {
         this.ser_nav = ser_nav;
     }
 
+    public Servicio(Long ID, String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
+        this.ID_Servicio = ID;
+        this.ser_Diagnostico = ser_Diagnostico;
+        this.ser_Acciones = ser_Acciones;
+        this.ser_responsable = Responsable;
+        this.ser_tall = ser_tall;
+        this.ser_nav = ser_nav;
+    }
+
     public Long getID_servicio() {
         return ID_Servicio;
     }

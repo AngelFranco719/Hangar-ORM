@@ -14,7 +14,6 @@ public class Tripulante implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Tripulante")
     private Long ID_Tripulante;
 
     @ManyToOne
@@ -33,6 +32,13 @@ public class Tripulante implements Serializable {
     }
 
     public Tripulante(Vuelo tri_vue, Cargo tri_car, Persona tri_per) {
+        this.tri_vue = tri_vue;
+        this.tri_car = tri_car;
+        this.tri_per = tri_per;
+    }
+
+    public Tripulante(Long ID, Vuelo tri_vue, Cargo tri_car, Persona tri_per) {
+        this.ID_Tripulante = ID;
         this.tri_vue = tri_vue;
         this.tri_car = tri_car;
         this.tri_per = tri_per;

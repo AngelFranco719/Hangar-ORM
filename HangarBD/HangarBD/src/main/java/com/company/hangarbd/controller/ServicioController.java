@@ -34,16 +34,16 @@ public class ServicioController extends Controller<Servicio> {
     public <T> List<T> getColumnsFromServicio(String Column) {
         return this.getAllByColumn(Column, emf, "Servicio");
     }
-    
+
 //    public List<List<String>> getAllFromServicio() {
 //        List<Servicio> Servicio = this.getAllFrom("Servicio", emf);
 //        List<List<String>> servicioToString = this.mapEntitiesToString(Servicio, 6);
 //        return servicioToString;
 //    }
-
-
-    public void updateServicio(String ser_Diagnostico, String ser_Acciones, String Responsable, Taller ser_tall, Nave ser_nav) {
-        Servicio updatedServicio = new Servicio(ser_Diagnostico, ser_Acciones, Responsable, ser_tall, ser_nav);
+    public void updateServicio(Long ID, String ser_Diagnostico, String ser_Acciones, String Responsable, Long ser_tall, Long ser_nav) {
+        Taller taller = tallerController.getTallerByID(ser_tall);
+        Nave nave = naveController.getNaveByID(ser_nav);
+        Servicio updatedServicio = new Servicio(ID,ser_Diagnostico, ser_Acciones, Responsable, taller, nave);
         this.updateElement(updatedServicio, emf);
     }
 
@@ -58,7 +58,7 @@ public class ServicioController extends Controller<Servicio> {
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Servicio");
     }
-    
+
     public List<String> getColumnsFromServicio() {
         return this.getColumns(emf, Servicio.class, 6);
     }

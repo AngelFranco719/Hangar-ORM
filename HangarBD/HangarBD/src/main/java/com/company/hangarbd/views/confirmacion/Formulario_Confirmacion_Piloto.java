@@ -7,18 +7,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
-    
+
     Long ID;
     int Horas;
     String Persona;
     String Modelo;
-    
+
     PilotoController pilotoController;
     PersonaController personaController;
     ModeloController modeloController;
-    
+
     boolean isUpdate = false;
-    
+
     public Formulario_Confirmacion_Piloto(Long ID, int Horas, String Persona, String Modelo) {
         initComponents();
         this.ID = ID;
@@ -27,7 +27,7 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
         this.Modelo = Modelo;
         this.initializeForm();
     }
-    
+
     public Formulario_Confirmacion_Piloto(boolean isUpdate, Long ID, int Horas, String Persona, String Modelo) {
         initComponents();
         this.ID = ID;
@@ -36,15 +36,16 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
         this.Modelo = Modelo;
         this.initializeForm();
         this.Button_Enviar.setText("Actualizar");
+        this.isUpdate = true;
     }
-    
+
     public void initializeForm() {
         this.id_piloto.setText(ID.toString());
         this.pil_horasVuelo.setText(String.valueOf(Horas));
         this.pil_persona.setText(Persona);
         this.pil_modelo.setText(Modelo);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,7 +62,7 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
         pil_persona = new javax.swing.JLabel();
         pil_modelo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("PILOTO");
@@ -96,25 +97,19 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
+                        .addGap(155, 155, 155)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Button_Enviar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pil_persona, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pil_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)))
+                        .addGap(115, 115, 115)
+                        .addComponent(Button_Enviar)
                         .addGap(38, 38, 38)
-                        .addComponent(Button_Cacelar))
+                        .addComponent(Button_Cacelar)))
+                .addContainerGap(99, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,15 +118,23 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addGap(34, 34, 34)
-                            .addComponent(id_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                            .addComponent(id_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pil_persona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pil_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(id_piloto))
@@ -147,11 +150,11 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(pil_modelo))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Enviar)
                     .addComponent(Button_Cacelar))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -164,16 +167,22 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
             pilotoController = new PilotoController(emf);
             personaController = new PersonaController(emf);
             modeloController = new ModeloController(emf);
-            
+
             Long ID_Persona = personaController.getIdByColumn("per_nombre", Persona);
             Long ID_Modelo = modeloController.getIdByColumn("mod_nombre", Modelo);
-            
-            pilotoController.createPiloto(Horas, ID_Persona, ID_Modelo);
+
+            if (!isUpdate) {
+                pilotoController.createPiloto(Horas, ID_Persona, ID_Modelo);
+                this.dispose();
+            } else {
+                this.dispose();
+                pilotoController.updatePiloto(ID, Horas, ID_Persona, ID_Modelo);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_Button_EnviarActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -201,7 +210,7 @@ public class Formulario_Confirmacion_Piloto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,39 +14,40 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity(name = "Vuelo")
+@Entity
 public class Vuelo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id_Vuelo;
+    private Long ID_Vuelo;
+    private String vue_codigo;
     private String vue_Origen;
     private String vue_Destino;
     @Temporal(value = TemporalType.DATE)
     private Date vue_fechaInicio;
     @Temporal(value = TemporalType.DATE)
     private Date vue_fechaFin;
-    private float vue_Distancia;
-    private float vue_Duracion;
-    private float vuel_AltitudPromedio;
+    private String vue_Distancia;
+    private String vue_Duracion;
+    private float vue_Altitud;
     private int vue_Pasajeros;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vue_nav")
     public Nave vue_nav;
 
-    @OneToMany
-    @JoinColumn(name = "tri_vue")
+    @OneToMany(mappedBy = "tri_vue", fetch = FetchType.EAGER)
     private Set<Tripulante> vue_tri;
 
-    public Vuelo(String vue_Origen, String vue_Destino, Date vue_fechaInicio, Date vue_fechaFin, float vue_Distancia, float vue_Duracion, float vuel_AltitudPromedio, int vue_Pasajeros, Nave vue_nav) {
+    public Vuelo(String vue_codigo, String vue_Origen, String vue_Destino, Date vue_fechaInicio, Date vue_fechaFin, String vue_Distancia, String vue_Duracion, float vuel_AltitudPromedio, int vue_Pasajeros, Nave vue_nav) {
+        this.vue_codigo = vue_codigo;
         this.vue_Origen = vue_Origen;
         this.vue_Destino = vue_Destino;
         this.vue_fechaInicio = vue_fechaInicio;
         this.vue_fechaFin = vue_fechaFin;
         this.vue_Distancia = vue_Distancia;
         this.vue_Duracion = vue_Duracion;
-        this.vuel_AltitudPromedio = vuel_AltitudPromedio;
+        this.vue_Altitud = vuel_AltitudPromedio;
         this.vue_Pasajeros = vue_Pasajeros;
         this.vue_nav = vue_nav;
     }
@@ -56,6 +58,22 @@ public class Vuelo implements Serializable {
 
     public void setVue_nav(Nave vue_nav) {
         this.vue_nav = vue_nav;
+    }
+
+    public String getVue_codigo() {
+        return vue_codigo;
+    }
+
+    public void setVue_codigo(String vue_codigo) {
+        this.vue_codigo = vue_codigo;
+    }
+
+    public float getVue_Altitud() {
+        return vue_Altitud;
+    }
+
+    public void setVue_Altitud(float vue_Altitud) {
+        this.vue_Altitud = vue_Altitud;
     }
 
     public Set<Tripulante> getVue_tri() {
@@ -75,11 +93,11 @@ public class Vuelo implements Serializable {
     }
 
     public Long getId_Vuelo() {
-        return Id_Vuelo;
+        return ID_Vuelo;
     }
 
     public void setId_Vuelo(Long Id_Vuelo) {
-        this.Id_Vuelo = Id_Vuelo;
+        this.ID_Vuelo = Id_Vuelo;
     }
 
     public String getVue_Origen() {
@@ -114,28 +132,28 @@ public class Vuelo implements Serializable {
         this.vue_fechaFin = vue_fechaFin;
     }
 
-    public float getVue_Distancia() {
+    public String getVue_Distancia() {
         return vue_Distancia;
     }
 
-    public void setVue_Distancia(float vue_Distancia) {
+    public void setVue_Distancia(String vue_Distancia) {
         this.vue_Distancia = vue_Distancia;
     }
 
-    public float getVue_Duracion() {
+    public String getVue_Duracion() {
         return vue_Duracion;
     }
 
-    public void setVue_Duracion(float vue_Duracion) {
+    public void setVue_Duracion(String vue_Duracion) {
         this.vue_Duracion = vue_Duracion;
     }
 
     public float getVuel_AltitudPromedio() {
-        return vuel_AltitudPromedio;
+        return vue_Altitud;
     }
 
     public void setVuel_AltitudPromedio(float vuel_AltitudPromedio) {
-        this.vuel_AltitudPromedio = vuel_AltitudPromedio;
+        this.vue_Altitud = vuel_AltitudPromedio;
     }
 
     public int getVue_Pasajeros() {
@@ -148,6 +166,6 @@ public class Vuelo implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(this.getId_Vuelo());
+        return String.valueOf(this.getVue_codigo());
     }
 }

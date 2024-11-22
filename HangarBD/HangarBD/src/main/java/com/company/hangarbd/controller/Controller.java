@@ -90,7 +90,7 @@ public class Controller<T> {
     protected <T> List<T> getAllByColumn(String Column, EntityManagerFactory emf, String Entity) {
         EntityManager em = emf.createEntityManager();
         try {
-            System.out.println("SELECT p." + Column + " FROM" + "Entity" + " p");
+            System.out.println("SELECT p." + Column + " FROM" + Entity + " p");
             List<T> Lista = em.createQuery("SELECT p." + Column + " FROM " + Entity + " p").getResultList();
             return Lista;
         } catch (Exception e) {

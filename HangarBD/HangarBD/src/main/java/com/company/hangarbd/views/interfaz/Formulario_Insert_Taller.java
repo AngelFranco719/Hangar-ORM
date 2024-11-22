@@ -18,20 +18,25 @@ public class Formulario_Insert_Taller extends javax.swing.JFrame {
     TallerController tallerController;
     HangarController hangarController;
 
+    boolean isUpdate = false;
+
     public Formulario_Insert_Taller() {
         initComponents();
         this.getLastID();
         this.getHangares();
     }
-    
+
     public Formulario_Insert_Taller(List<String> Tupla) {
         initComponents();
         this.id_taller.setText(Tupla.get(0));
         this.tall_nombre.setText(Tupla.get(1));
         this.tall_descripcion.setText(Tupla.get(2));
         this.getHangares();
-        this.tall_hangar.setSelectedItem(Tupla.get(3)); 
+        this.tall_hangar.setSelectedItem(Tupla.get(3));
         this.Button_Enviar.setText("Actualizar");
+
+        this.ID = Long.valueOf(this.id_taller.getText());
+        this.isUpdate = true;
     }
 
     public void getHangares() {
@@ -65,8 +70,7 @@ public class Formulario_Insert_Taller extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,7 +100,9 @@ public class Formulario_Insert_Taller extends javax.swing.JFrame {
         jLabel3.setText("Descripcion:");
 
         tall_descripcion.setColumns(20);
+        tall_descripcion.setLineWrap(true);
         tall_descripcion.setRows(5);
+        tall_descripcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(tall_descripcion);
 
         jLabel4.setText("Hangar:");
@@ -190,8 +196,13 @@ public class Formulario_Insert_Taller extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Taller FCT = new Formulario_Confirmacion_Taller(ID, Nombre, Descripcion, HangarName);
-        FCT.setVisible(true);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Taller FCT = new Formulario_Confirmacion_Taller(ID, Nombre, Descripcion, HangarName);
+            FCT.setVisible(true);
+        } else {
+            Formulario_Confirmacion_Taller FCT = new Formulario_Confirmacion_Taller(isUpdate, ID, Nombre, Descripcion, HangarName);
+            FCT.setVisible(true);
+        }
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     private void tall_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tall_nombreActionPerformed
