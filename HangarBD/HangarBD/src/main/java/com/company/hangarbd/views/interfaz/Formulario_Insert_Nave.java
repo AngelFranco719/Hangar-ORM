@@ -10,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Formulario_Insert_Nave extends javax.swing.JFrame {
-
+    
     Long ID;
     String Codigo;
     int Capacidad;
@@ -20,12 +20,13 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
     String Empresa;
     String Modelo;
     String Hangar;
-
+    
     NaveController naveController;
     EmpresaController empresaController;
     ModeloController modeloController;
     HangarController hangarController;
-
+    boolean isUpdate = false;
+    
     public Formulario_Insert_Nave() {
         initComponents();
         this.getLastID();
@@ -36,18 +37,25 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
     
     public Formulario_Insert_Nave(List<String> Tupla) {
         initComponents();
+        this.getAllEmpresas();
+        this.getAllHangar();
+        this.getAllModelo();
         this.id_nave.setText(Tupla.get(0));
         this.nav_codigo.setText(Tupla.get(1));
-        this.nav_capacidad.setText(Tupla.get(2));
-        this.nav_peso.setText(Tupla.get(3));  
-        this.nav_estado.setText(Tupla.get(4));
-        this.nav_descripcion.setText(Tupla.get(5));
+        this.nav_peso.setText(Tupla.get(2));
+        this.nav_estado.setText(Tupla.get(3));
+        this.nav_descripcion.setText(Tupla.get(4));
+        this.nav_capacidad.setText(Tupla.get(5));
         this.nav_empresa.setSelectedItem(Tupla.get(6));
         this.nav_modelo.setSelectedItem(Tupla.get(7));
         this.nav_hangar.setSelectedItem(Tupla.get(8));
         this.Button_Enviar.setText("Actualizar");
+        
+        this.ID = Long.valueOf(this.id_nave.getText());
+        
+        this.isUpdate = true;
     }
-
+    
     public void getAttributes() {
         this.Codigo = this.nav_codigo.getText();
         this.Capacidad = Integer.parseInt(this.nav_capacidad.getText());
@@ -58,7 +66,7 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
         this.Modelo = this.nav_modelo.getSelectedItem().toString();
         this.Hangar = this.nav_hangar.getSelectedItem().toString();
     }
-
+    
     public void getAllEmpresas() {
         EntityManagerFactory emf = null;
         try {
@@ -72,7 +80,7 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void getAllHangar() {
         EntityManagerFactory emf = null;
         try {
@@ -86,7 +94,7 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void getAllModelo() {
         EntityManagerFactory emf = null;
         try {
@@ -100,7 +108,7 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     public void getLastID() {
         EntityManagerFactory emf = null;
         try {
@@ -112,7 +120,7 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,7 +166,9 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
         jLabel6.setText("Descripción:");
 
         nav_descripcion.setColumns(20);
+        nav_descripcion.setLineWrap(true);
         nav_descripcion.setRows(5);
+        nav_descripcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(nav_descripcion);
 
         jLabel7.setText("Empresa:");
@@ -299,10 +309,17 @@ public class Formulario_Insert_Nave extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Nave FCN = new Formulario_Confirmacion_Nave(ID, Codigo, Capacidad, Peso, Estado, Descripcion, Empresa, Modelo, Hangar);
-        FCN.setVisible(true);
-    }//GEN-LAST:event_Button_EnviarActionPerformed
+        if (!isUpdate) {
+            Formulario_Confirmacion_Nave FCN = new Formulario_Confirmacion_Nave(ID, Codigo, Capacidad, Peso, Estado, Descripcion, Empresa, Modelo, Hangar);
+            FCN.setVisible(true);
+        } else {
+            Formulario_Confirmacion_Nave FCN = new Formulario_Confirmacion_Nave(isUpdate, ID, Codigo, Capacidad, Peso, Estado, Descripcion, Empresa, Modelo, Hangar);
+            FCN.setVisible(true);
+        }
+        
 
+    }//GEN-LAST:event_Button_EnviarActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

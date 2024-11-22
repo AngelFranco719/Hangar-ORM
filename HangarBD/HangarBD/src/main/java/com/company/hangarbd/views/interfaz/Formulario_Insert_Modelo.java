@@ -14,19 +14,22 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
     String Fabricante;
     String Año;
     ModeloController modeloController;
+    boolean isUpdate = false;
 
     public Formulario_Insert_Modelo() {
         initComponents();
         this.getLastID();
     }
-    
+
     public Formulario_Insert_Modelo(List<String> Tupla) {
         initComponents();
         this.id_modelo.setText(Tupla.get(0));
         this.mod_nombre.setText(Tupla.get(1));
         this.mod_fabricante.setText(Tupla.get(2));
-        this.mod_año.setText(Tupla.get(3));      
+        this.mod_año.setText(Tupla.get(3));
         this.Button_Enviar.setText("Actualizar");
+        this.ID = Long.valueOf(this.id_modelo.getText());
+        this.isUpdate = true;
     }
 
     public void getLastID() {
@@ -34,7 +37,7 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
         try {
             emf = Persistence.createEntityManagerFactory("hangar");
             modeloController = new ModeloController(emf);
-            ID = modeloController.getLastID_Modelo()+1;
+            ID = modeloController.getLastID_Modelo() + 1;
             this.id_modelo.setText(ID.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,7 +179,12 @@ public class Formulario_Insert_Modelo extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Modelo FCM = new Formulario_Confirmacion_Modelo(ID, Nombre, Fabricante, Año);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Modelo FCM = new Formulario_Confirmacion_Modelo(ID, Nombre, Fabricante, Año);
+        } else {
+            Formulario_Confirmacion_Modelo FCM = new Formulario_Confirmacion_Modelo(isUpdate, ID, Nombre, Fabricante, Año);
+        }
+
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     /**

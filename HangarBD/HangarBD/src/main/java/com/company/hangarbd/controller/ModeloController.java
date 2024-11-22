@@ -28,9 +28,8 @@ public class ModeloController extends Controller<Modelo> {
 //        List<List<String>> modelosToString = this.mapEntitiesToString(modelos, 6);
 //        return modelosToString;
 //    }
-
-    public void updateModelo(String mod_nombre, String mod_fabricante, String mod_anio) {
-        Modelo updatedModelo = new Modelo(mod_nombre, mod_fabricante, mod_anio);
+    public void updateModelo(Long ID, String mod_nombre, String mod_fabricante, String mod_anio) {
+        Modelo updatedModelo = new Modelo(ID, mod_nombre, mod_fabricante, mod_anio);
         this.updateElement(updatedModelo, emf);
     }
 
@@ -49,7 +48,7 @@ public class ModeloController extends Controller<Modelo> {
     public <T> Long getIdByColumn(String Column, T Value) {
         return this.getIdByColumnValue(emf, Column, Value, "Modelo");
     }
-    
+
     public List<String> getColumnsFromModelo() {
         return this.getColumns(emf, Modelo.class, 4);
     }

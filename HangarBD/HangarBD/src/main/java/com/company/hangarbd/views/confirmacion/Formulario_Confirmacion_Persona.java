@@ -12,6 +12,18 @@ public class Formulario_Confirmacion_Persona extends javax.swing.JFrame {
     int Horas;
     PersonaController personaController;
 
+    public Formulario_Confirmacion_Persona(boolean isUpdate, Long ID, String Nombre, String Licencia, int Horas) {
+        initComponents();
+        this.ID = ID;
+        this.Nombre = Nombre;
+        this.Licencia = Licencia;
+        this.Horas = Horas;
+        this.setVisible(true);
+        this.initializeForm();
+        
+        
+    }
+
     public Formulario_Confirmacion_Persona(Long ID, String Nombre, String Licencia, int Horas) {
         initComponents();
         this.ID = ID;

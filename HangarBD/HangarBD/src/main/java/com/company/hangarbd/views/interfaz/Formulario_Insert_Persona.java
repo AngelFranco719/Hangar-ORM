@@ -13,19 +13,23 @@ public class Formulario_Insert_Persona extends javax.swing.JFrame {
     String Licencia;
     int Horas;
     PersonaController personaController;
+    boolean isUpdate = false;
 
     public Formulario_Insert_Persona() {
         initComponents();
         this.getLastID();
     }
-    
+
     public Formulario_Insert_Persona(List<String> Tupla) {
         initComponents();
         this.id_persona.setText(Tupla.get(0));
         this.per_nombre.setText(Tupla.get(1));
         this.per_licencia.setText(Tupla.get(2));
-        this.per_horasTotal.setText(Tupla.get(3));  
+        this.per_horasTotal.setText(Tupla.get(3));
         this.Button_Enviar.setText("Actualizar");
+
+        this.ID = Long.valueOf(this.id_persona.getText());
+        this.isUpdate = true;
     }
 
     public void getAttributes() {
@@ -92,11 +96,11 @@ public class Formulario_Insert_Persona extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(per_horasTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(per_horasTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -106,9 +110,9 @@ public class Formulario_Insert_Persona extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(id_persona, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(per_nombre)
-                            .addComponent(per_licencia, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(per_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                            .addComponent(per_licencia))))
+                .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -151,7 +155,11 @@ public class Formulario_Insert_Persona extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.getAttributes();
-        Formulario_Confirmacion_Persona FCP = new Formulario_Confirmacion_Persona(ID, Nombre, Licencia, Horas);
+        if (!isUpdate) {
+            Formulario_Confirmacion_Persona FCP = new Formulario_Confirmacion_Persona(ID, Nombre, Licencia, Horas);
+        } else {
+            Formulario_Confirmacion_Persona FCP = new Formulario_Confirmacion_Persona(isUpdate, ID, Nombre, Licencia, Horas);
+        }
     }//GEN-LAST:event_Button_EnviarActionPerformed
 
     /**

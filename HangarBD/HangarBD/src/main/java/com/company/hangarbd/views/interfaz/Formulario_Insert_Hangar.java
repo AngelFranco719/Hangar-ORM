@@ -200,8 +200,14 @@ public class Formulario_Insert_Hangar extends javax.swing.JFrame {
 
     private void Button_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EnviarActionPerformed
         this.setAttributes();
-        Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(isUpdate, ID, capacidad, nombre, ubicacion, descripcion, codigo);
-        FCH.setVisible(true);
+        if (isUpdate) {
+            Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(isUpdate, ID, capacidad, nombre, ubicacion, descripcion, codigo);
+            FCH.setVisible(true);
+        } else {
+            Formulario_Confirmacion_Hangar FCH = new Formulario_Confirmacion_Hangar(ID, capacidad, nombre, ubicacion, descripcion, codigo);
+            FCH.setVisible(true);
+        }
+
 
     }//GEN-LAST:event_Button_EnviarActionPerformed
 

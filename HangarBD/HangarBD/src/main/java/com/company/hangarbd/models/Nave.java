@@ -56,6 +56,18 @@ public class Nave implements Serializable {
         this.nav_mod = nav_mod;
     }
 
+    public Nave(Long ID, String nav_codigo, float nav_peso, String nav_estado, String nav_descripcion, int nav_capacidad, Empresa nav_emp, Hangar nav_han, Modelo nav_mod) {
+        this.ID_Nave = ID;
+        this.nav_codigo = nav_codigo;
+        this.nav_peso = nav_peso;
+        this.nav_estado = nav_estado;
+        this.nav_descripcion = nav_descripcion;
+        this.nav_capacidad = nav_capacidad;
+        this.nav_emp = nav_emp;
+        this.nav_han = nav_han;
+        this.nav_mod = nav_mod;
+    }
+
     public String getNav_codigo() {
         return nav_codigo;
     }

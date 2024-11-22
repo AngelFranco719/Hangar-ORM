@@ -17,12 +17,12 @@ public class Taller implements Serializable {
     private String tall_nombre;
     private String tall_descripcion;
 
-    @OneToMany(mappedBy = "ser_tall", fetch = FetchType.EAGER)
-    public Set<Servicio> tall_ser = new HashSet<>();
-
     @OneToOne
     @JoinColumn(name = "tall_han")
     public Hangar tall_han;
+
+    @OneToMany(mappedBy = "ser_tall", fetch = FetchType.EAGER)
+    public Set<Servicio> tall_ser = new HashSet<>();
 
     public Taller() {
     }
