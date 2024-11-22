@@ -9,6 +9,7 @@ import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Tripulant
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
 
@@ -173,6 +174,11 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
         });
 
         Button_Cancelar.setText("Cancelar");
+        Button_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,6 +249,12 @@ public class Formulario_Insert_Tripulante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CancelarActionPerformed
+        // TODO add your handling code here:
+        if(JOptionPane.OK_OPTION==JOptionPane.showConfirmDialog(this, "Los Cambios se Perderán ¿Desea salir?")){
+            this.dispose(); 
+        }
+    }//GEN-LAST:event_Button_CancelarActionPerformed
     private void tri_personaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tri_personaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tri_personaActionPerformed

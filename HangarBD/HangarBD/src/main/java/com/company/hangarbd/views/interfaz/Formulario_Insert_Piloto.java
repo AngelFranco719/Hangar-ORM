@@ -7,6 +7,7 @@ import com.company.hangarbd.views.confirmacion.Formulario_Confirmacion_Piloto;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 public class Formulario_Insert_Piloto extends javax.swing.JFrame {
 
@@ -128,6 +129,11 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
         });
 
         Button_Cacelar.setText("Cancelar");
+        Button_Cacelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_CacelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,6 +212,13 @@ public class Formulario_Insert_Piloto extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_Button_EnviarActionPerformed
+
+    private void Button_CacelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CacelarActionPerformed
+        // TODO add your handling code here:
+        if(JOptionPane.OK_OPTION==JOptionPane.showConfirmDialog(this, "Los Cambios se Perderán ¿Desea salir?")){
+            this.dispose(); 
+        }
+    }//GEN-LAST:event_Button_CacelarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
