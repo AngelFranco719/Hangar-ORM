@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-min-width: 100%; -fx-background-color: #037189; -fx-min-height: 100%;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.hangarbd.views.interfaz.FormularioPruebaController">
+    <stylesheets>
+        <URL value="@/styles/formularioprueba.css" />
+    </stylesheets>
+    <children>
+        <TabPane style="-fx-background-color: #ffffff; -fx-min-width: 100%; -fx-min-height: 100%;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30" AnchorPane.topAnchor="30">
+            <tabs>
+                <Tab text="Insertar Datos">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <ChoiceBox fx:id="Cb_Entidades" layoutX="33.0" layoutY="61.0" onAction="#handleOnChangeEntidades" prefWidth="150.0" />
+                                <Label layoutX="24.0" layoutY="28.0" style="-fx-font-size: 16;" text="Selecciona una Entidad:" />
+                                <TableView fx:id="Table_Data" layoutX="213.0" prefHeight="311.0" prefWidth="327.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                    </columns>
+                                </TableView>
+                        <Button fx:id="B_Insertar" layoutX="38.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#handleInsertClicked" prefHeight="11.0" prefWidth="139.0" text="Agregar Datos" AnchorPane.bottomAnchor="10.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Eliminar Datos">
+                    <content>
+                        <AnchorPane>
+                     <children>
+                        <TableView fx:id="Table_Data1" layoutX="213.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="23.0" layoutY="20.0" style="-fx-font-size: 16;" text="Selecciona una Entidad:" />
+                        <ChoiceBox fx:id="Cb_Entidades1" layoutX="32.0" layoutY="55.0" onAction="#handleOnChangeEntidades1" prefWidth="150.0" />
+                        <Button fx:id="B_Eliminar" layoutX="38.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#handleDeleteClicked" prefHeight="11.0" prefWidth="139.0" text="Eliminar Registro" AnchorPane.bottomAnchor="14.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="39.0" layoutY="100.0" text="Registro Seleccionado">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TF_Selected" layoutX="33.0" layoutY="131.0" />
+                     </children></AnchorPane>
+                    </content>
+                </Tab>
+            <Tab text="Actualizar Datos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ChoiceBox fx:id="Cb_Entidades2" layoutX="35.0" layoutY="63.0" onAction="#handleOnChangeEntidades2" prefWidth="150.0" />
+                        <Label layoutX="26.0" layoutY="31.0" style="-fx-font-size: 16;" text="Selecciona una Entidad:" />
+                        <TableView fx:id="Table_Data2" layoutX="220.0" prefHeight="311.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="42.0" layoutY="114.0" text="Registro Seleccionado">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TF_Selected1" layoutX="36.0" layoutY="143.0" />
+                        <Button fx:id="B_Actualizar" layoutX="41.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#handleActualizarClicked" prefHeight="11.0" prefWidth="139.0" text="Actualizar Registro" AnchorPane.bottomAnchor="26.0">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

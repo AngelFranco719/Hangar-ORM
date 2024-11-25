@@ -3,14 +3,25 @@ package com.company.hangarbd.controller;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.swing.JOptionPane;
 import org.datanucleus.enhancement.StateManager;
 
+/// Clase Padre que es heredada por todos los Controladores
+/// Ayuda a no repetir código y compartir métodos entre las clases.
 public class Controller<T> {
 
+    /// Método para lograr la persistencia de Datos.
+    /// Recibe un Objeto T y lo hace persistente en la Base de Datos.
     protected void createElement(T element, EntityManagerFactory emf) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -18,7 +29,10 @@ public class Controller<T> {
             tx.begin();
             em.persist(element);
             tx.commit();
-            JOptionPane.showMessageDialog(null, "Se ha subido a la Base de Datos", "Operación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("Exito");
+            alerta.setHeaderText("Se guardó el registro con exito.");
+            alerta.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -26,6 +40,8 @@ public class Controller<T> {
         }
     }
 
+    /// Método que selecciona todos los registros de una Tabla.
+    /// Obtiene un String que guarda el nombre de la Entidad
     protected List<T> getAllFrom(String Entity, EntityManagerFactory emf) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -37,6 +53,8 @@ public class Controller<T> {
         return null;
     }
 
+    /// Método auxiliar que convierte una lista de tuplas de tipo T
+    /// a una Lista de Tuplas de tipo String.
     public List<List<String>> mapEntitiesToString(String Entity, EntityManagerFactory emf, int AttributesNumber) {
         List<T> Tuples = this.getAllFrom(Entity, emf);
         List<List<String>> Result = new ArrayList();
@@ -61,6 +79,8 @@ public class Controller<T> {
         return Result;
     }
 
+    /// Método que obtiene las columnas de una tabla.
+    /// Se usa para graficar la Tabla de Datos.
     protected List<String> getColumns(EntityManagerFactory enf, Class<T> type, int AttributesNumber) {
         List<String> Columns = new ArrayList();
         int index = 1;
@@ -78,6 +98,7 @@ public class Controller<T> {
         return Columns;
     }
 
+    /// Método que sirve para encontrar un registro según su ID.
     protected T getElementByID(Long ID, EntityManagerFactory emf, Class<T> type) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -87,6 +108,9 @@ public class Controller<T> {
         }
     }
 
+    ///Obtiene todos los valores de una Tabla según cierta columna.
+    /// Recibe un String de la Columna a buscar y un String con el
+    /// nombre de la entidad.
     protected <T> List<T> getAllByColumn(String Column, EntityManagerFactory emf, String Entity) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -99,6 +123,9 @@ public class Controller<T> {
         return null;
     }
 
+    /// Método que actualiza un registro en la Base de Datos.
+    /// Obtiene un Objeto tipo T que DEBE compartir el ID 
+    /// del registro que se desea actualizar.
     protected void updateElement(T updatedElement, EntityManagerFactory emf) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -115,6 +142,7 @@ public class Controller<T> {
         }
     }
 
+    /// Elimina un registro por su ID.
     protected void deleteElementByID(Long ID, EntityManagerFactory emf, Class<T> type) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -133,6 +161,7 @@ public class Controller<T> {
         }
     }
 
+    ///Elimina un elemento obteniendo toda su información.
     public void deleteElementByTuple(List<String> Tuple, EntityManagerFactory emf, String Entity) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -144,6 +173,7 @@ public class Controller<T> {
         }
     }
 
+    /// Método que obtiene el último ID registrado en una tabla.
     protected Long getLastID(EntityManagerFactory emf, String Entity) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -163,6 +193,7 @@ public class Controller<T> {
         return 0l;
     }
 
+    /// Método que obtiene el ID de un registro según un criterio
     protected <I> Long getIdByColumnValue(EntityManagerFactory emf, String Column, I Value, String Entity) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -173,6 +204,34 @@ public class Controller<T> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void initializeTable(String Entity, EntityManagerFactory emf, TableView<List<String>> table, Class type, int AttributesNum) {
+        try {
+            table.getColumns().clear();
+            List<String> Columnas = this.getColumns(emf, type, AttributesNum);
+            List<List<String>> data = this.mapEntitiesToString(Entity, emf, AttributesNum);
+            System.out.println(data.toString());
+
+            int index = 0;
+            for (String Columna : Columnas) {
+                TableColumn<List<String>, String> columna = new TableColumn<>(Columna);
+                int i = index;
+                columna.setCellValueFactory(cellData -> {
+                    List<String> row = cellData.getValue();
+                    return new SimpleStringProperty(row.get(i));
+                });
+                table.getColumns().add(columna);
+                index++;
+            }
+
+            ObservableList<List<String>> dataCollection = FXCollections.observableList(data);
+            table.setItems(dataCollection);
+            table.refresh();
+        } catch (Exception e) {
+
+        }
+
     }
 
 }

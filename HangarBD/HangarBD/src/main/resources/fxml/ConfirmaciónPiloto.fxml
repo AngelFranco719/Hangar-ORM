@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="325.0" prefWidth="516.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.company.hangarbd.views.confirmacion.ConfirmaciónPilotoController">
+   <children>
+      <Label layoutX="147.0" layoutY="24.0" text="Confirma la Información: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="172.0" layoutY="76.0" text="ID_Piloto:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ID_Piloto" editable="false" layoutX="257.0" layoutY="77.0" prefHeight="25.0" prefWidth="96.0" />
+      <Label layoutX="165.0" layoutY="123.0" text="ID_Persona:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="pil_persona" editable="false" layoutX="257.0" layoutY="123.0" prefHeight="25.0" prefWidth="96.0" promptText="Selecciona" />
+      <Label layoutX="166.0" layoutY="170.0" text="ID_Modelo:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="pil_modelo" editable="false" layoutX="257.0" layoutY="170.0" prefHeight="25.0" prefWidth="96.0" promptText="Selecciona" />
+      <Label layoutX="128.0" layoutY="223.0" text="Horas de Vuelo:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="pil_horasVuelo" editable="false" layoutX="255.0" layoutY="223.0" prefHeight="25.0" prefWidth="112.0" promptText="Horas" />
+      <Button fx:id="B_Cancelar" layoutX="180.0" layoutY="275.0" mnemonicParsing="false" text="Cancelar" onMouseClicked="#handleCancelarClicked" >
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="B_Enviar" layoutX="277.0" layoutY="275.0" mnemonicParsing="false" text="Enviar" onMouseClicked="#handleEnviarClicked" >
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

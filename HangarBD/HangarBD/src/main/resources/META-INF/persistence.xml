@@ -4,7 +4,9 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
     
+    <!--Declaración de la Unidad de Persistencia -->
     <persistence-unit name="hangar">
+        <!--Declaración de las Clases que se mapean las Entidades -->
         <class>com.company.hangarbd.models.Cargo</class>
         <class>com.company.hangarbd.models.Empresa</class>
         <class>com.company.hangarbd.models.Hangar</class>
@@ -17,8 +19,9 @@
         <class>com.company.hangarbd.models.Tripulante</class>
         <class>com.company.hangarbd.models.Vuelo</class>
         
+        <!--Propiedades de la Conexión al SGBD -->
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/hangar"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3307/hangar"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.password" value=""/>

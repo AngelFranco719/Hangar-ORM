@@ -24,7 +24,10 @@ public class Nave implements Serializable {
     private String nav_descripcion;
     private int nav_capacidad;
 
-    @ManyToOne
+    /// En las relaciones ManyToOne es donde se obtiene la Llave Foránea,
+    /// por lo tanto, es necesario usar JoinColumn para declarár qué
+    /// columna usará la llave foránea.
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nav_emp")
     public Empresa nav_emp;
 
@@ -32,7 +35,7 @@ public class Nave implements Serializable {
     @JoinColumn(name = "nav_han")
     public Hangar nav_han = new Hangar();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nav_mod")
     public Modelo nav_mod;
 

@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!--Archivo POM para manejar dependencias Maven -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,11 +9,13 @@
     <packaging>jar</packaging>
 
 
+    <!-- Declaración de la dependencia De JPA -->
     <properties>
         <dn.javax.persistence.version>2.2.3</dn.javax.persistence.version>
         <dn.core.version>6.0.9</dn.core.version>
     </properties>
 
+    <!-- Conexión al repositorio de DataNucleus para descargar dependencias -->
     <scm>
         <connection>scm:git:git@github.com:datanucleus/${project.artifactId}.git</connection>
         <developerConnection>scm:git:git@github.com:datanucleus/${project.artifactId}.git</developerConnection>
@@ -30,12 +33,26 @@
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version> <!-- O la versión que necesites -->
+            <version>2.2</version> 
         </dependency>
+        
+        <!-- Dependencias de JavaFX -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>21</version> 
+        </dependency>
+        
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>21</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-core</artifactId>
-            <version>6.0.9</version> <!-- Asegúrate de que ambas tengan la misma versión -->
+            <version>6.0.9</version> 
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -64,11 +81,16 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version> <!-- Usa la versión más reciente si es necesario -->
+            <version>8.0.28</version> <!-- Conector de MySQL -->
         </dependency>
         
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -103,6 +125,7 @@
                     <mainClass>com.mycompany.hangarbd.HangarBD</mainClass>
                 </configuration>
             </plugin>
+            <!-- Plugin encargado de hacer en ENHANCED para cada clase -->
             <plugin>
                 <groupId>org.datanucleus</groupId>
                 <artifactId>datanucleus-maven-plugin</artifactId>
@@ -122,7 +145,25 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Plugin de JavaFX -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.5</version> <!-- Usa la versión más reciente si es posible -->
+                <configuration>
+                    <mainClass>com.mycompany.hangarbd.HangarBD</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>
 </project>
+
